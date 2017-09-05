@@ -1,0 +1,20 @@
+{
+  "name": "mcber",
+  "version": "1.0.0",
+  "description": "API based game",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon ./bin/www",
+    "test": "mocha"
+  },
+  "author": "Alex Skorulis",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4",
+    "morgan": "^1.8.2"
+  },
+  "devDependencies": {
+    "mocha": "^3.5.0",
+    "nodemon": "^1.12.0"
+  }
+}

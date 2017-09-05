@@ -1,0 +1,56 @@
+{
+	"elements":[
+		{
+			"name":"Physical",
+			"shortName":"PHYS",
+			"damageModifiers":[1,1,1,1,1,1,1,1,1,1]
+		},
+		{
+			"name":"Fire",
+			"shortName":"FIRE",
+			"damageModifiers":[1,1,1,1,1,1,1,1,1,1]
+		},
+		{
+			"name":"Lightning",
+			"shortName":"ELEC",
+			"damageModifiers":[1,1,1,1,1,1,1,1,1,1]
+		},
+		{
+			"name":"Ice",
+			"shortName":"ICE",
+			"damageModifiers":[1,1,1,1,1,1,1,1,1,1]
+		},
+		{
+			"name":"Air",
+			"shortName":"AIR",
+			"damageModifiers":[1,1,1,1,1,1,1,1,1,1]
+		},
+		{
+			"name":"Earth",
+			"shortName":"ERTH",
+			"damageModifiers":[1,1,1,1,1,1,1,1,1,1]
+		},
+		{
+			"name":"Water",
+			"shortName":"WTR",
+			"damageModifiers":[1,1,1,1,1,1,1,1,1,1]
+		},
+		{
+			"name":"Nature",
+			"shortName":"NTR",
+			"damageModifiers":[1,1,1,1,1,1,1,1,1,1]
+		},
+		{
+			"name":"Light",
+			"shortName":"LGHT",
+			"damageModifiers":[1,1,1,1,1,1,1,1,1,1]
+		},
+		{
+			"name":"Dark",
+			"shortName":"DARK",
+			"damageModifiers":[1,1,1,1,1,1,1,1,1,1]
+		}
+
+
+	]
+}
