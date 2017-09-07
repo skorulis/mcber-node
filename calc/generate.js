@@ -1,13 +1,20 @@
 const avatarUtil = require("./avatar")
 const rand = require("./rand")
 
-
 const emptyAvatar = function() {
   var avatar = {}
   avatar.skills = {
     elements:Array.apply(null, Array(10)).map(Number.prototype.valueOf,0)
   }
   return avatarUtil.updateStats(avatar)
+}
+
+const basicRealm = function(element,level) {
+  var realm = {
+    level:level,
+    element:element
+  }
+  return realm;
 }
 
 module.exports = {
@@ -27,5 +34,6 @@ module.exports = {
     }
     avatarUtil.updateStats(avatar)
     return avatar
-  }
+  },
+  basicRealm
 }

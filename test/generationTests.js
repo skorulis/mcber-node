@@ -26,3 +26,9 @@ it("Generates a random avatar",function() {
   assert(avatar.health >= 20,"Has health")
   assert(avatar.speed >= 20,"Has Speed")
 })
+
+it("Generates a realm", function() {
+  var realm = gen.basicRealm(0,1)
+  realm.level.should.equal(1)
+  realm.element.should.equal(0)
+})
