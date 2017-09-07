@@ -41,7 +41,39 @@ const attack = function(a1,a2) {
   }
 }
 
+//Returns the result of the 2 avatars battling. No changes are made
+const battle = function(a1,a2) {
+  var res = {
+    winner:null,
+    a1Attacks:[],
+    a2Attacks:[],
+    a1TotalDamage:0,
+    a2TotalDamage:0
+  }
+  var attackRes;
+
+  while(true) {
+    attackRes = attack(a1,a2)
+    res.a1Attacks.push(attackRes)
+    res.a1TotalDamage += attackRes.damage;
+    if (res.a1TotalDamage >= a2.health) {
+      res.winner = a1
+      return res
+    }
+
+    attackRes = attack(a2,a1)
+    res.a2Attacks.push(attackRes)
+    res.a2TotalDamage += attackRes.damage
+    if (res.a2TotalDamage >= a1.health) {
+      res.winner = a2
+      return res
+    }
+  }
+}
+
 module.exports = {
-  attack:attack,
-  chooseSkill:chooseSkill
+  attack,
+  chooseSkill,
+  calculateDamage,
+  battle
 }

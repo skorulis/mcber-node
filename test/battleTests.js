@@ -29,3 +29,24 @@ it("Performs an attack 2",function() {
   assert(result.attackSkill == 1)
   assert(result.defenceSkill == 3)
 })
+
+it("Performs an attack 3",function() { 
+  const a1 = gen.withLevels([0,0,10,0,0,0,0,0,0,0])
+  const a2 = gen.withLevels([10,0,0,0,0,0,0,0,0,0])
+  const result = battle.attack(a1,a2)
+  assert(result != null)
+  result.damage.should.equal(9)
+  assert(result.attackSkill == 2)
+  assert(result.defenceSkill == 0)
+})
+
+it("Completes a battle",function() { 
+  const a1 = gen.withLevels([10,0,0,0,0,0,0,0,0,0])
+  const a2 = gen.withLevels([10,0,0,0,0,0,0,0,0,0])
+  const result = battle.battle(a1,a2)
+  assert(result != null)
+  assert(result.winner == a1)
+  assert(result.a1Attacks.length == 2)
+  assert(result.a1TotalDamage == 10)
+  assert(result.a2TotalDamage == 5)
+})
