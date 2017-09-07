@@ -1,0 +1,26 @@
+<table>
+	<thead>
+	<td></td>
+	{{#each skills.elements}}
+	<td class="header">{{this.name}}</td>
+	{{/each}}
+	<td class="header">Total Attack</td>
+	</thead>
+	<tbody>
+		{{#each skills.elements}}
+		<tr>
+			<td class="header"> {{this.name}} </td>
+			{{#each this.damageModifiers}}
+				<td class="value {{colorClass this}}"> {{percent this}} </td>
+			{{/each}}
+			<td>{{this.totalAttack}}</td>
+		</tr>
+		{{/each}}
+		<tr>
+			<td class="header">Vulnerability</td>
+			{{#each skills.elements}}
+				<td>{{this.totalDefense}}
+			{{/each}}
+		</tr>
+	</tbody>
+</table>

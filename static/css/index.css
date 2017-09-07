@@ -1,0 +1,33 @@
+td.value {
+  padding:20px;
+}
+
+td.v50 {
+  background-color: red;
+  color:white;
+}
+
+td.v75 {
+  background-color: #AAAA00;
+  color:white;
+}
+
+td.v125 {
+  background-color: #00DD00;
+  color:white;
+}
+
+td.v150 {
+  background-color: #00DD00;
+  color:white;
+}
+
+td.v200 {
+  background-color: green;
+  color:white;
+}
+
+td.header {
+  text-align: center;
+  font-weight: bold;
+}
