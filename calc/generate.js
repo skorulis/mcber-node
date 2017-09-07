@@ -1,8 +1,6 @@
 const avatarUtil = require("./avatar")
+const rand = require("./rand")
 
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 const emptyAvatar = function() {
   var avatar = {}
@@ -20,8 +18,8 @@ module.exports = {
   randomAvatar:function(level) {
     var avatar = emptyAvatar();
     while(level > 0) {
-      const index = getRandomInt(0,9)
-      const value = getRandomInt(1,level)
+      const index = rand.getRandomInt(0,9)
+      const value = rand.getRandomInt(1,level)
       avatar.skills[index] += value
       level -= value 
     }
