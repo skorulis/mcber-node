@@ -1,12 +1,11 @@
-const fs = require('fs');
-const skills = JSON.parse(fs.readFileSync('static/ref/skills.json', 'utf8'));
 const rand = require("./rand")
+const ref = require("./reference")
 
 const chooseSkill = function(avatar) {
   var val = rand.getRandomInt(1,avatar.level)
   var index = 0
   while(val > 0) {
-    val -= avatar.skills[index]
+    val -= avatar.skills.elements[index]
     index ++
   }
   return index - 1
@@ -19,15 +18,15 @@ const calculateDamage = function(a1,a2,sAttack,sDefence) {
 }
 
 const getMultiplier = function(sAttack,sDefence) {
-  return skills.elements[sAttack].damageModifiers[sDefence]
+  return ref.skills.elements[sAttack].damageModifiers[sDefence]
 }
 
 const getTotalAttack = function(avatar,sAttack,sDefence) {
-  return avatar.skills[sAttack] * getMultiplier(sAttack,sDefence)
+  return avatar.skills.elements[sAttack] * getMultiplier(sAttack,sDefence)
 }
 
 const getTotalDefence = function(avatar,sDefence) {
-  return avatar.skills[sDefence]
+  return avatar.skills.elements[sDefence]
 }
 
 //Get the result from avatar 1 attacking avatar 2. No changes are made
