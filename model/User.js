@@ -6,7 +6,8 @@ var userSchema = new mongoose.Schema({
   password: String,
   email: String,
   fbid: String,
-  avatars:[avatarSchema]
+  avatars:[avatarSchema],
+  resources:[Number]
 })
 
 userSchema.methods.toJSON = function() {

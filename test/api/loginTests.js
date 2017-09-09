@@ -2,10 +2,10 @@ process.env.NODE_ENV = "test"
 var chai = require('chai');
 const assert = chai.assert;
 var should = chai.should();
-var app = require("../app")("mongodb://localhost:27017/mcberTest1");
+var app = require("../../app")("mongodb://localhost:27017/mcberTest1");
 var supertest = require("supertest")(app);
-var auth = require("../server/auth/authHelpers")
-const User = require("../model").User
+var auth = require("../../server/auth/authHelpers")
+const User = require("../../model").User
 
 var createdId = null;
 
@@ -43,7 +43,6 @@ it("Gets current user",function(done) {
   .set('Authorization', 'Bearer ' + authJWT)
   .expect(200)
   .expect(function(res) {
-    console.log(res.body)
     res.body.user.email.should.equal("email1@test.com")
   })
   .end(done)

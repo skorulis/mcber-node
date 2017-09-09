@@ -9,4 +9,6 @@ module.exports = (app,passport) => {
   app.post('/api/login/fb',passport.authenticate('facebook-token'),controllers.user.loginComplete)
   app.post('/api/login/password',passport.authenticate('local-login'),controllers.user.loginComplete)
   app.post('/api/signup',passport.authenticate('local-signup'), controllers.user.signup)
+
+  app.post('/api/action/explore',passport.authenticate("jwt-verify"),controllers.action.explore)
 }

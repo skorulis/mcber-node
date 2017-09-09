@@ -6,7 +6,7 @@ const uniqid = require('uniqid');
 const bCrypt = require('bcrypt-nodejs');
 const cred = require("../config/credentials")
 const User = require("../../model").User
-
+const gen = require("../../calc/generate")
 
 const jwtOpts = {secretOrKey:cred.secret,jwtFromRequest:ExtractJwt.fromAuthHeaderAsBearerToken()}
 
@@ -56,7 +56,9 @@ module.exports = function(passport) {
         if(user) {
           done("User already exists")
         } else {
-          user = new User({_id:uniqid(),email:email,password:createHash(password)})
+          user = gen.newUser()
+          user.email = email;
+          user.password = createHash(password);
           user.save((err,user) => {
             done(null,user)
           })
@@ -71,7 +73,6 @@ module.exports = function(passport) {
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
     function(req, email, password, done) {
-      console.log("Start login")
       User.findOne({email:email}).then(user => {
         if(!user) {
           return done("No user with email " + email)

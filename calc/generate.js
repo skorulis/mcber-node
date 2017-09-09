@@ -2,8 +2,7 @@ const avatarUtil = require("./avatar")
 const rand = require("./rand")
 const uniqid = require('uniqid');
 const Avatar = require('../model').Avatar
-
-
+const User = require('../model').User
 
 const emptyAvatar = function() {
   var avatar = new Avatar({_id:uniqid()})
@@ -17,6 +16,12 @@ const basicRealm = function(element,level) {
     element:element
   }
   return realm;
+}
+
+const newUser = function() {
+  var user = new User({_id:uniqid()})
+  user.avatars.push(emptyAvatar())
+  return user
 }
 
 module.exports = {
@@ -37,5 +42,6 @@ module.exports = {
     avatarUtil.updateStats(avatar)
     return avatar
   },
-  basicRealm
+  basicRealm,
+  newUser
 }
