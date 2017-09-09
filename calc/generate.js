@@ -1,13 +1,13 @@
 const avatarUtil = require("./avatar")
 const rand = require("./rand")
-const uniqid = require('uniqid'); 
+const uniqid = require('uniqid');
+const Avatar = require('../model').Avatar
+
+
 
 const emptyAvatar = function() {
-  var avatar = {}
-  avatar.id = uniqid()
-  avatar.skills = {
-    elements:Array.apply(null, Array(10)).map(Number.prototype.valueOf,0)
-  }
+  var avatar = new Avatar({_id:uniqid()})
+  avatar.skills.elements = Array.apply(null, Array(10)).map(Number.prototype.valueOf,0)
   return avatarUtil.updateStats(avatar)
 }
 

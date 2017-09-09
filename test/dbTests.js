@@ -7,13 +7,6 @@ const User = require("../model").User
 mongoose.connect("mongodb://localhost:27017/mcberTest1",{useMongoClient: true});
 mongoose.Promise = global.Promise
 
-it("Has no users",function(done) {
-  User.find(function(err,users) {
-    users.length.should.equal(0)
-    done()
-  })
-})
-
 it("Saves a user",function(done) {
   var user = new User({_id:"1234",email:"test@gmail.com"})
   user.save((err,user) => {

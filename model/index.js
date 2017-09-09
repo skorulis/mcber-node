@@ -1,5 +1,4 @@
-const User = require("./User.js")
-
 module.exports = {
-  User:User.model
+  User:require("./User.js").model,
+  Avatar:require("./Avatar.js").model
 }
