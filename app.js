@@ -22,4 +22,6 @@ app.get('/', function (req, res, next) {
 
 require('./server/routes/web.js')(app)
 
-module.exports = app;
+module.exports = function(db) {
+  return app
+}

@@ -1,8 +1,8 @@
 const chai = require('chai');
 const should = chai.should();
 const assert = chai.assert;
-const gen = require("../calc/generate")
-const battle = require("../calc/battle")
+const gen = require("../../calc/generate")
+const battle = require("../../calc/battle")
 
 it("Chooses a skill",function() {
   const avatar = gen.withLevels([0,0,10,0,0,0,0,0,0,0])

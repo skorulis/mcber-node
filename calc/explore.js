@@ -15,7 +15,6 @@ const chooseResource = function(realm,avatar) {
 
 const calculateResourceQuantity = function(realm,avatar,resource) {
   var rarity = resource.rarity || 1
-  console.log(rarity,realm.level)
   return Math.pow(realm.level,1.5) / rarity
 }
 

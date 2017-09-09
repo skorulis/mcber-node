@@ -1,9 +1,9 @@
 const chai = require('chai');
 const should = chai.should();
 const assert = chai.assert;
-const gen = require("../calc/generate")
-const explore = require("../calc/explore")
-const ref = require("../calc/reference")
+const gen = require("../../calc/generate")
+const explore = require("../../calc/explore")
+const ref = require("../../calc/reference")
 
 it("Calculates explore constants",function() {
   var realm = gen.basicRealm(0,1)

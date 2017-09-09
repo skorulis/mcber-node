@@ -10,7 +10,7 @@
     "build": "npm run clean && npm run build-css",
     "watch": "npm run clean && npm run watch-css & nodemon ./bin/www -e js,jade",
     "start:dev": "nodemon ./bin/www",
-    "test": "mocha"
+    "test": "mongo mcberTest1 --eval \"db.dropDatabase()\" && mocha"
   },
   "author": "Alex Skorulis",
   "license": "ISC",
@@ -19,6 +19,8 @@
     "express-handlebars": "^3.0.0",
     "handlebars": "^4.0.10",
     "jade": "^1.11.0",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.11.10",
     "morgan": "^1.8.2",
     "stylus": "^0.54.5",
     "uniqid": "^4.1.1"
@@ -26,6 +28,7 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^3.5.0",
-    "nodemon": "^1.12.0"
+    "nodemon": "^1.12.0",
+    "supertest": "^3.0.0"
   }
 }
