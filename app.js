@@ -14,6 +14,15 @@ app.use(express.static(__dirname + '/static'))
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+const errorFunction = function(err, req, res, next) {
+  if (err.name === 'JsonSchemaValidation') {
+    res.status(400)
+    res.json({errors:err.validations.body})
+  } else {
+    next(err)  
+  }
+}
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -33,5 +42,6 @@ module.exports = function(dbURL) {
 
   require('./server/routes/web.js')(app)
   require('./server/routes/api.js')(app,passport)
+  app.use(errorFunction)
   return app
 }
