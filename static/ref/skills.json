@@ -6,7 +6,21 @@
 			"damageModifiers":[1,1.25,1,0.75,1.5,0.5,0.75,1,1,1],
 			"index":0,
 			"healthModifier":1,
-			"speedModifier":1
+			"speedModifier":1,
+			"resources":[
+				{
+					"name":"Iron"
+				},
+				{
+					"name":"Gold",
+					"rarity":2
+				},
+				{
+					"name":"Diamond",
+					"rarity":3
+				}
+
+			]
 		},
 		{
 			"name":"Fire",
@@ -14,7 +28,12 @@
 			"damageModifiers":[1,1.25,1,2,0.75,0.5,0.5,1.5,1,1],
 			"index":1,
 			"healthModifier":1,
-			"speedModifier":1
+			"speedModifier":1,
+			"resources":[
+				{
+					"name":"Magma"
+				}
+			]
 		},
 		{
 			"name":"Lightning",
@@ -22,7 +41,10 @@
 			"damageModifiers":[1.5,1,1.25,1,0.75,1,2,1,1,1],
 			"index":2,
 			"healthModifier":1,
-			"speedModifier":1
+			"speedModifier":1,
+			"resources":[
+
+			]
 		},
 		{
 			"name":"Ice",
@@ -30,7 +52,10 @@
 			"damageModifiers":[1,0.5,1,1,1,0.5,1.5,1.25,1,1],
 			"index":3,
 			"healthModifier":1,
-			"speedModifier":1
+			"speedModifier":1,
+			"resources":[
+
+			]
 		},
 		{
 			"name":"Air",
@@ -38,7 +63,10 @@
 			"damageModifiers":[1.25,1.5,1,1,0.5,1,0.75,0.75,1,1],
 			"index":4,
 			"healthModifier":1,
-			"speedModifier":1
+			"speedModifier":1,
+			"resources":[
+
+			]
 		},
 		{
 			"name":"Earth",
@@ -46,7 +74,10 @@
 			"damageModifiers":[1,1.25,1,1,1,0.25,0.5,0.75,1,1],
 			"index":5,
 			"healthModifier":1,
-			"speedModifier":1
+			"speedModifier":1,
+			"resources":[
+
+			]
 		},
 		{
 			"name":"Water",
@@ -54,7 +85,10 @@
 			"damageModifiers":[1,1.5,1,0.5,1.5,2,0.5,0.5,1,1],
 			"index":6,
 			"healthModifier":1,
-			"speedModifier":1
+			"speedModifier":1,
+			"resources":[
+
+			]
 		},
 		{
 			"name":"Nature",
@@ -62,7 +96,10 @@
 			"damageModifiers":[1,0.5,1,1.5,1,1.5,1.5,1,1,1],
 			"index":7,
 			"healthModifier":1,
-			"speedModifier":1
+			"speedModifier":1,
+			"resources":[
+
+			]
 		},
 		{
 			"name":"Light",
@@ -70,7 +107,10 @@
 			"damageModifiers":[1,1,1,1,1,1,1,1,1,1],
 			"index":8,
 			"healthModifier":1,
-			"speedModifier":1
+			"speedModifier":1,
+			"resources":[
+
+			]
 		},
 		{
 			"name":"Dark",
@@ -78,7 +118,10 @@
 			"damageModifiers":[1,1,1,1,1,1,1,1,1,1],
 			"index":9,
 			"healthModifier":1,
-			"speedModifier":1
+			"speedModifier":1,
+			"resources":[
+
+			]
 		}
 
 

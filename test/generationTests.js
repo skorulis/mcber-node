@@ -8,6 +8,7 @@ it("Generates an empty avatar",function() {
   avatar.level.should.equal(0)
   avatar.health.should.equal(0)
   avatar.speed.should.equal(0)
+  avatar.id.should.be.a('string')
   avatar.skills.elements.length.should.equal(10)
 })
 

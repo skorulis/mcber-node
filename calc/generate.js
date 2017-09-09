@@ -1,8 +1,10 @@
 const avatarUtil = require("./avatar")
 const rand = require("./rand")
+const uniqid = require('uniqid'); 
 
 const emptyAvatar = function() {
   var avatar = {}
+  avatar.id = uniqid()
   avatar.skills = {
     elements:Array.apply(null, Array(10)).map(Number.prototype.valueOf,0)
   }
