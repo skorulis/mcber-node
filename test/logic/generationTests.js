@@ -12,9 +12,9 @@ it("Generates an empty avatar",function() {
   avatar.skills.elements.length.should.equal(10)
 })
 
-it("Generates an fixed avatar",function() { 
+it("Generates a fixed avatar",function() { 
   const avatar = gen.withLevels([10,0,0,0,0,0,0,0,0,0])
-  assert(avatar.skills.elements[0] == 10)
+  assert(avatar.elementalLevel(0) == 10)
   avatar.level.should.equal(10)
   avatar.health.should.equal(10)
   avatar.speed.should.equal(10)

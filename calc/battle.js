@@ -5,7 +5,7 @@ const chooseSkill = function(avatar) {
   var val = rand.getRandomInt(1,avatar.level)
   var index = 0
   while(val > 0) {
-    val -= avatar.skills.elements[index]
+    val -= avatar.elementalLevel(index)
     index ++
   }
   return index - 1
@@ -22,11 +22,11 @@ const getMultiplier = function(sAttack,sDefence) {
 }
 
 const getTotalAttack = function(avatar,sAttack,sDefence) {
-  return avatar.skills.elements[sAttack] * getMultiplier(sAttack,sDefence)
+  return avatar.elementalLevel(sAttack) * getMultiplier(sAttack,sDefence)
 }
 
 const getTotalDefence = function(avatar,sDefence) {
-  return avatar.skills.elements[sDefence]
+  return avatar.elementalLevel(sDefence)
 }
 
 //Get the result from avatar 1 attacking avatar 2. No changes are made

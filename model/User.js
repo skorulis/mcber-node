@@ -9,7 +9,10 @@ var userSchema = new mongoose.Schema({
   fbid: String,
   avatars:[avatarSchema],
   activities:[activitySchema],
-  resources:[Number]
+  resources:[{
+    _id:String,
+    quantity:Number
+  }]
 })
 
 userSchema.methods.avatarActivity = function(avatarId) {
@@ -31,6 +34,20 @@ userSchema.methods.findActivity = function(activityId) {
 
 userSchema.methods.removeActivity = function(activityId) {
   this.activities = this.activities.filter((a) => a._id != activityId)
+}
+
+userSchema.methods.resourceCount = function(resourceId) {
+  var found = this.resources.find( (r) => r.id == resourceId)
+  return found ? found.quantity : 0
+}
+
+userSchema.methods.addResource = function(resource) {
+  var found = this.resources.find( (r) => r.id == resource._id)
+  if (found) {
+    found.quantity += resource.quantity
+  } else {
+    this.resources.push(resource)
+  }
 }
 
 userSchema.methods.toJSON = function() {

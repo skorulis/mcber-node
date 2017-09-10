@@ -2,7 +2,7 @@ const rand = require("./rand")
 const ref = require("./reference")
 
 const initialValues = function(realm,avatar) {
-  var skill = avatar.skills.elements[realm.element]
+  var skill = avatar.elementalLevel(realm.element)
   return {
     tickFrequency: 30 * realm.level * realm.level / (skill + 1)
   }
@@ -21,8 +21,9 @@ const calculateResourceQuantity = function(realm,avatar,resource) {
 const singleResult = function(realm,avatar,initial) {
   var result = {}
   result.experience = realm.level * initial.tickFrequency
-  result.resource = chooseResource(realm,avatar)
-  result.resourceQuantity = calculateResourceQuantity(realm,avatar,result.resource)
+  var resource = chooseResource(realm,avatar)
+  var quantity = calculateResourceQuantity(realm,avatar,resource)
+  result.resource = {id:resource.id,quantity:quantity}
   return result
 }
 

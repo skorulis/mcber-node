@@ -1,9 +1,11 @@
 var mongoose = require('mongoose');
 
-var avatarSchema = new mongoose.Schema({
+var schema = new mongoose.Schema({
   _id: String,
   skills: {
-    elements:[Number]
+    elements:[
+      {level:Number,xp:Number},
+    ]
   },
   level:Number,
   health:Number,
@@ -11,7 +13,11 @@ var avatarSchema = new mongoose.Schema({
   currentHealth:Number
 })
 
+schema.methods.elementalLevel = function(elementId) {
+  return this.skills.elements[elementId].level
+}
+
 module.exports = {
-  schema: avatarSchema,
-  model: mongoose.model('Avatar',avatarSchema)
+  schema: schema,
+  model: mongoose.model('Avatar',schema)
 }

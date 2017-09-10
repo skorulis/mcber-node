@@ -40,7 +40,7 @@ it("Calculates single results",function() {
 
   var r1 = results[0]
   r1.experience.should.equal(30)
-  r1.resourceQuantity.should.equal(1)
-  r1.resource.name.should.equal("Iron")
+  r1.resource.quantity.should.equal(1)
+  r1.resource.id.should.equal(1)
   
 })
