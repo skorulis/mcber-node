@@ -18,7 +18,11 @@ const errorFunction = function(err, req, res, next) {
   if (err.name === 'JsonSchemaValidation') {
     res.status(400)
     res.json({errors:err.validations.body})
-  } else {
+  } else if (err.name === "RequestValidationError") {
+    res.status(400)
+    res.json({errors:[err.message]})
+  }
+  else {
     next(err)  
   }
 }

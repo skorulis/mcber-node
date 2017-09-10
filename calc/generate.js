@@ -3,6 +3,7 @@ const rand = require("./rand")
 const uniqid = require('uniqid');
 const Avatar = require('../model').Avatar
 const User = require('../model').User
+const Activity = require("../model").Activity
 
 const emptyAvatar = function() {
   var avatar = new Avatar({_id:uniqid()})
@@ -24,6 +25,17 @@ const newUser = function() {
   return user
 }
 
+const baseActivity = function(avatarId,type) {
+  return new Activity({_id:uniqid(),avatarId:avatarId,activityType:type})
+}
+
+const exploreActivity = function(realm,avatarId,duration) {
+  var activity = baseActivity(avatarId,"explore")
+  activity.realm = realm
+  activity.finishTimestamp = activity.startTimestamp + duration
+  return activity
+}
+
 module.exports = {
   emptyAvatar:emptyAvatar,
   withLevels:function(elements) {
@@ -43,5 +55,6 @@ module.exports = {
     return avatar
   },
   basicRealm,
-  newUser
+  newUser,
+  exploreActivity
 }

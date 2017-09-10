@@ -1,0 +1,132 @@
+{
+	"variables": [],
+	"info": {
+		"name": "MCBER",
+		"_postman_id": "2d43438d-f62d-5ff8-4b9c-f2408e543b3f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8811/api/user/current",
+			"request": {
+				"url": "{{url}}/user/current",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authToken}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get current user"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8811/api/signup",
+			"request": {
+				"url": "{{url}}/signup",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "test@gmail.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "Create a new user"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8811/api/action/explore",
+			"request": {
+				"url": "{{url}}/action/explore",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authToken}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"realm\":{\"element\":0,\"level\":0},\n\t\"avatarId\":\"cy8vyg11waj7d6agwi\"\n\n}"
+				},
+				"description": "Start a new exploration"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8811/api/user/login/password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"authToken\", data.auth.token);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/login/password",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "test@gmail.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "Login with username and password"
+			},
+			"response": []
+		}
+	]
+}

@@ -12,4 +12,6 @@ module.exports = (app,passport) => {
   app.post('/api/signup',passport.authenticate('local-signup'), controllers.user.signup)
 
   app.post('/api/action/explore',passport.authenticate("jwt-verify"), validate({body:controllers.action.exploreSchema}),  controllers.action.explore)
+  app.post('/api/action/cancel',passport.authenticate("jwt-verify"), validate({body:controllers.action.cancelCompleteSchema}),  controllers.action.cancel)
+  app.post('/api/action/complete',passport.authenticate("jwt-verify"), validate({body:controllers.action.cancelCompleteSchema}),  controllers.action.complete)
 }

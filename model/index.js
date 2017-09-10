@@ -1,4 +1,5 @@
 module.exports = {
-  User:require("./User.js").model,
-  Avatar:require("./Avatar.js").model
+  User:require("./User").model,
+  Avatar:require("./Avatar").model,
+  Activity:require("./Activity").model
 }

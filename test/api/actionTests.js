@@ -10,8 +10,9 @@ const helpers = require("../testHelpers")(supertest)
 
 var token = null;
 var avatar = null;
+var activity = null;
 
-describe.only("Performs all action methods",function() {
+describe("Performs all action methods",function() {
   it("Sets up the user",function(done) {
     supertest.post("/api/signup")
     .send({"email":"action@test.com",password:"dummy"})
@@ -34,8 +35,26 @@ describe.only("Performs all action methods",function() {
   it("Starts exploring", function(done) {
     token.should.not.be.null
     var realm = {element:0,level:1}
-    supertest.post("/api/action/explore")
+    helpers.jsonAuthPost("/api/action/explore",token)
     .send({realm:realm,avatarId:avatar._id})
+    .expect(function(res) {
+      activity = res.body.activity
+      activity._id.should.not.be.null
+      activity.avatarId.should.equal(avatar._id)
+      activity.realm.should.not.be.null
+      activity.startTimestamp.should.not.be.null
+      assert(activity.startTimestamp <= activity.finishTimestamp)
+    })
+    .end(done)
+  })
+
+  it("Completes an activity", function(done) {
+    helpers.jsonAuthPost("/api/action/complete",token)
+    .send({activityId:activity._id})
+    .expect(200)
+    .expect(function(res) {
+      console.log(res.body)
+    })
     .end(done)
   })
 })

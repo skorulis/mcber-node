@@ -38,9 +38,17 @@ const explore = function(realm,avatar,time) {
   return results
 }
 
+const exploreActivity = function(activity,avatar) {
+  var constants = initialValues(activity.realm,avatar)
+
+  //TODO: Decide if I should be handling multiple results
+  return singleResult(activity.realm,avatar,constants)
+}
+
 module.exports = {
   initialValues,
   explore,
   chooseResource,
-  calculateResourceQuantity
+  calculateResourceQuantity,
+  exploreActivity
 }
