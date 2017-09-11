@@ -1,5 +1,6 @@
 const gen = require("../../calc/generate")
 const explore = require("../../calc/explore")
+const xp = require("../../calc/experience")
 
 class RequestError extends Error {
     constructor(...args) {
@@ -18,7 +19,7 @@ const exploreSchema = {
       required: ['element','level'],
       properties:{
         element:{type:'number'},
-        level:{type:'number'}
+        level:{type:'number',multipleOf:1,minimum:1}
       },
       avatarId: {type:"string"}
     }
@@ -76,11 +77,17 @@ module.exports = {
     var result = explore.exploreActivity(activity,avatar)
 
     req.user.removeActivity(req.body.activityId)
+    req.user.addResource(result.resource)
 
+    xp.addAllExperience(avatar,result.experience)
 
-    //TODO: Add resources
-    //TODO: Add XP
     //TODO: Add anything else that comes up
-    res.send({activities:req.user.activities,result:result})
+
+    req.user.save().then(user => {
+      res.send({activities:req.user.activities,result:result,avatar:avatar})  
+    })
+
+    
+    
   }
 }

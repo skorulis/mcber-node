@@ -39,7 +39,10 @@ it("Calculates single results",function() {
   results.length.should.equal(1)
 
   var r1 = results[0]
-  r1.experience.should.equal(30)
+  var xp = r1.experience[0]
+  xp.xp.should.equal(30)
+  xp.type.should.equal("elemental")
+  xp.elementId.should.equal(0)
   r1.resource.quantity.should.equal(1)
   r1.resource.id.should.equal(1)
   

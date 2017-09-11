@@ -1,5 +1,6 @@
 const rand = require("./rand")
 const ref = require("./reference")
+const xp = require("./experience")
 
 const initialValues = function(realm,avatar) {
   var skill = avatar.elementalLevel(realm.element)
@@ -20,7 +21,7 @@ const calculateResourceQuantity = function(realm,avatar,resource) {
 
 const singleResult = function(realm,avatar,initial) {
   var result = {}
-  result.experience = realm.level * initial.tickFrequency
+  result.experience = xp.exploreGain(realm, initial.tickFrequency)
   var resource = chooseResource(realm,avatar)
   var quantity = calculateResourceQuantity(realm,avatar,resource)
   result.resource = {id:resource.id,quantity:quantity}
