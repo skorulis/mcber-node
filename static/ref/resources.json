@@ -1,155 +1,157 @@
 {
-	"elemental": {
-		"1":{
-			"name":"Iron",
-			"skill":0
-		},
-		"2":{
-			"name":"Gold",
-			"skill":0,
-			"rarity":2
-		},
-		"3":{
-			"name":"Diamond",
-			"skill":0,
-			"rarity":3
-		},
-		"4":{
-			"name":"Magma",
-			"skill":1,
-			"rarity":1
-		},
-		"5":{
-			"name":"Firestone",
-			"skill":1,
-			"rarity":2
-		},
-		"6":{
-			"name":"Ruby",
-			"skill":1,
-			"rarity":3
-		},
-		"7":{
-			"name":"Copper",
-			"skill":2,
-			"rarity":1
-		},
-		"8":{
-			"name":"Lightning 2",
-			"skill":2,
-			"rarity":2
-		},
-		"9":{
-			"name":"Lightning 3",
-			"skill":2,
-			"rarity":3
-		},
-		"10":{
-			"name":"Ice 1",
-			"skill":3,
-			"rarity":1
-		},
-		"11":{
-			"name":"Ice 2",
-			"skill":3,
-			"rarity":2
-		},
-		"12":{
-			"name":"Ice 3",
-			"skill":3,
-			"rarity":3
-		},
-		"13":{
-			"name":"Air 1",
-			"skill":4,
-			"rarity":1
-		},
-		"14":{
-			"name":"Air 2",
-			"skill":4,
-			"rarity":2
-		},
-		"15":{
-			"name":"Air 3",
-			"skill":4,
-			"rarity":3
-		},
-		"16":{
-			"name":"Dirt",
-			"skill":5,
-			"rarity":1
-		},
-		"17":{
-			"name":"Stone",
-			"skill":5,
-			"rarity":2
-		},
-		"18":{
-			"name":"Earth 3",
-			"skill":5,
-			"rarity":3
-		},
-		"19":{
-			"name":"Water 1",
-			"skill":6,
-			"rarity":1
-		},
-		"20":{
-			"name":"Water 2",
-			"skill":6,
-			"rarity":2
-		},
-		"21":{
-			"name":"Water 3",
-			"skill":6,
-			"rarity":3
-		},
-		"22":{
-			"name":"Leaves",
-			"skill":7,
-			"rarity":1
-		},
-		"23":{
-			"name":"Wood",
-			"skill":7,
-			"rarity":2
-		},
-		"24":{
-			"name":"Amber",
-			"skill":7,
-			"rarity":3
-		},
-		"25":{
-			"name":"Light 1",
-			"skill":8,
-			"rarity":1
-		},
-		"26":{
-			"name":"Light 2",
-			"skill":8,
-			"rarity":2
-		},
-		"27":{
-			"name":"Light 3",
-			"skill":8,
-			"rarity":3
-		},
-		"28":{
-			"name":"Dark 1",
-			"skill":9,
-			"rarity":1
-		},
-		"29":{
-			"name":"Dark 2",
-			"skill":9,
-			"rarity":2
-		},
-		"30":{
-			"name":"Dark 3",
-			"skill":9,
-			"rarity":3
+"resources":	{
+		"elemental": {
+			"1":{
+				"name":"Iron",
+				"skill":0
+			},
+			"2":{
+				"name":"Gold",
+				"skill":0,
+				"rarity":2
+			},
+			"3":{
+				"name":"Diamond",
+				"skill":0,
+				"rarity":3
+			},
+			"4":{
+				"name":"Magma",
+				"skill":1,
+				"rarity":1
+			},
+			"5":{
+				"name":"Firestone",
+				"skill":1,
+				"rarity":2
+			},
+			"6":{
+				"name":"Ruby",
+				"skill":1,
+				"rarity":3
+			},
+			"7":{
+				"name":"Copper",
+				"skill":2,
+				"rarity":1
+			},
+			"8":{
+				"name":"Lightning 2",
+				"skill":2,
+				"rarity":2
+			},
+			"9":{
+				"name":"Lightning 3",
+				"skill":2,
+				"rarity":3
+			},
+			"10":{
+				"name":"Ice 1",
+				"skill":3,
+				"rarity":1
+			},
+			"11":{
+				"name":"Ice 2",
+				"skill":3,
+				"rarity":2
+			},
+			"12":{
+				"name":"Ice 3",
+				"skill":3,
+				"rarity":3
+			},
+			"13":{
+				"name":"Air 1",
+				"skill":4,
+				"rarity":1
+			},
+			"14":{
+				"name":"Air 2",
+				"skill":4,
+				"rarity":2
+			},
+			"15":{
+				"name":"Air 3",
+				"skill":4,
+				"rarity":3
+			},
+			"16":{
+				"name":"Dirt",
+				"skill":5,
+				"rarity":1
+			},
+			"17":{
+				"name":"Stone",
+				"skill":5,
+				"rarity":2
+			},
+			"18":{
+				"name":"Earth 3",
+				"skill":5,
+				"rarity":3
+			},
+			"19":{
+				"name":"Water 1",
+				"skill":6,
+				"rarity":1
+			},
+			"20":{
+				"name":"Water 2",
+				"skill":6,
+				"rarity":2
+			},
+			"21":{
+				"name":"Water 3",
+				"skill":6,
+				"rarity":3
+			},
+			"22":{
+				"name":"Leaves",
+				"skill":7,
+				"rarity":1
+			},
+			"23":{
+				"name":"Wood",
+				"skill":7,
+				"rarity":2
+			},
+			"24":{
+				"name":"Amber",
+				"skill":7,
+				"rarity":3
+			},
+			"25":{
+				"name":"Light 1",
+				"skill":8,
+				"rarity":1
+			},
+			"26":{
+				"name":"Light 2",
+				"skill":8,
+				"rarity":2
+			},
+			"27":{
+				"name":"Light 3",
+				"skill":8,
+				"rarity":3
+			},
+			"28":{
+				"name":"Dark 1",
+				"skill":9,
+				"rarity":1
+			},
+			"29":{
+				"name":"Dark 2",
+				"skill":9,
+				"rarity":2
+			},
+			"30":{
+				"name":"Dark 3",
+				"skill":9,
+				"rarity":3
+			}
 		}
-	}
 
-	
+		
+	}
 }

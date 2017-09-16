@@ -12,7 +12,12 @@ var userSchema = new mongoose.Schema({
   resources:[{
     _id:String,
     quantity:Number
-  }]
+  }],
+  realms:[{
+    elementId:Number,
+    maximumLevel:Number,
+    _id:false
+  }] 
 })
 
 userSchema.methods.avatarActivity = function(avatarId) {

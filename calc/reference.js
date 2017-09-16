@@ -1,6 +1,6 @@
 const fs = require('fs');
-const skills = JSON.parse(fs.readFileSync('static/ref/skills.json', 'utf8'));
-const resources = JSON.parse(fs.readFileSync('static/ref/resources.json', 'utf8'));
+const skills = JSON.parse(fs.readFileSync('static/ref/skills.json', 'utf8')).skills;
+const resources = JSON.parse(fs.readFileSync('static/ref/resources.json', 'utf8')).resources;
 
 for(e of skills.elements) {
   e.totalAttack = e.damageModifiers.reduce((total,amount) => total + amount )

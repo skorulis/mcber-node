@@ -1,6 +1,7 @@
 const gen = require("../../calc/generate")
 const explore = require("../../calc/explore")
 const xp = require("../../calc/experience")
+const avatarCalc = require("../../calc/avatar")
 
 class RequestError extends Error {
     constructor(...args) {
@@ -80,6 +81,7 @@ module.exports = {
     req.user.addResource(result.resource)
 
     xp.addAllExperience(avatar,result.experience)
+    avatarCalc.updateStats(avatar)
 
     //TODO: Add anything else that comes up
 

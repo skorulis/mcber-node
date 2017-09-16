@@ -4,6 +4,7 @@ const uniqid = require('uniqid');
 const Avatar = require('../model').Avatar
 const User = require('../model').User
 const Activity = require("../model").Activity
+const ref = require("./reference")
 
 const emptyAvatar = function() {
   var avatar = new Avatar({_id:uniqid()})
@@ -25,6 +26,9 @@ const basicRealm = function(element,level) {
 const newUser = function() {
   var user = new User({_id:uniqid()})
   user.avatars.push(emptyAvatar())
+  for(var i = 0; i < ref.skills.elements.length; ++i) {
+    user.realms.push({elementId:i,maximumLevel:1})
+  }
   return user
 }
 
