@@ -1,5 +1,52 @@
 {
 "skills":	{
+		"trades":[
+			{
+				"name":"Mining",
+				"shortName":"MINE",
+				"damageModifiers":[],
+				"index":0,
+				"healthModifier":0,
+				"speedModifier":0,
+				"color":"555650"
+			},
+			{
+				"name":"Crafting",
+				"shortName":"CRFT",
+				"damageModifiers":[],
+				"index":1,
+				"healthModifier":0,
+				"speedModifier":0,
+				"color":"555650"
+			},
+			{
+				"name":"Fighting",
+				"shortName":"FGHT",
+				"damageModifiers":[],
+				"index":2,
+				"healthModifier":0,
+				"speedModifier":0,
+				"color":"555650"
+			},
+			{
+				"name":"Exploring",
+				"shortName":"EXPL",
+				"damageModifiers":[],
+				"index":3,
+				"healthModifier":0,
+				"speedModifier":0,
+				"color":"555650"
+			},
+			{
+				"name":"Researching",
+				"shortName":"RSCH",
+				"damageModifiers":[],
+				"index":4,
+				"healthModifier":0,
+				"speedModifier":0,
+				"color":"555650"
+			}
+		],
 		"elements":[
 			{
 				"name":"Physical",
@@ -8,21 +55,7 @@
 				"index":0,
 				"healthModifier":1,
 				"speedModifier":1,
-				"color":"555650",
-				"resources":[
-					{
-						"name":"Iron"
-					},
-					{
-						"name":"Gold",
-						"rarity":2
-					},
-					{
-						"name":"Diamond",
-						"rarity":3
-					}
-
-				]
+				"color":"555650"
 			},
 			{
 				"name":"Fire",
@@ -31,12 +64,7 @@
 				"index":1,
 				"healthModifier":1,
 				"speedModifier":1,
-				"color":"f90909",
-				"resources":[
-					{
-						"name":"Magma"
-					}
-				]
+				"color":"f90909"
 			},
 			{
 				"name":"Lightning",
@@ -45,10 +73,7 @@
 				"index":2,
 				"healthModifier":1,
 				"speedModifier":1,
-				"color":"c5def9",
-				"resources":[
-
-				]
+				"color":"c5def9"
 			},
 			{
 				"name":"Ice",
@@ -57,10 +82,7 @@
 				"index":3,
 				"healthModifier":1,
 				"speedModifier":1,
-				"color":"a0e4ff",
-				"resources":[
-
-				]
+				"color":"a0e4ff"
 			},
 			{
 				"name":"Air",
@@ -69,10 +91,7 @@
 				"index":4,
 				"healthModifier":1,
 				"speedModifier":1,
-				"color":"d5dae0",
-				"resources":[
-
-				]
+				"color":"d5dae0"
 			},
 			{
 				"name":"Earth",
@@ -81,10 +100,7 @@
 				"index":5,
 				"healthModifier":1,
 				"speedModifier":1,
-				"color":"75533a",
-				"resources":[
-
-				]
+				"color":"75533a"
 			},
 			{
 				"name":"Water",
@@ -93,10 +109,7 @@
 				"index":6,
 				"healthModifier":1,
 				"speedModifier":1,
-				"color":"050d84",
-				"resources":[
-
-				]
+				"color":"050d84"
 			},
 			{
 				"name":"Nature",
@@ -105,10 +118,7 @@
 				"index":7,
 				"healthModifier":1,
 				"speedModifier":1,
-				"color":"04841a",
-				"resources":[
-
-				]
+				"color":"04841a"
 			},
 			{
 				"name":"Light",
@@ -117,10 +127,7 @@
 				"index":8,
 				"healthModifier":1,
 				"speedModifier":1,
-				"color":"e0d216",
-				"resources":[
-
-				]
+				"color":"e0d216"
 			},
 			{
 				"name":"Dark",
@@ -129,10 +136,7 @@
 				"index":9,
 				"healthModifier":1,
 				"speedModifier":1,
-				"color":"161612",
-				"resources":[
-
-				]
+				"color":"161612"
 			}
 
 

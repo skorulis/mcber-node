@@ -6,16 +6,19 @@ const xp = require("../../calc/experience")
 
 it("Adds Experience", function() {
   var avatar = gen.emptyAvatar()
-  xp.addExperience(avatar,{type:"elemental",xp:25,elementId:0})
+  xp.addExperience(avatar,{type:"elemental",xp:25,skillId:0})
   avatar.skills.elements[0].level.should.equal(0)
   avatar.skills.elements[0].xp.should.equal(25)
-  xp.addExperience(avatar,{type:"elemental",xp:25,elementId:0})
+  avatar.skills.elements[0].xpNext.should.equal(50)
+  xp.addExperience(avatar,{type:"elemental",xp:25,skillId:0})
   avatar.skills.elements[0].level.should.equal(1)
   avatar.skills.elements[0].xp.should.equal(0)
+  avatar.skills.elements[0].xpNext.should.equal(141)
 
 //level 2 requires 141, 3 requires 259 = 400 total
-  xp.addExperience(avatar,{type:"elemental",xp:450,elementId:0})
+  xp.addExperience(avatar,{type:"elemental",xp:450,skillId:0})
   avatar.skills.elements[0].level.should.equal(3)
   avatar.skills.elements[0].xp.should.equal(50)
+  avatar.skills.elements[0].xpNext.should.equal(400)
 
 })

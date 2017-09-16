@@ -1,3 +1,12 @@
+const typeElemental = "elemental";
+const typeTrade = "trade";
+
+const tradeSkillMine = 0;
+const tradeSkillCraft = 1;
+const tradeSkillBattle = 2;
+const tradeSkillExplore = 3;
+const tradeSkillResearch = 4;
+
 
 //Calculates how much experience to go from level-1 -> level
 const elementalRequirement = function(level) {
@@ -6,21 +15,29 @@ const elementalRequirement = function(level) {
 
 //Returns all the experience gained exploring the given realm for that amount of time
 const exploreGain = function(realm,time) {
-  return [{type:"elemental",xp:realm.level*time,elementId:realm.element}]
+  return [
+    {type:typeElemental,xp:realm.level*time,skillId:realm.element},
+    {type:typeTrade,xp:realm.level*time,skillId:tradeSkillExplore},
+  ]
+}
+
+const addExperienceToSkill = function(skillXpProgress,xpObject) {
+  var xpTotal = skillXpProgress.xp + xpObject.xp
+    while(xpTotal >= elementalRequirement(skillXpProgress.level + 1)) {
+      xpTotal -= elementalRequirement(skillXpProgress.level + 1);
+      skillXpProgress.level = skillXpProgress.level + 1;
+    }
+    skillXpProgress.xp = xpTotal
+    skillXpProgress.xpNext = elementalRequirement(skillXpProgress.level + 1)
 }
 
 const addExperience = function(avatar,xpObject) {
-  if (xpObject.type == "elemental") {
-    var element = avatar.skills.elements[xpObject.elementId]
-    var xpTotal = element.xp + xpObject.xp
-    while(xpTotal >= elementalRequirement(element.level + 1)) {
-      xpTotal -= elementalRequirement(element.level + 1);
-      element.level = element.level + 1;
-    }
-    element.xp = xpTotal
-    element.nextXP = elementalRequirement(element.level + 1)
-  } else {
-
+  if (xpObject.type == typeElemental) {
+    var element = avatar.skills.elements[xpObject.skillId]
+    addExperienceToSkill(element,xpObject)
+  } else if(xpObject.type == typeTrade) {
+    var skill = avatar.skills.trades[xpObject.skillId]
+    addExperienceToSkill(skill,xpObject)
   }
 }
 

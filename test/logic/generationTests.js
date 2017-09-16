@@ -10,6 +10,7 @@ it("Generates an empty avatar",function() {
   avatar.speed.should.equal(0)
   avatar.id.should.be.a('string')
   avatar.skills.elements.length.should.equal(10)
+  avatar.skills.trades.length.should.equal(5)
   avatar.skills.elements[0].xpNext.should.equal(50)
 })
 
@@ -20,6 +21,7 @@ it("Generates a fixed avatar",function() {
   avatar.health.should.equal(10)
   avatar.speed.should.equal(10)
   avatar.skills.elements[0].xpNext.should.equal(1824)
+  avatar.skills.trades.length.should.equal(5)
 })
 
 it("Generates a random avatar",function() {

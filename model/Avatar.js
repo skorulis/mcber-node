@@ -5,6 +5,9 @@ var schema = new mongoose.Schema({
   skills: {
     elements:[
       {level:Number,xp:Number,xpNext:Number, _id:false},
+    ],
+    trades:[
+      {level:Number,xp:Number,xpNext:Number, _id:false},
     ]
   },
   level:Number,
@@ -13,8 +16,12 @@ var schema = new mongoose.Schema({
   currentHealth:Number
 })
 
-schema.methods.elementalLevel = function(elementId) {
-  return this.skills.elements[elementId].level
+schema.methods.elementalLevel = function(skillId) {
+  return this.skills.elements[skillId].level
+}
+
+schema.methods.tradelLevel = function(skillId) {
+  return this.skills.trade[skillId].level
 }
 
 module.exports = {

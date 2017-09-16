@@ -10,8 +10,9 @@ var userSchema = new mongoose.Schema({
   avatars:[avatarSchema],
   activities:[activitySchema],
   resources:[{
-    _id:String,
-    quantity:Number
+    id:String,
+    quantity:Number,
+    _id:false
   }],
   realms:[{
     elementId:Number,
@@ -47,7 +48,7 @@ userSchema.methods.resourceCount = function(resourceId) {
 }
 
 userSchema.methods.addResource = function(resource) {
-  var found = this.resources.find( (r) => r.id == resource._id)
+  var found = this.resources.find( (r) => r.id == resource.id)
   if (found) {
     found.quantity += resource.quantity
   } else {

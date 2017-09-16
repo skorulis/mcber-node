@@ -10,9 +10,8 @@ for(e of skills.elements) {
 
 for (var id in resources.elemental) {
   var r = resources.elemental[id]
-  r.id = parseInt(id)
+  r.id = id;
   skills.elements[r.skill].resources.push(r)
-  
 }
 
 module.exports = {

@@ -10,8 +10,12 @@ const xp = require("./experience")
 const emptyAvatar = function() {
   var avatar = new Avatar({_id:uniqid()})
   avatar.skills.elements = []
-  for(var i = 0; i < 10; ++i) {
+  avatar.skills.trades = []
+  for(var i = 0; i < ref.skills.elements.length; ++i) {
     avatar.skills.elements.push({level:0,xp:0,xpNext:xp.elementalRequirement(1)})
+  }
+  for(var i = 0; i < ref.skills.trades.length; ++i) {
+    avatar.skills.trades.push({level:0,xp:0,xpNext:xp.elementalRequirement(1)})
   }
   return avatarUtil.updateStats(avatar)
 }
