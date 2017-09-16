@@ -5,7 +5,7 @@ var schema = new mongoose.Schema({
   _id: String,
   avatarId:String,
   activityType:String,
-  startTimestamp:{type:Number,default:Math.floor(Date.now() / 1000)},
+  startTimestamp:{type:Number},
   finishTimestamp:Number,
   realm: {
     element:Number,

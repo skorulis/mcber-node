@@ -34,7 +34,8 @@ const newUser = function() {
 }
 
 const baseActivity = function(avatarId,type) {
-  return new Activity({_id:uniqid(),avatarId:avatarId,activityType:type})
+  var start = Math.floor(Date.now() / 1000)
+  return new Activity({_id:uniqid(),avatarId:avatarId,activityType:type,startTimestamp:start})
 }
 
 const exploreActivity = function(realm,avatarId,duration) {
