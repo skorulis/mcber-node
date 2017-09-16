@@ -4,7 +4,7 @@ var schema = new mongoose.Schema({
   _id: String,
   skills: {
     elements:[
-      {level:Number,xp:Number,_id:false},
+      {level:Number,xp:Number,xpNext:Number, _id:false},
     ]
   },
   level:Number,

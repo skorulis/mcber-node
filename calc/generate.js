@@ -5,12 +5,13 @@ const Avatar = require('../model').Avatar
 const User = require('../model').User
 const Activity = require("../model").Activity
 const ref = require("./reference")
+const xp = require("./experience")
 
 const emptyAvatar = function() {
   var avatar = new Avatar({_id:uniqid()})
   avatar.skills.elements = []
   for(var i = 0; i < 10; ++i) {
-    avatar.skills.elements.push({level:0,xp:0})
+    avatar.skills.elements.push({level:0,xp:0,xpNext:xp.elementalRequirement(1)})
   }
   return avatarUtil.updateStats(avatar)
 }
@@ -49,7 +50,7 @@ module.exports = {
     var avatar = emptyAvatar()
     avatar.skills.elements = []
     for(var i = 0; i < elements.length; ++i) {
-      avatar.skills.elements.push({level:elements[i],xp:0})
+      avatar.skills.elements.push({level:elements[i],xp:0,xpNext:xp.elementalRequirement(elements[i]+1)})
     }
     return avatarUtil.updateStats(avatar)
   },

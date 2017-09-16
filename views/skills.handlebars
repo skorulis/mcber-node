@@ -2,14 +2,14 @@
 	<thead>
 	<td></td>
 	{{#each skills.elements}}
-	<td class="header">{{this.name}}</td>
+	<td class="header" style="color:#{{this.color}}">{{this.name}}</td>
 	{{/each}}
 	<td class="header">Total Attack</td>
 	</thead>
 	<tbody>
 		{{#each skills.elements}}
 		<tr>
-			<td class="header"> {{this.name}} </td>
+			<td class="header" style="color:#{{this.color}}"> {{this.name}} </td>
 			{{#each this.damageModifiers}}
 				<td class="value {{colorClass this}}"> {{percent this}} </td>
 			{{/each}}

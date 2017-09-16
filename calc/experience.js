@@ -18,6 +18,7 @@ const addExperience = function(avatar,xpObject) {
       element.level = element.level + 1;
     }
     element.xp = xpTotal
+    element.nextXP = elementalRequirement(element.level + 1)
   } else {
 
   }

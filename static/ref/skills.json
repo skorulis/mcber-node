@@ -8,6 +8,7 @@
 				"index":0,
 				"healthModifier":1,
 				"speedModifier":1,
+				"color":"555650",
 				"resources":[
 					{
 						"name":"Iron"
@@ -30,6 +31,7 @@
 				"index":1,
 				"healthModifier":1,
 				"speedModifier":1,
+				"color":"f90909",
 				"resources":[
 					{
 						"name":"Magma"
@@ -43,6 +45,7 @@
 				"index":2,
 				"healthModifier":1,
 				"speedModifier":1,
+				"color":"c5def9",
 				"resources":[
 
 				]
@@ -54,6 +57,7 @@
 				"index":3,
 				"healthModifier":1,
 				"speedModifier":1,
+				"color":"a0e4ff",
 				"resources":[
 
 				]
@@ -65,6 +69,7 @@
 				"index":4,
 				"healthModifier":1,
 				"speedModifier":1,
+				"color":"d5dae0",
 				"resources":[
 
 				]
@@ -76,6 +81,7 @@
 				"index":5,
 				"healthModifier":1,
 				"speedModifier":1,
+				"color":"75533a",
 				"resources":[
 
 				]
@@ -87,6 +93,7 @@
 				"index":6,
 				"healthModifier":1,
 				"speedModifier":1,
+				"color":"050d84",
 				"resources":[
 
 				]
@@ -98,6 +105,7 @@
 				"index":7,
 				"healthModifier":1,
 				"speedModifier":1,
+				"color":"04841a",
 				"resources":[
 
 				]
@@ -109,6 +117,7 @@
 				"index":8,
 				"healthModifier":1,
 				"speedModifier":1,
+				"color":"e0d216",
 				"resources":[
 
 				]
@@ -120,6 +129,7 @@
 				"index":9,
 				"healthModifier":1,
 				"speedModifier":1,
+				"color":"161612",
 				"resources":[
 
 				]
