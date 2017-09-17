@@ -10,6 +10,7 @@ var schema = new mongoose.Schema({
       {level:Number,xp:Number,xpNext:Number, _id:false},
     ]
   },
+  name:String,
   level:Number,
   health:Number,
   speed:Number,

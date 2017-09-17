@@ -1,0 +1,21 @@
+{
+	"mods":[
+		{
+			"type":"+skill",
+			"postfix":"of Skill",
+			"elemental":true,
+			"trade":true,
+			"plain":false,
+			"multiplier":1,
+			"power":1
+		},
+		{
+			"type":"+health",
+			"postfix":"of Health",
+			"elemental":false,
+			"plain":true,
+			"multiplier":5,
+			"power":1
+		}
+	]
+}

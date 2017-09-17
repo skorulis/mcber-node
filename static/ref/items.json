@@ -1,0 +1,26 @@
+{
+	"items":{
+		"baseTypes":[
+			{
+				"name":"Sword",
+				"type":"weapon"
+			},
+			{
+				"name":"Club",
+				"type":"weapon"
+			},
+			{
+				"name":"Spear",
+				"type":"weapon"
+			},
+			{
+				"name":"Shovel",
+				"type":"tool"
+			},
+			{
+				"name":"staff",
+				"type":"weapon"
+			}
+		]
+	}
+}
