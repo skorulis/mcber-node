@@ -49,7 +49,8 @@ module.exports = {
       return next(new RequestError("User has no avatar " + req.body.avatarId)) 
     }
     var duration = 30
-    var activity = gen.exploreActivity(req.body.realm,req.body.avatarId,duration)
+    var initial = explore.initialValues(req.body.realm,avatar)
+    var activity = gen.exploreActivity(req.body.realm,req.body.avatarId,initial.tickFrequency)
     req.user.activities.push(activity)
     req.user.save().then((user) => {
       res.send({activity:activity})  
