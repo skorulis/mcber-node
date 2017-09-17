@@ -5,6 +5,7 @@ const gen = require("../../calc/generate")
 const explore = require("../../calc/explore")
 const ref = require("../../calc/reference")
 const rand = require("../../calc/rand")
+const update = require("../../calc/update")
 
 it("Calculates explore constants",function() {
   var realm = gen.basicRealm(0,1)
@@ -61,4 +62,7 @@ it("Unlocks a new realm level",function() {
   var r1 = results[0]
   r1.realmUnlock.level.should.equal(2)
   r1.realmUnlock.elementId.should.equal(realm.elementId)
+
+  update.completeActivity("0",user,avatar,r1)
+  user.findRealm(0).maximumLevel.should.equal(2)
 })

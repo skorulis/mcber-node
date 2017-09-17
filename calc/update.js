@@ -11,7 +11,8 @@ const completeActivity = function(activityId,user,avatar,result) {
   avatarCalc.updateStats(avatar) 
 
   if (result.realmUnlock) {
-    
+    var realm = user.findRealm(result.realmUnlock.elementId)
+    realm.maximumLevel = Math.max(result.realmUnlock.level,realm.maximumLevel)
   }
 
   //TODO: Add anything else that comes up
