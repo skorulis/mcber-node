@@ -2,6 +2,7 @@ const gen = require("../../calc/generate")
 const explore = require("../../calc/explore")
 const xp = require("../../calc/experience")
 const avatarCalc = require("../../calc/avatar")
+const updateCalc = require("../../calc/update")
 
 class RequestError extends Error {
     constructor(...args) {
@@ -17,9 +18,9 @@ const exploreSchema = {
   properties:{
     realm: {
       type:'object',
-      required: ['element','level'],
+      required: ['elementId','level'],
       properties:{
-        element:{type:'number'},
+        elementId:{type:'number'},
         level:{type:'number',multipleOf:1,minimum:1}
       },
       avatarId: {type:"string"}
@@ -73,17 +74,10 @@ module.exports = {
     if (!activity.isComplete()) {
       return next(new RequestError("Activity has not completed")) 
     }
-
     var avatar = req.user.findAvatar(activity.avatarId)
     var result = explore.exploreActivity(activity,avatar)
 
-    req.user.removeActivity(req.body.activityId)
-    req.user.addResource(result.resource)
-
-    xp.addAllExperience(avatar,result.experience)
-    avatarCalc.updateStats(avatar)
-
-    //TODO: Add anything else that comes up
+    updateCalc.completeActivity(req.body.activityId,req.user,avatar,result)
 
     req.user.save().then(user => {
       res.send({activities:req.user.activities,result:result,avatar:avatar})  

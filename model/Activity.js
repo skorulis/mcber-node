@@ -8,7 +8,7 @@ var schema = new mongoose.Schema({
   startTimestamp:{type:Number},
   finishTimestamp:Number,
   realm: {
-    element:Number,
+    elementId:Number,
     level:Number
   }
 })

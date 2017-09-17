@@ -20,10 +20,10 @@ const emptyAvatar = function() {
   return avatarUtil.updateStats(avatar)
 }
 
-const basicRealm = function(element,level) {
+const basicRealm = function(elementId,level) {
   var realm = {
     level:level,
-    element:element
+    elementId:elementId
   }
   return realm;
 }

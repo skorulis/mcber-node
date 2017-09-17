@@ -3,14 +3,14 @@ const ref = require("./reference")
 const xp = require("./experience")
 
 const initialValues = function(realm,avatar) {
-  var skill = avatar.elementalLevel(realm.element)
+  var skill = avatar.elementalLevel(realm.elementId)
   return {
     tickFrequency: 30 * realm.level * realm.level / (skill + 1)
   }
 }
 
 const chooseResource = function(realm,avatar) {
-  var skill = ref.skills.elements[realm.element]
+  var skill = ref.skills.elements[realm.elementId]
   return skill.resources[0]
 }
 
@@ -25,6 +25,10 @@ const singleResult = function(realm,avatar,initial) {
   var resource = chooseResource(realm,avatar)
   var quantity = calculateResourceQuantity(realm,avatar,resource)
   result.resource = {id:resource.id,quantity:quantity}
+  if (rand.getRandomInt(0,100) > 90) { //10% chance to unlock a realm)
+    result.realmUnlock = {elementId:realm.elementId,level:realm.level + 1}
+  }
+
   return result
 }
 

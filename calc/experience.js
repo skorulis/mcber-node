@@ -16,7 +16,7 @@ const elementalRequirement = function(level) {
 //Returns all the experience gained exploring the given realm for that amount of time
 const exploreGain = function(realm,time) {
   return [
-    {type:typeElemental,xp:realm.level*time,skillId:realm.element},
+    {type:typeElemental,xp:realm.level*time,skillId:realm.elementId},
     {type:typeTrade,xp:realm.level*time,skillId:tradeSkillExplore},
   ]
 }

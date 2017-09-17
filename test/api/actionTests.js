@@ -34,7 +34,7 @@ describe("Performs all action methods",function() {
 
   it("Starts exploring", function(done) {
     token.should.not.be.null
-    var realm = {element:0,level:1}
+    var realm = {elementId:0,level:1}
     helpers.jsonAuthPost("/api/action/explore",token)
     .send({realm:realm,avatarId:avatar._id})
     .expect(function(res) {
@@ -53,7 +53,6 @@ describe("Performs all action methods",function() {
     .send({activityId:activity._id})
     .expect(200)
     .expect(function(res) {
-      console.log(res.body)
       var xp = res.body.result.experience[0]
       xp.xp.should.equal(30)
       res.body.result.resource.quantity.should.equal(1)

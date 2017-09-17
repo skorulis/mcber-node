@@ -21,7 +21,7 @@ schema.methods.elementalLevel = function(skillId) {
 }
 
 schema.methods.tradelLevel = function(skillId) {
-  return this.skills.trade[skillId].level
+  return this.skills.trades[skillId].level
 }
 
 module.exports = {

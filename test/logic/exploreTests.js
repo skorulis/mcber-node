@@ -4,6 +4,7 @@ const assert = chai.assert;
 const gen = require("../../calc/generate")
 const explore = require("../../calc/explore")
 const ref = require("../../calc/reference")
+const rand = require("../../calc/rand")
 
 it("Calculates explore constants",function() {
   var realm = gen.basicRealm(0,1)
@@ -47,5 +48,17 @@ it("Calculates single results",function() {
   xp.skillId.should.equal(0)
   r1.resource.quantity.should.equal(1)
   r1.resource.id.should.equal("1")
-  
+})
+
+it("Unlocks a new realm level",function() {
+  var user = gen.newUser()
+  var realm = user.findRealm(0)
+  realm.level = realm.maximumLevel
+  var avatar = user.avatars[0]
+  rand.setNextInt(100)
+  var results = explore.explore(realm,avatar,30)
+  results.length.should.equal(1)
+  var r1 = results[0]
+  r1.realmUnlock.level.should.equal(2)
+  r1.realmUnlock.elementId.should.equal(realm.elementId)
 })

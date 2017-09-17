@@ -34,5 +34,5 @@ it("Generates a random avatar",function() {
 it("Generates a realm", function() {
   var realm = gen.basicRealm(0,1)
   realm.level.should.equal(1)
-  realm.element.should.equal(0)
+  realm.elementId.should.equal(0)
 })
