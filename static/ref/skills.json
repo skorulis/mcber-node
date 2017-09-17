@@ -6,6 +6,7 @@
 				"shortName":"MINE",
 				"damageModifiers":[],
 				"index":0,
+				"type":"trade",
 				"healthModifier":0,
 				"speedModifier":0,
 				"color":"555650"
@@ -15,6 +16,7 @@
 				"shortName":"CRFT",
 				"damageModifiers":[],
 				"index":1,
+				"type":"trade",
 				"healthModifier":0,
 				"speedModifier":0,
 				"color":"555650"
@@ -24,6 +26,7 @@
 				"shortName":"FGHT",
 				"damageModifiers":[],
 				"index":2,
+				"type":"trade",
 				"healthModifier":0,
 				"speedModifier":0,
 				"color":"555650"
@@ -33,6 +36,7 @@
 				"shortName":"EXPL",
 				"damageModifiers":[],
 				"index":3,
+				"type":"trade",
 				"healthModifier":0,
 				"speedModifier":0,
 				"color":"555650"
@@ -42,6 +46,7 @@
 				"shortName":"RSCH",
 				"damageModifiers":[],
 				"index":4,
+				"type":"trade",
 				"healthModifier":0,
 				"speedModifier":0,
 				"color":"555650"
@@ -53,6 +58,7 @@
 				"shortName":"PHYS",
 				"damageModifiers":[1,1.25,1,0.75,1.5,0.5,0.75,1,1,1],
 				"index":0,
+				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
 				"color":"555650"
@@ -62,6 +68,7 @@
 				"shortName":"FIRE",
 				"damageModifiers":[1,1.25,1,2,0.75,0.5,0.5,1.5,1,1],
 				"index":1,
+				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
 				"color":"f90909"
@@ -71,6 +78,7 @@
 				"shortName":"ELEC",
 				"damageModifiers":[1.5,1,1.25,1,0.75,1,2,1,1,1],
 				"index":2,
+				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
 				"color":"c5def9"
@@ -80,6 +88,7 @@
 				"shortName":"ICE",
 				"damageModifiers":[1,0.5,1,1,1,0.5,1.5,1.25,1,1],
 				"index":3,
+				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
 				"color":"a0e4ff"
@@ -89,6 +98,7 @@
 				"shortName":"AIR",
 				"damageModifiers":[1.25,1.5,1,1,0.5,1,0.75,0.75,1,1],
 				"index":4,
+				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
 				"color":"d5dae0"
@@ -98,6 +108,7 @@
 				"shortName":"ERTH",
 				"damageModifiers":[1,1.25,1,1,1,0.25,0.5,0.75,1,1],
 				"index":5,
+				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
 				"color":"75533a"
@@ -107,6 +118,7 @@
 				"shortName":"WTR",
 				"damageModifiers":[1,1.5,1,0.5,1.5,2,0.5,0.5,1,1],
 				"index":6,
+				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
 				"color":"050d84"
@@ -116,6 +128,7 @@
 				"shortName":"NTR",
 				"damageModifiers":[1,0.5,1,1.5,1,1.5,1.5,1,1,1],
 				"index":7,
+				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
 				"color":"04841a"
@@ -125,6 +138,7 @@
 				"shortName":"LGHT",
 				"damageModifiers":[1,1,1,1,1,1,1,1,1,1],
 				"index":8,
+				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
 				"color":"e0d216"
@@ -134,6 +148,7 @@
 				"shortName":"DARK",
 				"damageModifiers":[1,1,1,1,1,1,1,1,1,1],
 				"index":9,
+				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
 				"color":"161612"
