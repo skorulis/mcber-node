@@ -9,13 +9,10 @@ const xp = require("./experience")
 
 const emptyAvatar = function() {
   var avatar = new Avatar({_id:uniqid()})
-  avatar.skills.elements = []
-  avatar.skills.trades = []
-  for(var i = 0; i < ref.skills.elements.length; ++i) {
-    avatar.skills.elements.push({level:0,xp:0,xpNext:xp.elementalRequirement(1)})
-  }
-  for(var i = 0; i < ref.skills.trades.length; ++i) {
-    avatar.skills.trades.push({level:0,xp:0,xpNext:xp.elementalRequirement(1)})
+  avatar.skills = []
+  for(var i = 0; i < ref.skills.length; ++i) {
+    var skill = ref.skills[i]
+    avatar.skills.push({id:skill.id, level:0, xp:0, xpNext:xp.elementalRequirement(1)})
   }
   return avatarUtil.updateStats(avatar)
 }
@@ -31,7 +28,7 @@ const basicRealm = function(elementId,level) {
 const newUser = function() {
   var user = new User({_id:uniqid()})
   user.avatars.push(emptyAvatar())
-  for(var i = 0; i < ref.skills.elements.length; ++i) {
+  for(var i = 0; i < ref.elements.length; ++i) {
     user.realms.push({elementId:i,maximumLevel:1})
   }
   return user
@@ -53,9 +50,9 @@ module.exports = {
   emptyAvatar:emptyAvatar,
   withLevels:function(elements) {
     var avatar = emptyAvatar()
-    avatar.skills.elements = []
     for(var i = 0; i < elements.length; ++i) {
-      avatar.skills.elements.push({level:elements[i],xp:0,xpNext:xp.elementalRequirement(elements[i]+1)})
+      avatar.skills[i].level = elements[i]
+      avatar.skills[i].xpNext = xp.elementalRequirement(elements[i]+1)
     }
     return avatarUtil.updateStats(avatar)
   },
@@ -64,7 +61,7 @@ module.exports = {
     while(level > 0) {
       const index = rand.getRandomInt(0,9)
       const value = rand.getRandomInt(1,level)
-      avatar.skills.elements[index].level += value
+      avatar.skills[index].level += value
       level -= value 
     }
     avatarUtil.updateStats(avatar)

@@ -3,14 +3,14 @@ const ref = require("./reference")
 const xp = require("./experience")
 
 const initialValues = function(realm,avatar) {
-  var skill = avatar.elementalLevel(realm.elementId)
+  var skill = avatar.skillLevel(realm.elementId)
   return {
     tickFrequency: 30 * realm.level * realm.level / (skill + 1)
   }
 }
 
 const chooseResource = function(realm,avatar) {
-  var skill = ref.skills.elements[realm.elementId]
+  var skill = ref.getSkill(realm.elementId)
   return skill.resources[0]
 }
 

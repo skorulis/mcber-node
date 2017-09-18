@@ -2,14 +2,9 @@ var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
   _id: String,
-  skills: {
-    elements:[
-      {level:Number,xp:Number,xpNext:Number, _id:false},
-    ],
-    trades:[
-      {level:Number,xp:Number,xpNext:Number, _id:false},
-    ]
-  },
+  skills: [
+    {id:Number,level:Number,xp:Number,xpNext:Number, _id:false},
+  ],
   name:String,
   level:Number,
   health:Number,
@@ -17,13 +12,22 @@ var schema = new mongoose.Schema({
   currentHealth:Number
 })
 
-schema.methods.elementalLevel = function(skillId) {
-  return this.skills.elements[skillId].level
+schema.methods.findSkill = function(skillId) {
+  return this.skills.find((x) => x.id == skillId)
 }
 
-schema.methods.tradelLevel = function(skillId) {
-  return this.skills.trades[skillId].level
+schema.methods.skillLevel = function(skillId) {
+  return this.findSkill(skillId).level
 }
+
+schema.methods.elementalSkills = function() {
+  return this.skills.slice(0,9) //TODO: Might need refactoring
+}
+
+schema.methods.elementalLevel = function() {
+  return this.elementalSkills().reduce((total,s) => {return total + s.level},0)
+}
+
 
 module.exports = {
   schema: schema,

@@ -1,63 +1,10 @@
 {
-"skills":	{
-		"trades":[
-			{
-				"name":"Mining",
-				"shortName":"MINE",
-				"damageModifiers":[],
-				"index":0,
-				"type":"trade",
-				"healthModifier":0,
-				"speedModifier":0,
-				"color":"555650"
-			},
-			{
-				"name":"Crafting",
-				"shortName":"CRFT",
-				"damageModifiers":[],
-				"index":1,
-				"type":"trade",
-				"healthModifier":0,
-				"speedModifier":0,
-				"color":"555650"
-			},
-			{
-				"name":"Fighting",
-				"shortName":"FGHT",
-				"damageModifiers":[],
-				"index":2,
-				"type":"trade",
-				"healthModifier":0,
-				"speedModifier":0,
-				"color":"555650"
-			},
-			{
-				"name":"Exploring",
-				"shortName":"EXPL",
-				"damageModifiers":[],
-				"index":3,
-				"type":"trade",
-				"healthModifier":0,
-				"speedModifier":0,
-				"color":"555650"
-			},
-			{
-				"name":"Researching",
-				"shortName":"RSCH",
-				"damageModifiers":[],
-				"index":4,
-				"type":"trade",
-				"healthModifier":0,
-				"speedModifier":0,
-				"color":"555650"
-			}
-		],
-		"elements":[
-			{
+"skills":	[
+	{
 				"name":"Physical",
 				"shortName":"PHYS",
 				"damageModifiers":[1,1.25,1,0.75,1.5,0.5,0.75,1,1,1],
-				"index":0,
+				"id":0,
 				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
@@ -67,7 +14,7 @@
 				"name":"Fire",
 				"shortName":"FIRE",
 				"damageModifiers":[1,1.25,1,2,0.75,0.5,0.5,1.5,1,1],
-				"index":1,
+				"id":1,
 				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
@@ -77,7 +24,7 @@
 				"name":"Lightning",
 				"shortName":"ELEC",
 				"damageModifiers":[1.5,1,1.25,1,0.75,1,2,1,1,1],
-				"index":2,
+				"id":2,
 				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
@@ -87,7 +34,7 @@
 				"name":"Ice",
 				"shortName":"ICE",
 				"damageModifiers":[1,0.5,1,1,1,0.5,1.5,1.25,1,1],
-				"index":3,
+				"id":3,
 				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
@@ -97,7 +44,7 @@
 				"name":"Air",
 				"shortName":"AIR",
 				"damageModifiers":[1.25,1.5,1,1,0.5,1,0.75,0.75,1,1],
-				"index":4,
+				"id":4,
 				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
@@ -107,7 +54,7 @@
 				"name":"Earth",
 				"shortName":"ERTH",
 				"damageModifiers":[1,1.25,1,1,1,0.25,0.5,0.75,1,1],
-				"index":5,
+				"id":5,
 				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
@@ -117,7 +64,7 @@
 				"name":"Water",
 				"shortName":"WTR",
 				"damageModifiers":[1,1.5,1,0.5,1.5,2,0.5,0.5,1,1],
-				"index":6,
+				"id":6,
 				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
@@ -127,7 +74,7 @@
 				"name":"Nature",
 				"shortName":"NTR",
 				"damageModifiers":[1,0.5,1,1.5,1,1.5,1.5,1,1,1],
-				"index":7,
+				"id":7,
 				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
@@ -137,7 +84,7 @@
 				"name":"Light",
 				"shortName":"LGHT",
 				"damageModifiers":[1,1,1,1,1,1,1,1,1,1],
-				"index":8,
+				"id":8,
 				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
@@ -147,14 +94,61 @@
 				"name":"Dark",
 				"shortName":"DARK",
 				"damageModifiers":[1,1,1,1,1,1,1,1,1,1],
-				"index":9,
+				"id":9,
 				"type":"elemental",
 				"healthModifier":1,
 				"speedModifier":1,
 				"color":"161612"
+			},
+			{
+				"name":"Mining",
+				"shortName":"MINE",
+				"damageModifiers":[],
+				"id":101,
+				"type":"trade",
+				"healthModifier":0,
+				"speedModifier":0,
+				"color":"555650"
+			},
+			{
+				"name":"Crafting",
+				"shortName":"CRFT",
+				"damageModifiers":[],
+				"id":102,
+				"type":"trade",
+				"healthModifier":0,
+				"speedModifier":0,
+				"color":"555650"
+			},
+			{
+				"name":"Fighting",
+				"shortName":"FGHT",
+				"damageModifiers":[],
+				"id":103,
+				"type":"trade",
+				"healthModifier":0,
+				"speedModifier":0,
+				"color":"555650"
+			},
+			{
+				"name":"Exploring",
+				"shortName":"EXPL",
+				"damageModifiers":[],
+				"id":104,
+				"type":"trade",
+				"healthModifier":0,
+				"speedModifier":0,
+				"color":"555650"
+			},
+			{
+				"name":"Researching",
+				"shortName":"RSCH",
+				"damageModifiers":[],
+				"id":105,
+				"type":"trade",
+				"healthModifier":0,
+				"speedModifier":0,
+				"color":"555650"
 			}
-
-
-		]
-	}
+]
 }

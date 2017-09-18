@@ -1,11 +1,11 @@
 const typeElemental = "elemental";
 const typeTrade = "trade";
 
-const tradeSkillMine = 0;
-const tradeSkillCraft = 1;
-const tradeSkillBattle = 2;
-const tradeSkillExplore = 3;
-const tradeSkillResearch = 4;
+const tradeSkillMine = 101;
+const tradeSkillCraft = 102;
+const tradeSkillBattle = 103;
+const tradeSkillExplore = 104;
+const tradeSkillResearch = 105;
 
 
 //Calculates how much experience to go from level-1 -> level
@@ -32,13 +32,8 @@ const addExperienceToSkill = function(skillXpProgress,xpObject) {
 }
 
 const addExperience = function(avatar,xpObject) {
-  if (xpObject.type == typeElemental) {
-    var element = avatar.skills.elements[xpObject.skillId]
-    addExperienceToSkill(element,xpObject)
-  } else if(xpObject.type == typeTrade) {
-    var skill = avatar.skills.trades[xpObject.skillId]
-    addExperienceToSkill(skill,xpObject)
-  }
+  var skill = avatar.findSkill(xpObject.skillId)
+  addExperienceToSkill(skill,xpObject)
 }
 
 const addAllExperience = function(avatar,xpList) {

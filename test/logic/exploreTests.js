@@ -30,7 +30,7 @@ it("Chooses a resource", function() {
 
 it("Calculates resource quantity", function() {
   var realm = gen.basicRealm(0,1)
-  var resource = ref.skills.elements[0].resources[0]
+  var resource = ref.skills[0].resources[0]
   var quantity = explore.calculateResourceQuantity(realm,null,resource)
   quantity.should.equal(1)
   resource.id.should.equal("1")

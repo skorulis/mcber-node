@@ -6,8 +6,10 @@ const battle = require("../../calc/battle")
 
 it("Chooses a skill",function() {
   const avatar = gen.withLevels([0,0,10,0,0,0,0,0,0,0])
+  avatar.skills.length.should.equal(15)
+  avatar.skillLevel(2).should.equal(10)
   const skill = battle.chooseSkill(avatar)
-  assert(skill == 2)
+  skill.should.equal(2)
 })
 
 it("Performs an attack",function() { 

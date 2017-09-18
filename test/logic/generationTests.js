@@ -9,19 +9,18 @@ it("Generates an empty avatar",function() {
   avatar.health.should.equal(0)
   avatar.speed.should.equal(0)
   avatar.id.should.be.a('string')
-  avatar.skills.elements.length.should.equal(10)
-  avatar.skills.trades.length.should.equal(5)
-  avatar.skills.elements[0].xpNext.should.equal(50)
+  avatar.skills.length.should.equal(15)
+  avatar.skills[0].xpNext.should.equal(50)
 })
 
 it("Generates a fixed avatar",function() { 
   const avatar = gen.withLevels([10,0,0,0,0,0,0,0,0,0])
-  assert(avatar.elementalLevel(0) == 10)
+  assert(avatar.skillLevel(0) == 10)
   avatar.level.should.equal(10)
   avatar.health.should.equal(10)
   avatar.speed.should.equal(10)
-  avatar.skills.elements[0].xpNext.should.equal(1824)
-  avatar.skills.trades.length.should.equal(5)
+  avatar.skills[0].xpNext.should.equal(1824)
+  avatar.skills.length.should.equal(15)
 })
 
 it("Generates a random avatar",function() {
