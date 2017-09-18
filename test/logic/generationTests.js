@@ -2,6 +2,7 @@ const chai = require('chai');
 const should = chai.should();
 const assert = chai.assert;
 const gen = require("../../calc/generate")
+const ref = require("../../calc/reference")
 
 it("Generates an empty avatar",function() { 
   const avatar = gen.emptyAvatar()
@@ -34,4 +35,17 @@ it("Generates a realm", function() {
   var realm = gen.basicRealm(0,1)
   realm.level.should.equal(1)
   realm.elementId.should.equal(0)
+})
+
+it("Generates an item", function() {
+  var baseItem = ref.items.baseTypes[0]
+  var item = gen.emptyItem(baseItem)
+  item._id.should.not.be.null
+  item.name.should.equal("Sword")
+  item.type.should.equal("weapon")
+
+  var baseItem = ref.items.baseTypes[3]
+  var item = gen.emptyItem(baseItem)
+  item.name.should.equal("Shovel")
+  item.type.should.equal("tool")
 })

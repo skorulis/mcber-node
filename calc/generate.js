@@ -4,6 +4,7 @@ const uniqid = require('uniqid');
 const Avatar = require('../model').Avatar
 const User = require('../model').User
 const Activity = require("../model").Activity
+const Item = require("../model").AvatarItem
 const ref = require("./reference")
 const xp = require("./experience")
 
@@ -46,6 +47,14 @@ const exploreActivity = function(realm,avatarId,duration) {
   return activity
 }
 
+const emptyItem = function(baseItem) {
+  var item = new Item({_id:uniqid()})
+  item.type = baseItem.type
+  item.name = baseItem.name
+  item.mods = []
+  return item
+}
+
 module.exports = {
   emptyAvatar:emptyAvatar,
   withLevels:function(elements) {
@@ -69,5 +78,6 @@ module.exports = {
   },
   basicRealm,
   newUser,
-  exploreActivity
+  exploreActivity,
+  emptyItem
 }

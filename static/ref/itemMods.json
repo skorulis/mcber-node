@@ -1,21 +1,35 @@
 {
 	"mods":[
 		{
-			"type":"+skill",
+			"id":"+skill",
 			"postfix":"of Skill",
-			"elemental":true,
-			"trade":true,
-			"plain":false,
-			"multiplier":1,
+			"elementalMultiplier":1,
+			"tradeMultiplier":1,
+			"baseMultiplier":1,
 			"power":1
 		},
 		{
-			"type":"+health",
+			"id":"+health",
 			"postfix":"of Health",
-			"elemental":false,
-			"plain":true,
-			"multiplier":5,
+			"prefix":"Healthy",
+			"plainMultiplier":1,
+			"baseMultiplier":5,
 			"power":1
+		},
+		{
+			"id":"%skill",
+			"postfix":"of Skill",
+			"elementalMultiplier":1,
+			"tradeMultiplier":1,
+			"baseMultiplier":2,
+			"power":1
+		},
+		{
+			"id":"extra-attack",
+			"postfix":"of Extra Attacks",
+			"elementalMultiplier":1,
+			"multiplier":1,
+			"power":2
 		}
 	]
 }

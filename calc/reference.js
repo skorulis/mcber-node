@@ -5,10 +5,23 @@ const mods = JSON.parse(fs.readFileSync('static/ref/itemMods.json', 'utf8')).mod
 const items = JSON.parse(fs.readFileSync('static/ref/items.json', 'utf8')).items;
 
 var skillIndex = []
+var modIndex = []
 const elements = skills.filter((s) => s.type == "elemental")
 
 const getSkill = function(id) {
   return skillIndex[id]
+}
+
+const baseItem = function(index) {
+  return items.baseTypes[index]
+}
+
+const modAtIndex = function(index) {
+  return mods[index]
+}
+
+const getMod = function(id) {
+  return modIndex[id]
 }
 
 for(e of skills) {
@@ -27,11 +40,18 @@ for (var id in resources.elemental) {
   getSkill(r.skill).resources.push(r)
 }
 
+for (m of mods) {
+  modIndex[m.id] = m
+}
+
 module.exports = {
   skills,
   resources,
   mods,
   items,
   getSkill,
-  elements
+  elements,
+  baseItem,
+  modAtIndex,
+  getMod
 }
