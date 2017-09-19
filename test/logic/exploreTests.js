@@ -66,3 +66,21 @@ it("Unlocks a new realm level",function() {
   update.completeActivity("0",user,avatar,r1)
   user.findRealm(0).maximumLevel.should.equal(2)
 })
+
+it("Finds a new item", function() {
+  var user = gen.newUser()
+  var realm = user.findRealm(0)
+  realm.level = realm.maximumLevel
+  var avatar = user.avatars[0]
+  rand.setNextInt(0);rand.setNextInt(100)
+  var results = explore.explore(realm,avatar,30)
+  results.length.should.equal(1)
+  var r1 = results[0]
+  r1.item.should.not.be.null
+  r1.item.name.should.not.be.null
+  assert(r1.realmUnlock == null)
+
+  user.items.length.should.equal(0)
+  update.completeActivity("0",user,avatar,r1)
+  user.items.length.should.equal(1)
+})

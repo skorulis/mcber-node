@@ -74,4 +74,14 @@ describe("Performs all item methods",function() {
       .end(done)
   })
 
+  it("Checks for an empty item", function(done) {
+    helpers.authGet("/api/user/current",token)
+    .expect(function(res) {
+      var u = res.body.user;
+      u.items.length.should.equal(0)
+      u.avatars[0].items.length.should.equal(1)
+    })
+    .end(done)
+  })
+
 })

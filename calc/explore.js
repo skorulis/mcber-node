@@ -1,6 +1,7 @@
 const rand = require("./rand")
 const ref = require("./reference")
 const xp = require("./experience")
+const item = require("./item")
 
 const initialValues = function(realm,avatar) {
   var skill = avatar.skillLevel(realm.elementId)
@@ -27,6 +28,9 @@ const singleResult = function(realm,avatar,initial) {
   result.resource = {id:resource.id,quantity:quantity}
   if (rand.getRandomInt(0,100) > 90) { //10% chance to unlock a realm)
     result.realmUnlock = {elementId:realm.elementId,level:realm.level + 1}
+  }
+  if (rand.getRandomInt(0,100) > 90) { //10% chance of getting an item
+    result.item = item.randomItem(1,realm.elementId)
   }
 
   return result

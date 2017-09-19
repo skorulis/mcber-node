@@ -14,6 +14,9 @@ const completeActivity = function(activityId,user,avatar,result) {
     var realm = user.findRealm(result.realmUnlock.elementId)
     realm.maximumLevel = Math.max(result.realmUnlock.level,realm.maximumLevel)
   }
+  if (result.item) {
+    user.items.push(result.item)
+  }
 
   //TODO: Add anything else that comes up
 }
