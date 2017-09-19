@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var avatarSchema = require("./Avatar").schema
 var activitySchema = require("./Activity").schema
+var itemSchema = require("./AvatarItem").schema
 
 var userSchema = new mongoose.Schema({
   _id: String,
@@ -9,6 +10,7 @@ var userSchema = new mongoose.Schema({
   fbid: String,
   avatars:[avatarSchema],
   activities:[activitySchema],
+  items:[itemSchema], //Unassigned items
   resources:[{
     id:String,
     quantity:Number,

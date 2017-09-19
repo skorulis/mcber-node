@@ -1,18 +1,19 @@
 const chai = require('chai');
 const should = chai.should();
 const assert = chai.assert;
+const gen = require("../../calc/generate")
 const ref = require("../../calc/reference")
 const rand = require("../../calc/rand")
 const itemCalc = require("../../calc/item")
 
-it.only("Generates a plain item",function() {
+it("Generates a plain item",function() {
   rand.setNextInt(1)
   var item = itemCalc.randomItem(0,0)
   item.name.should.equal("Club")
   item.mods.length.should.equal(0)
 })
 
-it.only("Generates a mod", function() {
+it("Generates a mod", function() {
   rand.setNextInt(1)
   var info = itemCalc.itemGenInfo(1,null)
   var mod = itemCalc.attemptMod(info)
@@ -20,5 +21,38 @@ it.only("Generates a mod", function() {
   mod.id.should.equal("+health")
   mod.power.should.equal(1)
   assert(mod.elementId == null)
+})
+
+it("Chooses and element",function() {
+  var info = itemCalc.itemGenInfo(1,2)
+  var mod = ref.mods[0]
+  rand.setNextInt(40)
+  var elementId = itemCalc.chooseElement(mod,info)
+  elementId.should.equal(2)
+})
+
+it("Generates elemental mods", function() {
+  rand.setNextInt(0)
+  rand.setNextInt(40)
+  var info = itemCalc.itemGenInfo(1,1)
+  var mod = itemCalc.attemptMod(info)
+  mod.id.should.equal("+skill")
+  mod.elementId.should.equal(1)
+
+  rand.setNextInt(0)
+  rand.setNextInt(4)
+  info = itemCalc.itemGenInfo(1,1)
+  mod = itemCalc.attemptMod(info)
+  mod.id.should.equal("+skill")
+  mod.elementId.should.equal(4)
+})
+
+it("Generates a complex item", function() {
+  rand.setNextInt(1)
+  var item = itemCalc.randomItem(10,0)
+  item.name.should.equal("Club")
+  
+  console.log(item)
+  //TODO: More for seeing the results than anything else
 })
 

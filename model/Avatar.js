@@ -1,9 +1,13 @@
 var mongoose = require('mongoose');
+var itemSchema = require("./AvatarItem").schema
 
 var schema = new mongoose.Schema({
   _id: String,
   skills: [
     {id:Number,level:Number,xp:Number,xpNext:Number, _id:false},
+  ],
+  items: [
+    {slot:String,item:itemSchema,_id:false}
   ],
   name:String,
   level:Number,
