@@ -3,6 +3,7 @@ const skills = JSON.parse(fs.readFileSync('static/ref/skills.json', 'utf8')).ski
 const resources = JSON.parse(fs.readFileSync('static/ref/resources.json', 'utf8')).resources;
 const mods = JSON.parse(fs.readFileSync('static/ref/itemMods.json', 'utf8')).mods;
 const items = JSON.parse(fs.readFileSync('static/ref/items.json', 'utf8')).items;
+const baseItems = items.baseTypes
 
 var skillIndex = []
 var modIndex = []
@@ -53,5 +54,6 @@ module.exports = {
   elements,
   baseItem,
   modAtIndex,
-  getMod
+  getMod,
+  baseItems
 }

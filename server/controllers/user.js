@@ -15,7 +15,6 @@ module.exports = {
   },
   update: function(req, res) {
     const json = req.body
-    console.log(json)
     req.user.update({fullname:json.fullname}).then(() => {
       const obj = {status:"ok"}
       res.status(200).send(obj)  
@@ -23,7 +22,6 @@ module.exports = {
   },
   refreshToken: function(req,res) {
     const token = req.decodedToken
-    console.log(token)
     if(!req.decodedToken) {
       res.status(400).send({message:"Could not decode token"})
     } else if(!req.user) {

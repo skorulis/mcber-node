@@ -57,7 +57,7 @@ const modPower = function(mod) {
 }
 
 const randomItem = function(power,elementId) {
-  var index = rand.getRandomInt(0, ref.items.length)
+  var index = rand.getRandomInt(0, ref.baseItems.length - 1)
   var baseItem = ref.baseItem(index)
   var item = gen.emptyItem(baseItem)
   var info = itemGenInfo(power,elementId)

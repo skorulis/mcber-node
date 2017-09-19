@@ -44,6 +44,16 @@ userSchema.methods.findRealm = function(elementId) {
   return this.realms.find( (r) => r.elementId == elementId)
 }
 
+userSchema.methods.findItem = function(itemId) {
+  return this.items.find( (x) => x._id == itemId )
+}
+
+userSchema.methods.removeItem = function(itemId) {
+  var item = this.findItem(itemId);
+  this.items = this.items.filter( (x) => x._id != itemId )
+  return item
+}
+
 userSchema.methods.removeActivity = function(activityId) {
   this.activities = this.activities.filter((a) => a._id != activityId)
 }
