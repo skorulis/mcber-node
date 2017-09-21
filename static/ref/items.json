@@ -1,5 +1,37 @@
 {
 	"items":{
+		"itemSlots":[
+			{
+				"id":"hand1",
+				"name":"Main hand",
+				"types":["weapon","tool"]
+			},
+			{
+				"id":"hand2",
+				"name":"Off hand",
+				"types":["weapon","tool"]
+			},
+			{
+				"id":"head",
+				"name":"Head",
+				"types":["helmet","hat"]
+			},
+			{
+				"id":"feet",
+				"name":"Feet",
+				"types":["shoes","boots","sandals"]
+			},
+			{
+				"id":"chest",
+				"name":"Chest",
+				"types":["shirt","vest"]
+			},
+			{
+				"id":"legs",
+				"name":"Legs",
+				"types":["pants"]
+			}
+		],
 		"baseTypes":[
 			{
 				"name":"Sword",

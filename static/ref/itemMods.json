@@ -6,7 +6,8 @@
 			"elementalMultiplier":1,
 			"tradeMultiplier":1,
 			"baseMultiplier":1,
-			"power":1
+			"power":1,
+			"descriptionFormatter":"+{{power}} to {{skill}} level"
 		},
 		{
 			"id":"+health",
@@ -14,7 +15,8 @@
 			"prefix":"Healthy",
 			"plainMultiplier":1,
 			"baseMultiplier":5,
-			"power":1
+			"power":1,
+			"descriptionFormatter":"+{{power}} health"
 		},
 		{
 			"id":"%skill",
@@ -22,14 +24,16 @@
 			"elementalMultiplier":1,
 			"tradeMultiplier":1,
 			"baseMultiplier":2,
-			"power":1
+			"power":1,
+			"descriptionFormatter":"{{power}}% increase to {{skill}} level"
 		},
 		{
 			"id":"extra-attack",
 			"postfix":"of Extra Attacks",
 			"elementalMultiplier":1,
-			"multiplier":1,
-			"power":2
+			"baseMultiplier":1,
+			"power":2,
+			"descriptionFormatter":"{{power}}% chance of an extra attack"
 		}
 	]
 }
