@@ -7,6 +7,7 @@ const Activity = require("../model").Activity
 const Item = require("../model").AvatarItem
 const ref = require("./reference")
 const xp = require("./experience")
+const statCalc = require("./statCalc")
 
 const emptyAvatar = function() {
   var avatar = new Avatar({_id:uniqid()})

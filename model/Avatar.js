@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var itemSchema = require("./AvatarItem").schema
+var statsSchema = require("./AvatarStats").schema
 
 var schema = new mongoose.Schema({
   _id: String,
@@ -9,10 +10,9 @@ var schema = new mongoose.Schema({
   items: [
     {slot:String,item:itemSchema,_id:false}
   ],
+  stats:statsSchema,
   name:String,
   level:Number,
-  health:Number,
-  speed:Number,
   currentHealth:Number
 })
 

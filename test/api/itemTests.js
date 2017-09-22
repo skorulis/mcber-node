@@ -14,11 +14,6 @@ var avatar = null;
 var user = null;
 var item = null;
 
-function findUser() {
-  User.findOne({email:"item@test.com"}, (err,u) => {
-    user = u
-  })
-}
 
 //TODO: Test works with only but is broken due to dodgy timing. Need to look into pre setting up the database
 describe("Performs all item methods",function() {
@@ -30,10 +25,16 @@ describe("Performs all item methods",function() {
       token = res.body.auth.token
       token.should.not.be.null
       avatar = res.body.user.avatars[0]
-      findUser()
+    })
+    .end(done)
+  })
+
+  it("Finds the user",function(done) {
+    User.findOne({email:"item@test.com"}, (err,u) => {
+      user = u
+      user.should.not.be.null
       done()
     })
-    .end()
   })
 
   it("Creates an item", function(done) {

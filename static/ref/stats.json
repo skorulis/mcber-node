@@ -3,7 +3,11 @@
 		{
 			"id":"1",
 			"name":"Health"
-		}
+		},
+		{
+			"id":"2",
+			"name":"Speed"
+		},
 
 	]
 }

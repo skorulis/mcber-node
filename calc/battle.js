@@ -55,7 +55,7 @@ const battle = function(a1,a2) {
     attackRes = attack(a1,a2)
     res.a1Attacks.push(attackRes)
     res.a1TotalDamage += attackRes.damage;
-    if (res.a1TotalDamage >= a2.health) {
+    if (res.a1TotalDamage >= a2.currentHealth) {
       res.winner = a1
       return res
     }
@@ -63,7 +63,7 @@ const battle = function(a1,a2) {
     attackRes = attack(a2,a1)
     res.a2Attacks.push(attackRes)
     res.a2TotalDamage += attackRes.damage
-    if (res.a2TotalDamage >= a1.health) {
+    if (res.a2TotalDamage >= a1.currentHealth) {
       res.winner = a2
       return res
     }
