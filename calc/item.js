@@ -78,8 +78,22 @@ const randomItem = function(power,elementId) {
   return item
 }
 
+const fixedItem = function(refType,mods) {
+  var item = gen.emptyItem(refType)
+  for (m of mods) {
+    item.mods.push(m)
+  }
+  return item
+}
+
+const fixedMod = function(refType,power,elementId) {
+  return {id:refType.id,power:power,elementId:elementId}
+}
+
 module.exports = {
   randomItem,
+  fixedItem,
+  fixedMod,
   attemptMod,
   itemGenInfo,
   chooseElement

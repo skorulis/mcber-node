@@ -10,7 +10,7 @@ var schema = new mongoose.Schema({
 
   //Calculated values of other avatar attributes
   otherStats: [
-    {id:String,value:Number}
+    {id:String,value:Number,_id:false}
   ],
   
 })
@@ -34,12 +34,12 @@ schema.methods.other = function(id) {
   }
 }
 
-schema.methods.setSkill = function(id,level) {
+schema.methods.setSkill = function(skillId,level) {
   var skill = this.skills.find((x) => x.id == skillId)
   if (skill) {
     skill.level = level;
   } else {
-    this.skills.push({id:id,level:level})
+    this.skills.push({id:skillId,level:level})
   }
 }
 
