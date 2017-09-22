@@ -42,14 +42,6 @@ schema.methods.skillLevel = function(skillId) {
   return this.findSkill(skillId).level
 }
 
-schema.methods.elementalSkills = function() {
-  return this.skills.slice(0,9) //TODO: Might need refactoring
-}
-
-schema.methods.elementalLevel = function() {
-  return this.elementalSkills().reduce((total,s) => {return total + s.level},0)
-}
-
 
 module.exports = {
   schema: schema,

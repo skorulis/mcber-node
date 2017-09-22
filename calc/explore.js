@@ -4,7 +4,7 @@ const xp = require("./experience")
 const item = require("./item")
 
 const initialValues = function(realm,avatar) {
-  var skill = avatar.skillLevel(realm.elementId)
+  var skill = avatar.stats.skill(realm.elementId)
   return {
     tickFrequency: 30 * realm.level * realm.level / (skill + 1)
   }

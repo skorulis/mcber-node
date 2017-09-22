@@ -13,7 +13,7 @@ it("Generates a plain item",function() {
   item.mods.length.should.equal(0)
 })
 
-it.only("Generates a fixed item", function() {
+it("Generates a fixed item", function() {
   var mod = itemCalc.fixedMod(ref.getMod("+skill"),0,0)
   var item = itemCalc.fixedItem(ref.baseItem(0),[mod])
   item.name.should.equal("Sword")

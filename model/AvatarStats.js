@@ -15,6 +15,14 @@ var schema = new mongoose.Schema({
   
 })
 
+schema.methods.elementalSkills = function() {
+  return this.skills.slice(0,9) //TODO: Might need refactoring
+}
+
+schema.methods.elementalLevel = function() {
+  return this.elementalSkills().reduce((total,s) => {return total + s.level},0)
+}
+
 
 schema.methods.skill = function(skillId) {
   var skill = this.skills.find((x) => x.id == skillId)

@@ -13,7 +13,7 @@ it("Generates default stats",function() {
   avatar.stats.other("1").should.equal(10)
 })
 
-it.only("Calculates simple item stats",function() {
+it("Calculates simple item stats",function() {
   const avatar = gen.withLevels([0,10,0,0,0,0,0,0,0,0])
 
   var mod = itemCalc.fixedMod(ref.getMod("+skill"),1,0)

@@ -2,10 +2,10 @@ const rand = require("./rand")
 const ref = require("./reference")
 
 const chooseSkill = function(avatar) {
-  var val = rand.getRandomInt(1,avatar.elementalLevel())
+  var val = rand.getRandomInt(1,avatar.stats.elementalLevel())
   var index = 0
   while(val > 0 && index < ref.elements.length) {
-    val -= avatar.skillLevel(index)
+    val -= avatar.stats.skill(index)
     index ++
   }
   return index - 1
@@ -22,11 +22,11 @@ const getMultiplier = function(sAttack,sDefence) {
 }
 
 const getTotalAttack = function(avatar,sAttack,sDefence) {
-  return avatar.skillLevel(sAttack) * getMultiplier(sAttack,sDefence)
+  return avatar.stats.skill(sAttack) * getMultiplier(sAttack,sDefence)
 }
 
 const getTotalDefence = function(avatar,sDefence) {
-  return avatar.skillLevel(sDefence)
+  return avatar.stats.skill(sDefence)
 }
 
 //Get the result from avatar 1 attacking avatar 2. No changes are made
