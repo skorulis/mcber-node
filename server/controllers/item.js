@@ -1,4 +1,5 @@
 const util = require("../util/util.js")
+const avatarUtil = require("../../calc/avatar")
 
 const assignItemSchema = {
   type:'object',
@@ -30,6 +31,8 @@ module.exports = {
     if (removedItem) {
       req.user.items.push(removedItem)
     }
+    avatarUtil.updateStats(avatar)
+
     req.user.save().then(user => {
       res.send({avatar:avatar,removedItem:removedItem})
     })

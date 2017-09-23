@@ -7,11 +7,17 @@ const ref = require("../../calc/reference")
 const rand = require("../../calc/rand")
 const update = require("../../calc/update")
 
-it("Calculates explore constants",function() {
+it.only("Calculates explore constants",function() {
   var realm = gen.basicRealm(0,1)
   var avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0])
   var constants = explore.initialValues(realm,avatar);
   constants.tickFrequency.should.equal(30)
+  constants.skillLevel.should.equal(0)
+
+  avatar = gen.withLevels([10,15,0,0,0,0,0,0,0,0,0,0,7,15,0])
+  constants = explore.initialValues(realm,avatar);
+  constants.skillLevel.should.equal(25)
+  constants.tickFrequency.should.equal(2)
 })
 
 it("Calculates empty results", function() {

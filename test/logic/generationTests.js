@@ -16,13 +16,21 @@ it("Generates an empty avatar",function() {
 })
 
 it("Generates a fixed avatar",function() { 
-  const avatar = gen.withLevels([10,0,0,0,0,0,0,0,0,0])
+  var avatar = gen.withLevels([10,0,0,0,0,0,0,0,0,0])
   assert(avatar.stats.skill(0) == 10)
   avatar.level.should.equal(10)
   avatar.stats.other(statCalc.kStatIdHealth).should.equal(20)
   avatar.stats.other(statCalc.kStatIdSpeed).should.equal(110)
   avatar.skills[0].xpNext.should.equal(1824)
   avatar.skills.length.should.equal(15)
+
+  avatar = gen.withLevels([10,0,0,0,0,0,0,0,0,0,10,10,10,10,10])
+
+  avatar.stats.skill(0).should.equal(10)
+  assert(avatar.stats.skill(101) == 10)
+  avatar.level.should.equal(60)
+  avatar.stats.other(statCalc.kStatIdHealth).should.equal(20)
+  avatar.stats.other(statCalc.kStatIdSpeed).should.equal(110)
 })
 
 it("Generates a random avatar",function() {
