@@ -12,10 +12,10 @@ const rand = require("../../calc/rand")
 var token = null;
 var avatar = null;
 var user = null;
-var item = null;
+var item1 = null;
+var item2 = null;
 
 
-//TODO: Test works with only but is broken due to dodgy timing. Need to look into pre setting up the database
 describe("Performs all item methods",function() {
   it("Sets up the user",function(done) {
     supertest.post("/api/signup")
@@ -37,13 +37,19 @@ describe("Performs all item methods",function() {
     })
   })
 
-  it("Creates an item", function(done) {
+  it("Creates 2 items", function(done) {
     rand.setNextInt(1)
     var item = itemCalc.randomItem(0,0)
     item.name.should.equal("Club")
     assert(user != null)
     user.items.push(item)
-    user.items.length.should.equal(1)
+
+    rand.setNextInt(2)
+    item = itemCalc.randomItem(0,0)
+    item.name.should.equal("Spear")
+    user.items.push(item)
+
+    user.items.length.should.equal(2)
     user.save((err,u) => {
       done()
     })
@@ -53,21 +59,24 @@ describe("Performs all item methods",function() {
     helpers.authGet("/api/user/current",token)
     .expect(function(res) {
       var u = res.body.user;
-      u.items.length.should.equal(1)
-      item = u.items[0]
-      item.name.should.equal("Club")
-      item._id.should.not.be.null
+      u.items.length.should.equal(2)
+      item1 = u.items[0]
+      item1.name.should.equal("Club")
+      item1._id.should.not.be.null
+
+      item2 = u.items[1]
     })
     .end(done)
   })
 
   it("Assigns an item",function(done) {
-    var body = {avatarId:avatar._id,itemId:item._id,slot:"hand1"}
+    var body = {avatarId:avatar._id,itemId:item1._id,slot:"hand1"}
     helpers.jsonAuthPost("/api/item/assign",token,body)
       .expect(200)
       .expect(function(res) {
         res.body.avatar.should.not.be.null
         res.body.avatar.items.length.should.equal(1)
+        assert(res.body.removedItem == null)
         var item = res.body.avatar.items[0]
         item.item.name.should.equal("Club")
         item.slot.should.equal("hand1")
@@ -75,14 +84,61 @@ describe("Performs all item methods",function() {
       .end(done)
   })
 
-  it("Checks for an empty item", function(done) {
+  it("Checks for an missing item", function(done) {
     helpers.authGet("/api/user/current",token)
     .expect(function(res) {
       var u = res.body.user;
-      u.items.length.should.equal(0)
+      u.items.length.should.equal(1)
+      u.items[0].name.should.equal("Spear")
       u.avatars[0].items.length.should.equal(1)
     })
     .end(done)
   })
+
+  it("Reassigns an item",function(done) {
+    var body = {avatarId:avatar._id,itemId:item2._id,slot:"hand1"}
+    helpers.jsonAuthPost("/api/item/assign",token,body)
+      .expect(200)
+      .expect(function(res) {
+        res.body.avatar.should.not.be.null
+        res.body.avatar.items.length.should.equal(1)
+        var item = res.body.avatar.items[0]
+        item.item.name.should.equal("Spear")
+        item.slot.should.equal("hand1")
+
+        res.body.removedItem.should.not.be.null
+        res.body.removedItem._id.should.equal(item1._id)
+      })
+      .end(done)
+  })
+
+  it("Checks for replaced item", function(done) {
+    User.findOne({email:"item@test.com"}, (err,u) => {
+      u.items.length.should.equal(1)
+      done()
+    })
+  })
+
+  it("Removes an item",function(done) {
+    var body = {avatarId:avatar._id,slot:"hand1"}
+    helpers.jsonAuthPost("/api/item/assign",token,body)
+      .expect(200)
+      .expect(function(res) {
+        res.body.avatar.items.length.should.equal(1)
+        var item = res.body.avatar.items[0]
+        item.slot.should.equal("hand1")
+        assert(item.item == null)
+        res.body.removedItem._id.should.equal(item2._id)
+      })
+      .end(done)
+  })
+
+  it("Checks for both item", function(done) {
+    User.findOne({email:"item@test.com"}, (err,u) => {
+      u.items.length.should.equal(2)
+      done()
+    })
+  })
+
 
 })

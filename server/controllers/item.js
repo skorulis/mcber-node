@@ -2,7 +2,7 @@ const util = require("../util/util.js")
 
 const assignItemSchema = {
   type:'object',
-  required:["avatarId","itemId","slot"],
+  required:["avatarId","slot"],
   properties:{
     avatarId: {type:"string"},
     itemId:{type:"string"},
@@ -18,11 +18,18 @@ module.exports = {
     if (!avatar) {
       return next(new util.RequestError("User has no avatar " + req.body.avatarId))  
     }
-    var item = req.user.removeItem(req.body.itemId)
-    if (!item) {
-      return next(new util.RequestError("User has no item " + req.body.itemId))   
+    var item = null;
+    if (req.body.itemId) {
+      item = req.user.removeItem(req.body.itemId)
+      if (!item) {
+        return next(new util.RequestError("User has no item " + req.body.itemId))   
+      }  
     }
+    
     var removedItem = avatar.setItem(item,req.body.slot)
+    if (removedItem) {
+      req.user.items.push(removedItem)
+    }
     req.user.save().then(user => {
       res.send({avatar:avatar,removedItem:removedItem})
     })

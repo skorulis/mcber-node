@@ -4,12 +4,12 @@
 			{
 				"id":"hand1",
 				"name":"Main hand",
-				"types":["weapon","tool"]
+				"types":["weapon","tool","shield"]
 			},
 			{
 				"id":"hand2",
 				"name":"Off hand",
-				"types":["weapon","tool"]
+				"types":["weapon","tool","shield"]
 			},
 			{
 				"id":"head",
@@ -52,6 +52,22 @@
 			{
 				"name":"staff",
 				"type":"weapon"
+			},
+			{
+				"name":"Rusty helmet",
+				"type":"helmet"
+			},
+			{
+				"name":"Old shoes",
+				"type":"shoes"
+			},
+			{
+				"name":"Brown pants",
+				"type":"pants"
+			},
+			{
+				"name":"Ugly shirt",
+				"type":"shirt"
 			}
 		]
 	}
