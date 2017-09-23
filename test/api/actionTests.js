@@ -54,7 +54,7 @@ describe("Performs all action methods",function() {
     .expect(200)
     .expect(function(res) {
       var xp = res.body.result.experience[0]
-      xp.xp.should.equal(30)
+      xp.xp.should.equal(40)
       res.body.result.resource.quantity.should.equal(1)
     })
     .end(done)

@@ -36,7 +36,8 @@ const singleResult = function(realm,avatar,initial) {
     result.realmUnlock = {elementId:realm.elementId,level:realm.level + 1}
   }
   if (rand.getRandomInt(0,100) > 90) { //10% chance of getting an item
-    result.item = item.randomItem(1,realm.elementId)
+    var maxPower = realm.level
+    result.item = item.randomItem(maxPower,realm.elementId)
   }
 
   return result

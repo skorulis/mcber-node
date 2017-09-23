@@ -77,3 +77,10 @@ it("Generates a complex item", function() {
   //TODO: More for seeing the results than anything else
 })
 
+it("Calculates item resources", function() {
+  var item = itemCalc.fixedItem(ref.baseItem(0),[])
+  var resources = itemCalc.requiredResources(item)
+  var r1 = resources[0]
+  r1.should.deep.equal({id:"1",quantity:5})
+})
+

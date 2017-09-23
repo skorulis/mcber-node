@@ -7,7 +7,7 @@ const ref = require("../../calc/reference")
 const rand = require("../../calc/rand")
 const update = require("../../calc/update")
 
-it.only("Calculates explore constants",function() {
+it("Calculates explore constants",function() {
   var realm = gen.basicRealm(0,1)
   var avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0])
   var constants = explore.initialValues(realm,avatar);
@@ -50,7 +50,7 @@ it("Calculates single results",function() {
 
   var r1 = results[0]
   var xp = r1.experience[0]
-  xp.xp.should.equal(30)
+  xp.xp.should.equal(40)
   xp.type.should.equal("elemental")
   xp.skillId.should.equal(0)
   r1.resource.quantity.should.equal(1)

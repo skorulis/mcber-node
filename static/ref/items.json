@@ -35,39 +35,48 @@
 		"baseTypes":[
 			{
 				"name":"Sword",
-				"type":"weapon"
+				"type":"weapon",
+				"resources": [{"id":"1","q":5}]
 			},
 			{
 				"name":"Club",
-				"type":"weapon"
+				"type":"weapon",
+				"resources": [{"id":"23","q":1}]
 			},
 			{
 				"name":"Spear",
-				"type":"weapon"
+				"type":"weapon",
+				"resources": [{"id":"23","q":1},{"id":"23","q":1}]
 			},
 			{
 				"name":"Shovel",
-				"type":"tool"
+				"type":"tool",
+				"resources": [{"id":"23","q":1},{"id":"23","q":1}]
 			},
 			{
 				"name":"staff",
-				"type":"weapon"
+				"type":"weapon",
+				"resources": [{"id":"23","q":1}]
 			},
 			{
 				"name":"Rusty helmet",
-				"type":"helmet"
+				"type":"helmet",
+				"resources": [{"id":"1","q":5}]
 			},
 			{
 				"name":"Old shoes",
-				"type":"shoes"
+				"type":"shoes",
+				"resources": [{"id":"19","q":5}]
 			},
 			{
 				"name":"Brown pants",
-				"type":"pants"
+				"type":"pants",
+				"resources": [{"id":"19","q":5}]
 			},
 			{
 				"name":"Ugly shirt",
-				"type":"shirt"
+				"type":"shirt",
+				"resources": [{"id":"19","q":5}]
 			}
 		]
 	}

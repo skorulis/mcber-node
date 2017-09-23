@@ -90,11 +90,35 @@ const fixedMod = function(refType,power,elementId) {
   return {id:refType.id,power:power,elementId:elementId}
 }
 
+const requiredResources = function(item) {
+  var resources = {}
+  var itemRef = ref.baseItemWithId(item.name)
+  for (r of itemRef.resources) {
+    if (resources[r.id] == null) {
+      resources[r.id] = r.q
+    } else {
+      resources[r.id] = resources[r.id] + r.q
+    }
+  }
+  var ret = []
+  for (var key in resources) {
+    ret.push({id:key,quantity:resources[key]})
+  }
+
+  return ret
+}
+
+const breakdown = function(item,avatar) {
+
+}
+
 module.exports = {
   randomItem,
   fixedItem,
   fixedMod,
   attemptMod,
   itemGenInfo,
-  chooseElement
+  chooseElement,
+  requiredResources,
+  breakdown
 }

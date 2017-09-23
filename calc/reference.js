@@ -8,6 +8,7 @@ const baseItems = items.baseTypes
 var skillIndex = []
 var modIndex = []
 const elements = skills.filter((s) => s.type == "elemental")
+const baseTypeMap = {}
 
 const getSkill = function(id) {
   return skillIndex[id]
@@ -15,6 +16,10 @@ const getSkill = function(id) {
 
 const baseItem = function(index) {
   return items.baseTypes[index]
+}
+
+const baseItemWithId = function(id) {
+  return baseTypeMap[id]
 }
 
 const modAtIndex = function(index) {
@@ -45,6 +50,10 @@ for (m of mods) {
   modIndex[m.id] = m
 }
 
+for (t of items.baseTypes) {
+  baseTypeMap[t.name] = t
+}
+
 module.exports = {
   skills,
   resources,
@@ -55,5 +64,6 @@ module.exports = {
   baseItem,
   modAtIndex,
   getMod,
-  baseItems
+  baseItems,
+  baseItemWithId
 }
