@@ -48,6 +48,10 @@ userSchema.methods.findItem = function(itemId) {
   return this.items.find( (x) => x._id == itemId )
 }
 
+userSchema.methods.addItem = function(item) {
+  this.items.push(item)
+}
+
 userSchema.methods.removeItem = function(itemId) {
   var item = this.findItem(itemId);
   this.items = this.items.filter( (x) => x._id != itemId )
@@ -61,6 +65,16 @@ userSchema.methods.removeActivity = function(activityId) {
 userSchema.methods.resourceCount = function(resourceId) {
   var found = this.resources.find( (r) => r.id == resourceId)
   return found ? found.quantity : 0
+}
+
+userSchema.methods.hasResources = function(resourceList) {
+  for (r of resourceList) {
+    var count = this.resourceCount(r.id)
+    if (count < r.quantity) {
+      return false
+    }
+  }
+  return true
 }
 
 userSchema.methods.addResource = function(resource) {

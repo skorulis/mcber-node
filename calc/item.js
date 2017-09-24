@@ -95,9 +95,9 @@ const requiredResources = function(item) {
   var itemRef = ref.baseItemWithId(item.name)
   for (r of itemRef.resources) {
     if (resources[r.id] == null) {
-      resources[r.id] = r.q
+      resources[r.id] = r.quantity
     } else {
-      resources[r.id] = resources[r.id] + r.q
+      resources[r.id] = resources[r.id] + r.quantity
     }
   }
   var ret = []

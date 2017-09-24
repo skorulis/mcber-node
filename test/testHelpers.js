@@ -9,6 +9,16 @@ module.exports = function(supertest) {
     authGet:function(url,token) {
       return supertest.get(url)
       .set('Authorization', 'Bearer ' + token)
-    }  
+    },
+    checkStatusCode:function(code) {
+      return function(res) {
+        if (res.status == code) {
+          return true
+        }
+        console.log(res.error)
+        return false
+      }
+    }
+
   }
 }

@@ -1,6 +1,7 @@
 const util = require("../util/util.js")
 const avatarUtil = require("../../calc/avatar")
 const itemCalc = require("../../calc/item")
+const ref = require("../../calc/reference")
 
 const assignItemSchema = {
   type:'object',
@@ -20,10 +21,18 @@ const breakdownSchema = {
   }
 }
 
+const craftSchema = {
+  type:'object',
+  required:["itemName"],
+  properties:{
+    itemName:{type:"string"}
+  }
+}
 
 module.exports = {
   assignItemSchema,
   breakdownSchema,
+  craftSchema,
   assignItem:function(req,res,next) {
     var avatar = req.user.findAvatar(req.body.avatarId)
     if (!avatar) {
@@ -48,7 +57,7 @@ module.exports = {
     })
   },
   breakdownItem:function(req,res,next) {
-    item = req.user.removeItem(req.body.itemId)
+    var item = req.user.removeItem(req.body.itemId)
     if (!item) {
       return next(new util.RequestError("User has no item " + req.body.itemId))   
     }
@@ -59,6 +68,20 @@ module.exports = {
 
     req.user.save().then(user => {
       res.send({resources:resources})
+    })
+  },
+  craft:function(req,res,next) {
+    var itemRef = ref.baseItemWithId(req.body.itemName)
+    if (!itemRef) {
+      return next(new util.RequestError("No item named " + req.body.itemName))   
+    }
+    if (!req.user.hasResources(itemRef.resources)) {
+      return next(new util.RequestError("Insufficient resources"))   
+    }
+    var item = itemCalc.fixedItem(itemRef,[])
+    req.user.addItem(item)
+    req.user.save().then(user => {
+      res.send({item:item,resources:itemRef.resources})
     })
   }
 }

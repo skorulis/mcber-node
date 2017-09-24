@@ -36,47 +36,47 @@
 			{
 				"name":"Sword",
 				"type":"weapon",
-				"resources": [{"id":"1","q":5}]
+				"resources": [{"id":"1","quantity":5}]
 			},
 			{
 				"name":"Club",
 				"type":"weapon",
-				"resources": [{"id":"23","q":1}]
+				"resources": [{"id":"23","quantity":1}]
 			},
 			{
 				"name":"Spear",
 				"type":"weapon",
-				"resources": [{"id":"23","q":1},{"id":"1","q":2}]
+				"resources": [{"id":"23","quantity":1},{"id":"1","quantity":2}]
 			},
 			{
 				"name":"Shovel",
 				"type":"tool",
-				"resources": [{"id":"23","q":1},{"id":"1","q":2}]
+				"resources": [{"id":"23","quantity":1},{"id":"1","quantity":2}]
 			},
 			{
 				"name":"staff",
 				"type":"weapon",
-				"resources": [{"id":"23","q":1}]
+				"resources": [{"id":"23","quantity":1}]
 			},
 			{
 				"name":"Rusty helmet",
 				"type":"helmet",
-				"resources": [{"id":"1","q":5}]
+				"resources": [{"id":"1","quantity":5}]
 			},
 			{
 				"name":"Old shoes",
 				"type":"shoes",
-				"resources": [{"id":"19","q":5}]
+				"resources": [{"id":"19","quantity":5}]
 			},
 			{
 				"name":"Brown pants",
 				"type":"pants",
-				"resources": [{"id":"19","q":5}]
+				"resources": [{"id":"19","quantity":5}]
 			},
 			{
 				"name":"Ugly shirt",
 				"type":"shirt",
-				"resources": [{"id":"19","q":5}]
+				"resources": [{"id":"19","quantity":5}]
 			}
 		]
 	}

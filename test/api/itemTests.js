@@ -33,7 +33,11 @@ describe("Performs all item methods",function() {
     User.findOne({email:"item@test.com"}, (err,u) => {
       user = u
       user.should.not.be.null
-      done()
+      var resource = {id:"1",quantity:10}
+      user.addResource(resource)
+      user.save((err,u) => {
+        done()
+      })
     })
   })
 
@@ -156,6 +160,24 @@ describe("Performs all item methods",function() {
       u.items.length.should.equal(1)
       done()
     })
+  })
+
+  it("Can't create a spear",function(done) {
+    var body = {itemName:"Spear"}
+    helpers.jsonAuthPost("/api/item/craft",token,body)
+    .expect(helpers.checkStatusCode(400))
+    .end(done)
+  })
+
+  it("Does create a sword",function(done) {
+    var body = {itemName:"Sword"}
+    helpers.jsonAuthPost("/api/item/craft",token,body)
+    .expect(helpers.checkStatusCode(200))
+    .expect(function(res) {
+      res.body.item._id.should.not.be.null
+      res.body.resources.should.deep.equal([{"id":"1","quantity":5}])
+    })
+    .end(done)
   })
 
 

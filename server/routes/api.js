@@ -17,6 +17,7 @@ module.exports = (app,passport) => {
 
   app.post('/api/item/assign',passport.authenticate("jwt-verify"), validate({body:controllers.item.assignItemSchema}),  controllers.item.assignItem)
   app.post('/api/item/breakdown',passport.authenticate("jwt-verify"), validate({body:controllers.item.breakdownSchema}),  controllers.item.breakdownItem)
+  app.post('/api/item/craft',passport.authenticate("jwt-verify"), validate({body:controllers.item.craftSchema}),  controllers.item.craft)
 
   app.get('/api/*', function(req, res) {
     res.status(404).send({message:"404 for " + req.method + " at " + req.originalUrl})  
