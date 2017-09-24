@@ -108,8 +108,13 @@ const requiredResources = function(item) {
   return ret
 }
 
-const breakdown = function(item,avatar) {
-
+const breakdown = function(item) {
+  var resources = requiredResources(item)
+  resources = resources.map(function(x) { 
+    return {id:x.id, quantity:Math.floor(x.quantity/2)} 
+  })
+  resources = resources.filter((x) => x.quantity > 0)
+  return resources
 }
 
 module.exports = {

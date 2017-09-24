@@ -84,3 +84,8 @@ it("Calculates item resources", function() {
   r1.should.deep.equal({id:"1",quantity:5})
 })
 
+it.only("Breaks down and item",function() {
+  var item = itemCalc.fixedItem(ref.baseItem(2),[])
+  var resources = itemCalc.breakdown(item)
+  resources.should.deep.equal([{id:"1",quantity:1}])
+})
