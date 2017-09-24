@@ -1,5 +1,6 @@
 const util = require("../util/util.js")
 const avatarUtil = require("../../calc/avatar")
+const itemCalc = require("../../calc/item")
 
 const assignItemSchema = {
   type:'object',
@@ -11,9 +12,18 @@ const assignItemSchema = {
   }
 }
 
+const breakdownSchema = {
+  type:'object',
+  required:["itemId"],
+  properties:{
+    itemId:{type:"string"}
+  }
+}
+
 
 module.exports = {
   assignItemSchema,
+  breakdownSchema,
   assignItem:function(req,res,next) {
     var avatar = req.user.findAvatar(req.body.avatarId)
     if (!avatar) {
@@ -36,6 +46,19 @@ module.exports = {
     req.user.save().then(user => {
       res.send({avatar:avatar,removedItem:removedItem})
     })
-    
+  },
+  breakdownItem:function(req,res,next) {
+    item = req.user.removeItem(req.body.itemId)
+    if (!item) {
+      return next(new util.RequestError("User has no item " + req.body.itemId))   
+    }
+    var resources = itemCalc.breakdown(item)
+    for (r of resources) {
+      req.user.addResource(r)
+    }
+
+    req.user.save().then(user => {
+      res.send({resources:resources})
+    })
   }
 }

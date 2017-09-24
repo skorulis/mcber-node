@@ -140,5 +140,23 @@ describe("Performs all item methods",function() {
     })
   })
 
+  it("Breaks down an item", function(done) {
+    var body = {itemId:item2._id}
+    helpers.jsonAuthPost("/api/item/breakdown",token,body)
+      .expect(200)
+      .expect(function(res) {
+        res.body.resources.length.should.equal(1)
+        res.body.resources[0].should.deep.equal({id:"1",quantity:1})
+      })
+      .end(done)
+  })
+
+  it("Checks for missing item", function(done) {
+    User.findOne({email:"item@test.com"}, (err,u) => {
+      u.items.length.should.equal(1)
+      done()
+    })
+  })
+
 
 })
