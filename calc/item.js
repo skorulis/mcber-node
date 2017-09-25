@@ -1,6 +1,7 @@
 const ref = require("./reference")
 const rand = require("./rand")
 const gen = require("./generate")
+const Counter = require("../util/Counter")
 
 const itemGenInfo = function(power,elementId) {
   return {
@@ -91,21 +92,12 @@ const fixedMod = function(refType,power,elementId) {
 }
 
 const requiredResources = function(item) {
-  var resources = {}
+  var resources = new Counter()
   var itemRef = ref.baseItemWithId(item.name)
   for (r of itemRef.resources) {
-    if (resources[r.id] == null) {
-      resources[r.id] = r.quantity
-    } else {
-      resources[r.id] = resources[r.id] + r.quantity
-    }
+    resources.add(r.id,r.quantity)
   }
-  var ret = []
-  for (var key in resources) {
-    ret.push({id:key,quantity:resources[key]})
-  }
-
-  return ret
+  return resources.asNamedArray("id","quantity")
 }
 
 const breakdown = function(item) {

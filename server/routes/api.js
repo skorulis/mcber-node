@@ -12,12 +12,14 @@ module.exports = (app,passport) => {
   app.post('/api/signup',passport.authenticate('local-signup'), controllers.user.signup)
 
   app.post('/api/action/explore',passport.authenticate("jwt-verify"), validate({body:controllers.action.exploreSchema}),  controllers.action.explore)
+  app.post('/api/action/craft',passport.authenticate("jwt-verify"), validate({body:controllers.item.craftSchema}),  controllers.item.craft)
+
   app.post('/api/action/cancel',passport.authenticate("jwt-verify"), validate({body:controllers.action.cancelCompleteSchema}),  controllers.action.cancel)
   app.post('/api/action/complete',passport.authenticate("jwt-verify"), validate({body:controllers.action.cancelCompleteSchema}),  controllers.action.complete)
 
   app.post('/api/item/assign',passport.authenticate("jwt-verify"), validate({body:controllers.item.assignItemSchema}),  controllers.item.assignItem)
   app.post('/api/item/breakdown',passport.authenticate("jwt-verify"), validate({body:controllers.item.breakdownSchema}),  controllers.item.breakdownItem)
-  app.post('/api/item/craft',passport.authenticate("jwt-verify"), validate({body:controllers.item.craftSchema}),  controllers.item.craft)
+  
 
   app.get('/api/*', function(req, res) {
     res.status(404).send({message:"404 for " + req.method + " at " + req.originalUrl})  

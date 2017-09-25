@@ -25,7 +25,8 @@ const craftSchema = {
   type:'object',
   required:["itemName"],
   properties:{
-    itemName:{type:"string"}
+    itemName:{type:"string"},
+    avatarId:{type:"string"}
   }
 }
 

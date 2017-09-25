@@ -163,15 +163,15 @@ describe("Performs all item methods",function() {
   })
 
   it("Can't create a spear",function(done) {
-    var body = {itemName:"Spear"}
-    helpers.jsonAuthPost("/api/item/craft",token,body)
+    var body = {itemName:"Spear",avatarId:avatar._id}
+    helpers.jsonAuthPost("/api/action/craft",token,body)
     .expect(helpers.checkStatusCode(400))
     .end(done)
   })
 
   it("Does create a sword",function(done) {
-    var body = {itemName:"Sword"}
-    helpers.jsonAuthPost("/api/item/craft",token,body)
+    var body = {itemName:"Sword",avatarId:avatar._id}
+    helpers.jsonAuthPost("/api/action/craft",token,body)
     .expect(helpers.checkStatusCode(200))
     .expect(function(res) {
       res.body.item._id.should.not.be.null
