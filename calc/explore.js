@@ -1,9 +1,9 @@
-const rand = require("./rand")
-const ref = require("./reference")
-const xp = require("./experience")
-const item = require("./item")
+const rand = require("./rand");
+const ref = require("./reference");
+const xp = require("./experience");
+const item = require("./item");
 
-const kExploreSkill = 104
+let kExploreSkill = "104";
 
 const initialValues = function(realm,avatar) {
   var skill = avatar.stats.skill(realm.elementId)

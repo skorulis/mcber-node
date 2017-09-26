@@ -3,7 +3,8 @@
 	{
 				"id":"1",
 				"name":"Iron",
-				"skill":"0"
+				"skill":"0",
+				"rarity":1
 			},
 			{
 				"id":"2",
