@@ -12,7 +12,7 @@ const initialValues = function(realm,avatar) {
   time = Math.max(time,2)
   return {
     skillLevel:skill,
-    tickFrequency: time
+    duration: time
   }
 }
 
@@ -28,7 +28,7 @@ const calculateResourceQuantity = function(realm,avatar,resource) {
 
 const singleResult = function(realm,avatar,initial) {
   var result = {}
-  result.experience = xp.exploreGain(realm, initial.tickFrequency)
+  result.experience = xp.exploreGain(realm, initial.duration)
   var resource = chooseResource(realm,avatar)
   var quantity = calculateResourceQuantity(realm,avatar,resource)
   result.resource = {id:resource.id,quantity:quantity}
@@ -46,7 +46,7 @@ const singleResult = function(realm,avatar,initial) {
 //Calculates the results of exploring for this length of time, no changes are made
 const explore = function(realm,avatar,time) {
   var constants = initialValues(realm,avatar)
-  var ticks = Math.floor(time / constants.tickFrequency)
+  var ticks = Math.floor(time / constants.duration)
   var results = []
   for(var i = 0; i < ticks; ++i) {
     results.push(singleResult(realm,avatar,constants))
@@ -55,11 +55,9 @@ const explore = function(realm,avatar,time) {
   return results
 }
 
-const exploreActivity = function(activity,avatar) {
-  var constants = initialValues(activity.realm,avatar)
-
+const completeActivity = function(activity,avatar) {
   //TODO: Decide if I should be handling multiple results
-  return singleResult(activity.realm,avatar,constants)
+  return singleResult(activity.realm,avatar,activity.calculated)
 }
 
 module.exports = {
@@ -67,5 +65,5 @@ module.exports = {
   explore,
   chooseResource,
   calculateResourceQuantity,
-  exploreActivity
+  completeActivity
 }

@@ -1,47 +1,48 @@
 const fs = require('fs');
-const skills = JSON.parse(fs.readFileSync('static/ref/skills.json', 'utf8')).skills;
+const RefContainer = require("../util/RefContainer");
+const skillsData = JSON.parse(fs.readFileSync('static/ref/skills.json', 'utf8')).skills;
 const resources = JSON.parse(fs.readFileSync('static/ref/resources.json', 'utf8')).resources;
 const mods = JSON.parse(fs.readFileSync('static/ref/itemMods.json', 'utf8')).mods;
 const items = JSON.parse(fs.readFileSync('static/ref/items.json', 'utf8')).items;
-const baseItems = items.baseTypes
+const baseItems = items.baseTypes;
 
-var skillIndex = []
+let skills = new RefContainer(skillsData,"id");
+
 var modIndex = []
-const elements = skills.filter((s) => s.type == "elemental")
+const elements = skills.array.filter((s) => s.type == "elemental")
 const baseTypeMap = {}
 
 const getSkill = function(id) {
-  return skillIndex[id]
-}
+  return skills.withId(id)
+};
 
 const baseItem = function(index) {
   return items.baseTypes[index]
-}
+};
 
 const baseItemWithId = function(id) {
   return baseTypeMap[id]
-}
+};
 
 const modAtIndex = function(index) {
   return mods[index]
-}
+};
 
 const getMod = function(id) {
   return modIndex[id]
-}
+};
 
-for(e of skills) {
-  skillIndex[e.id] = e;
-  e.resources = []
+for(let e of skills.array) {
+  e.resources = [];
 
   if (e.type == "elemental") {
-    e.totalAttack = e.damageModifiers.reduce((total,amount) => total + amount )
-    e.totalDefense = skills.reduce( (total,element) => {return total + element.damageModifiers[e.index]},0)
+    e.totalAttack = e.damageModifiers.reduce((total,amount) => total + amount );
+    e.totalDefense = skills.array.reduce( (total,element) => {return total + element.damageModifiers[e.index]},0)
   }
 }
 
-for (var id in resources.elemental) {
-  var r = resources.elemental[id]
+for (let id in resources.elemental) {
+  let r = resources.elemental[id];
   r.id = id;
   getSkill(r.skill).resources.push(r)
 }
@@ -66,4 +67,4 @@ module.exports = {
   getMod,
   baseItems,
   baseItemWithId
-}
+};

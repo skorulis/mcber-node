@@ -11,13 +11,13 @@ it("Calculates explore constants",function() {
   var realm = gen.basicRealm(0,1)
   var avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0])
   var constants = explore.initialValues(realm,avatar);
-  constants.tickFrequency.should.equal(30)
+  constants.duration.should.equal(30)
   constants.skillLevel.should.equal(0)
 
   avatar = gen.withLevels([10,15,0,0,0,0,0,0,0,0,0,0,7,15,0])
   constants = explore.initialValues(realm,avatar);
   constants.skillLevel.should.equal(25)
-  constants.tickFrequency.should.equal(2)
+  constants.duration.should.equal(2)
 })
 
 it("Calculates empty results", function() {
@@ -35,12 +35,12 @@ it("Chooses a resource", function() {
 })
 
 it("Calculates resource quantity", function() {
-  var realm = gen.basicRealm(0,1)
-  var resource = ref.skills[0].resources[0]
-  var quantity = explore.calculateResourceQuantity(realm,null,resource)
-  quantity.should.equal(1)
+  let realm = gen.basicRealm(0,1);
+  let resource = ref.skills.array[0].resources[0];
+  let quantity = explore.calculateResourceQuantity(realm,null,resource);
+  quantity.should.equal(1);
   resource.id.should.equal("1")
-})
+});
 
 it("Calculates single results",function() {
   var realm = gen.basicRealm(0,1)

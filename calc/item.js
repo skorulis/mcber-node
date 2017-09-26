@@ -92,13 +92,13 @@ const fixedMod = function(refType,power,elementId) {
 }
 
 const requiredResources = function(item) {
-  var resources = new Counter()
-  var itemRef = ref.baseItemWithId(item.name)
+  let resources = new Counter();
+  let itemRef = ref.baseItemWithId(item.name);
   for (r of itemRef.resources) {
     resources.add(r.id,r.quantity)
   }
   return resources.asNamedArray("id","quantity")
-}
+};
 
 const breakdown = function(item) {
   var resources = requiredResources(item)

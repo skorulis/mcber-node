@@ -1,11 +1,11 @@
 const chai = require('chai');
 const should = chai.should();
 const assert = chai.assert;
-const gen = require("../../calc/generate")
-const ref = require("../../calc/reference")
-const statCalc = require("../../calc/statCalc")
+const gen = require("../../calc/generate");
+const ref = require("../../calc/reference");
+const statCalc = require("../../calc/statCalc");
 
-it("Generates an empty avatar",function() { 
+it("Generates an empty avatar",function() {
   const avatar = gen.emptyAvatar()
   avatar.level.should.equal(0)
   avatar.stats.other(statCalc.kStatIdHealth).should.equal(10)
@@ -13,16 +13,16 @@ it("Generates an empty avatar",function() {
   avatar.id.should.be.a('string')
   avatar.skills.length.should.equal(15)
   avatar.skills[0].xpNext.should.equal(50)
-})
+});
 
-it("Generates a fixed avatar",function() { 
-  var avatar = gen.withLevels([10,0,0,0,0,0,0,0,0,0])
-  assert(avatar.stats.skill(0) == 10)
-  avatar.level.should.equal(10)
+it("Generates a fixed avatar",function() {
+  let avatar = gen.withLevels([10,0,0,0,0,0,0,0,0,0]);
+  assert(avatar.stats.skill(0) == 10);
+  avatar.level.should.equal(10);
   avatar.stats.other(statCalc.kStatIdHealth).should.equal(20)
   avatar.stats.other(statCalc.kStatIdSpeed).should.equal(110)
-  avatar.skills[0].xpNext.should.equal(1824)
-  avatar.skills.length.should.equal(15)
+  avatar.skills[0].xpNext.should.equal(1824);
+  avatar.skills.length.should.equal(15);
 
   avatar = gen.withLevels([10,0,0,0,0,0,0,0,0,0,10,10,10,10,10])
 

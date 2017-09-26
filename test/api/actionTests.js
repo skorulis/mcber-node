@@ -43,7 +43,9 @@ describe("Performs all action methods",function() {
       activity.avatarId.should.equal(avatar._id)
       activity.realm.should.not.be.null
       activity.startTimestamp.should.not.be.null
-      assert(activity.startTimestamp <= activity.finishTimestamp)
+      activity.calculated.should.not.be.null
+      activity.calculated.duration.should.equal(30)
+      activity.calculated.skillLevel.should.equal(0)
     })
     .end(done)
   })

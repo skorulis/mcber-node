@@ -1,16 +1,16 @@
 const chai = require('chai');
 const should = chai.should();
 const assert = chai.assert;
-const gen = require("../../calc/generate")
-const battle = require("../../calc/battle")
+const gen = require("../../calc/generate");
+const battle = require("../../calc/battle");
 
 it("Chooses a skill",function() {
-  const avatar = gen.withLevels([0,0,10,0,0,0,0,0,0,0])
-  avatar.skills.length.should.equal(15)
-  avatar.stats.skill(2).should.equal(10)
-  const skill = battle.chooseSkill(avatar)
+  const avatar = gen.withLevels([0,0,10,0,0,0,0,0,0,0]);
+  avatar.skills.length.should.equal(15);
+  avatar.stats.skill(2).should.equal(10);
+  const skill = battle.chooseSkill(avatar);
   skill.should.equal(2)
-})
+});
 
 it("Performs an attack",function() { 
   const a1 = gen.withLevels([10,0,0,0,0,0,0,0,0,0])

@@ -19,11 +19,11 @@ const initialValues = function(itemRef,avatar) {
   time = Math.max(time,2)
   return {
     skillLevel:skill,
-    tickFrequency: time
+    duration: time
   }
 }
 
 
 module.exports = {
-
+  initialValues
 }

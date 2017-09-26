@@ -2,14 +2,14 @@ const rand = require("./rand")
 const ref = require("./reference")
 
 const chooseSkill = function(avatar) {
-  var val = rand.getRandomInt(1,avatar.stats.elementalLevel())
-  var index = 0
+  let val = rand.getRandomInt(1,avatar.stats.elementalLevel());
+  let index = 0;
   while(val > 0 && index < ref.elements.length) {
-    val -= avatar.stats.skill(index)
+    val -= avatar.stats.skill(index);
     index ++
   }
   return index - 1
-}
+};
 
 const calculateDamage = function(a1,a2,sAttack,sDefence) {
   const att = getTotalAttack(a1,sAttack,sDefence)

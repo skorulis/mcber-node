@@ -78,11 +78,11 @@ it("Generates a complex item", function() {
 })
 
 it("Calculates item resources", function() {
-  var item = itemCalc.fixedItem(ref.baseItem(0),[])
-  var resources = itemCalc.requiredResources(item)
-  var r1 = resources[0]
+  let item = itemCalc.fixedItem(ref.baseItem(0),[]);
+  let resources = itemCalc.requiredResources(item);
+  let r1 = resources[0];
   r1.should.deep.equal({id:"1",quantity:5})
-})
+});
 
 it("Breaks down and item",function() {
   var item = itemCalc.fixedItem(ref.baseItem(2),[])

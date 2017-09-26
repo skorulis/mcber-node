@@ -43,7 +43,7 @@ module.exports = {
     }
     var duration = 30
     var initial = explore.initialValues(req.body.realm,avatar)
-    var activity = gen.exploreActivity(req.body.realm,req.body.avatarId,initial.tickFrequency)
+    var activity = gen.exploreActivity(req.body.realm,req.body.avatarId,initial)
     req.user.activities.push(activity)
     req.user.save().then((user) => {
       res.send({activity:activity})  
@@ -69,7 +69,7 @@ module.exports = {
       return next(new util.RequestError("Activity has not completed")) 
     }
     var avatar = req.user.findAvatar(activity.avatarId)
-    var result = explore.exploreActivity(activity,avatar)
+    var result = explore.completeActivity(activity,avatar)
 
     updateCalc.completeActivity(req.body.activityId,req.user,avatar,result)
 

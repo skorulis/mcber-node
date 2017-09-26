@@ -6,10 +6,15 @@ var schema = new mongoose.Schema({
   avatarId:String,
   activityType:String,
   startTimestamp:{type:Number},
-  finishTimestamp:Number,
+  calculated: {
+    duration:Number,
+    skillLevel:Number,
+    _id:false
+  },
   realm: {
     elementId:Number,
-    level:Number
+    level:Number,
+    _id:false
   }
 })
 
@@ -18,7 +23,7 @@ schema.methods.isComplete = function() {
     return true
   }
   var time = Math.floor(Date.now() / 1000);
-  return time >= this.finishTimestamp
+  return time >= this.startTimestamp + this.calculated.duration
 }
 
 module.exports = {
