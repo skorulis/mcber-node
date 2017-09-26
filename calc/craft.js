@@ -55,10 +55,16 @@ let getActivity = function(itemRef,avatar) {
   return activitiy
 };
 
+let completeActivity = function(activity,avatar) {
+  let itemRef = ref.baseItems.withId(activity.itemId);
+  let result = getResult(itemRef,avatar,activity.calculated);
+  return result
+};
 
 module.exports = {
   itemSkillAffiliation,
   initialValues,
   getResult,
-  getActivity
+  getActivity,
+  completeActivity
 };

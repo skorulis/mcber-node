@@ -1,6 +1,7 @@
 let gen = require("../../calc/generate");
 let explore = require("../../calc/explore");
 let craft = require("../../calc/craft");
+let ref = require("../../calc/reference");
 let updateCalc = require("../../calc/update");
 let util = require("../util/util.js");
 
@@ -36,24 +37,47 @@ let completeActivity = function(activity,avatar) {
   }
 };
 
+let findFreeAvatar = function(user,avatarId,errorBlock) {
+    let currentActivity = user.avatarActivity(avatarId);
+    if (currentActivity) {
+        errorBlock (new util.RequestError("Avatar is already assigned"));
+        return;
+    }
+    let avatar = user.findAvatar(avatarId);
+    if (!avatar) {
+        errorBlock((new util.RequestError("User has no avatar " + avatarId)));
+        return
+    }
+    return avatar;
+};
+
 module.exports = {
   exploreSchema,
   cancelCompleteSchema,
   explore:function(req,res,next) {
-    var currentActivity = req.user.avatarActivity(req.body.avatarId)
-    if (currentActivity != null) {
-      return next(new util.RequestError("Avatar is already assigned"))
+    let avatar = findFreeAvatar(req.user,req.body.avatarId,next);
+    if (!avatar) {
+      return
     }
-    var avatar = req.user.findAvatar(req.body.avatarId)
-    if (avatar == null) {
-      return next(new util.RequestError("User has no avatar " + req.body.avatarId)) 
-    }
-    var duration = 30
-    var initial = explore.initialValues(req.body.realm,avatar)
-    var activity = gen.exploreActivity(req.body.realm,req.body.avatarId,initial)
-    req.user.activities.push(activity)
+
+    let initial = explore.initialValues(req.body.realm,avatar);
+    let activity = gen.exploreActivity(req.body.realm,req.body.avatarId,initial);
+    req.user.activities.push(activity);
     req.user.save().then((user) => {
       res.send({activity:activity})  
+    })
+  },
+  craft:function(req,res,next) {
+    let avatar = findFreeAvatar(req.user,req.body.avatarId,next);
+    if (!avatar) {
+        return
+    }
+    let itemRef = ref.baseItems.withId(req.body.itemId);
+
+    let activity = craft.getActivity(itemRef,avatar);
+    req.user.activities.push(activity);
+    req.user.save().then((user) => {
+        res.send({activity:activity})
     })
   },
   cancel:function(req,res,next) {

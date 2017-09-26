@@ -40,12 +40,16 @@ it("Creates an item",function() {
     result.item.id.should.be.a("String")
 });
 
-it("Creates an activity", function() {
+it("Creates and completes an activity", function() {
     let avatar = gen.emptyAvatar();
     let itemRef = ref.baseItems.atIndex(1);
     let activity = craft.getActivity(itemRef,avatar);
     activity.activityType.should.equal("craft");
     activity.calculated.duration.should.equal(23);
     activity.itemId.should.equal(itemRef.name);
-    activity.avatarId.should.equal(avatar._id)
+    activity.avatarId.should.equal(avatar._id);
+
+    let result = craft.completeActivity(activity,avatar);
+    result.item.id.should.be.a("String");
+    result.item.name.should.equal("Club");
 });
