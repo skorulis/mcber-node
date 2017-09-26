@@ -1,9 +1,8 @@
-const gen = require("../../calc/generate")
-const explore = require("../../calc/explore")
-const xp = require("../../calc/experience")
-const avatarCalc = require("../../calc/avatar")
-const updateCalc = require("../../calc/update")
-const util = require("../util/util.js")
+let gen = require("../../calc/generate");
+let explore = require("../../calc/explore");
+let craft = require("../../calc/craft");
+let updateCalc = require("../../calc/update");
+let util = require("../util/util.js");
 
 const exploreSchema = {
   type:'object',
@@ -19,7 +18,7 @@ const exploreSchema = {
       avatarId: {type:"string"}
     }
   }
-}
+};
 
 const cancelCompleteSchema = {
   type:'object',
@@ -27,7 +26,15 @@ const cancelCompleteSchema = {
   properties:{
     activityId:{type:"string"}
   }
-}
+};
+
+let completeActivity = function(activity,avatar) {
+  if (activity.activityType == "explore") {
+    return explore.completeActivity(activity,avatar);
+  } else if (activity.activity == "craft") {
+    return
+  }
+};
 
 module.exports = {
   exploreSchema,
@@ -68,10 +75,10 @@ module.exports = {
     if (!activity.isComplete()) {
       return next(new util.RequestError("Activity has not completed")) 
     }
-    var avatar = req.user.findAvatar(activity.avatarId)
-    var result = explore.completeActivity(activity,avatar)
+    let avatar = req.user.findAvatar(activity.avatarId);
+    let result = completeActivity(activity,avatar);
 
-    updateCalc.completeActivity(req.body.activityId,req.user,avatar,result)
+    updateCalc.completeActivity(req.body.activityId,req.user,avatar,result);
 
     req.user.save().then(user => {
       res.send({activities:req.user.activities,result:result,avatar:avatar})  
@@ -80,4 +87,4 @@ module.exports = {
     
     
   }
-}
+};

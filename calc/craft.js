@@ -2,6 +2,7 @@ let rand = require("./rand");
 let ref = require("./reference");
 let xp = require("./experience");
 let item = require("./item");
+let gen = require("./generate");
 let Counter = require("../util/Counter");
 
 let kCraftSkill = "102";
@@ -34,12 +35,30 @@ let initialValues = function(itemRef,avatar) {
   time = Math.max(Math.round(time),2);
   return {
     skillLevel:skill,
-    duration: time
+    duration: time,
+    usedSkills:[itemSkill.id,kCraftSkill]
   }
+};
+
+let getResult = function(itemRef,avatar,initial) {
+  let result = {};
+  result.experience = xp.craftGain(itemRef,initial);
+  result.item = item.fixedItem(itemRef,[]);
+
+  return result;
+};
+
+let getActivity = function(itemRef,avatar) {
+  let initial = initialValues(itemRef,avatar);
+  let activitiy = gen.baseActivity(avatar._id,"craft",initial);
+  activitiy.itemId = itemRef.name;
+  return activitiy
 };
 
 
 module.exports = {
   itemSkillAffiliation,
-  initialValues
+  initialValues,
+  getResult,
+  getActivity
 };

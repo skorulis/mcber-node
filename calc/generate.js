@@ -37,11 +37,11 @@ const newUser = function() {
 }
 
 const baseActivity = function(avatarId,type,initial) {
-  var start = Math.floor(Date.now() / 1000)
-  var activity = new Activity({_id:uniqid(),avatarId:avatarId,activityType:type,startTimestamp:start})
-  activity.calculated = initial
+  let start = Math.floor(Date.now() / 1000);
+  let activity = new Activity({_id:uniqid(),avatarId:avatarId,activityType:type,startTimestamp:start});
+  activity.calculated = initial;
   return activity
-}
+};
 
 const exploreActivity = function(realm,avatarId,initialValues) {
   var activity = baseActivity(avatarId,"explore",initialValues)
@@ -81,5 +81,6 @@ module.exports = {
   basicRealm,
   newUser,
   exploreActivity,
-  emptyItem
-}
+  emptyItem,
+  baseActivity
+};

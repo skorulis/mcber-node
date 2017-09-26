@@ -6,8 +6,10 @@ var schema = new mongoose.Schema({
   avatarId:String,
   activityType:String,
   startTimestamp:{type:Number},
+  itemId:String,
   calculated: {
     duration:Number,
+    usedSkills:[String],
     skillLevel:Number,
     _id:false
   },

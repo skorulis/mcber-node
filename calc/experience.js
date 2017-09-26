@@ -1,26 +1,33 @@
 const typeElemental = "elemental";
 const typeTrade = "trade";
 
-const tradeSkillMine = 101;
-const tradeSkillCraft = 102;
-const tradeSkillBattle = 103;
-const tradeSkillExplore = 104;
-const tradeSkillResearch = 105;
+const tradeSkillMine = "101";
+const tradeSkillCraft = "102";
+const tradeSkillBattle = "103";
+const tradeSkillExplore = "104";
+const tradeSkillResearch = "105";
 
 
 //Calculates how much experience to go from level-1 -> level
 const elementalRequirement = function(level) {
   return Math.floor(Math.pow(level,1.5) * 50)
-}
+};
 
 //Returns all the experience gained exploring the given realm for that amount of time
 const exploreGain = function(realm,time) {
-  var amount = Math.round(realm.level*time + realm.level * 10)
+  let amount = Math.round(realm.level*time + realm.level * 10)
   return [
     {type:typeElemental,xp:amount,skillId:realm.elementId},
     {type:typeTrade,xp:amount,skillId:tradeSkillExplore},
   ]
-}
+};
+
+let craftGain = function(itemRef,initial) {
+  let amount = Math.round(initial.duration);
+  return initial.usedSkills.map(function(sId) {
+    return {type:typeElemental,xp:amount,skillId:sId}
+  })
+};
 
 const addExperienceToSkill = function(skillXpProgress,xpObject) {
   var xpTotal = skillXpProgress.xp + xpObject.xp
@@ -47,5 +54,6 @@ module.exports = {
   addExperience,
   addAllExperience,
   elementalRequirement,
-  exploreGain
-}
+  exploreGain,
+  craftGain
+};
