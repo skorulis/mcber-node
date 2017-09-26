@@ -1,7 +1,7 @@
-const ref = require("./reference")
-const rand = require("./rand")
-const gen = require("./generate")
-const Counter = require("../util/Counter")
+const ref = require("./reference");
+const rand = require("./rand");
+const gen = require("./generate");
+const Counter = require("../util/Counter");
 
 const itemGenInfo = function(power,elementId) {
   return {
@@ -9,10 +9,11 @@ const itemGenInfo = function(power,elementId) {
     currentPower:power,
     coreElement:elementId
   }
-}
+};
 
 const chooseElement = function(modRef, info) {
-  var number = rand.getRandomInt(0,100)
+  console.log(modRef);
+  let number = rand.getRandomInt(0,100);
 
   //Check if we have picked the index of an element
   if (number < ref.elements.length) { 
@@ -38,8 +39,8 @@ const attemptMod = function(info) {
   if (info.currentPower == 0) {
     return null
   }
-  var index = rand.getRandomInt(0, ref.mods.length - 1)
-  var modRef = ref.modAtIndex(index)
+  var index = rand.getRandomInt(0, ref.mods.array.length - 1);
+  var modRef = ref.mods.atIndex(index);
   var elementId = chooseElement(modRef,info)
   const maxPowerMult = Math.floor(Math.pow(info.initialPower, 0.5))
   var powerMult = rand.getRandomInt(1,maxPowerMult)
@@ -58,18 +59,18 @@ const modPower = function(mod) {
 }
 
 const randomItem = function(power,elementId) {
-  var index = rand.getRandomInt(0, ref.baseItems.length - 1)
-  var baseItem = ref.baseItem(index)
-  var item = gen.emptyItem(baseItem)
-  var info = itemGenInfo(power,elementId)
+  let index = rand.getRandomInt(0, ref.baseItems.length - 1);
+  let baseItem = ref.baseItem(index);
+  let item = gen.emptyItem(baseItem);
+  let info = itemGenInfo(power,elementId);
 
-  var usedMods = []
+  let usedMods = [];
 
   while(true) {
-    var nextMod = attemptMod(info)
+    let nextMod = attemptMod(info);
     if (nextMod && !usedMods.includes(nextMod.id)) {
-      item.mods.push(nextMod)
-      usedMods.push(nextMod.id)
+      item.mods.push(nextMod);
+      usedMods.push(nextMod.id);
       info.currentPower -= modPower(nextMod)
     } else {
       break
@@ -77,7 +78,7 @@ const randomItem = function(power,elementId) {
   }
 
   return item
-}
+};
 
 const fixedItem = function(refType,mods) {
   var item = gen.emptyItem(refType)
@@ -85,11 +86,11 @@ const fixedItem = function(refType,mods) {
     item.mods.push(m)
   }
   return item
-}
+};
 
 const fixedMod = function(refType,power,elementId) {
   return {id:refType.id,power:power,elementId:elementId}
-}
+};
 
 const requiredResources = function(item) {
   let resources = new Counter();
@@ -118,4 +119,4 @@ module.exports = {
   chooseElement,
   requiredResources,
   breakdown
-}
+};

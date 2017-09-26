@@ -32,7 +32,7 @@ it("Generates a mod", function() {
 
 it("Chooses and element",function() {
   var info = itemCalc.itemGenInfo(1,2)
-  var mod = ref.mods[0]
+  var mod = ref.mods.atIndex(0);
   rand.setNextInt(40)
   var elementId = itemCalc.chooseElement(mod,info)
   elementId.should.equal(2)
@@ -69,13 +69,13 @@ it("Assigns items", function() {
 })
 
 it("Generates a complex item", function() {
-  rand.setNextInt(1)
-  var item = itemCalc.randomItem(10,0)
-  item.name.should.equal("Club")
+  rand.setNextInt(1);
+  let item = itemCalc.randomItem(10,0);
+  item.name.should.equal("Club");
   
   console.log(item)
   //TODO: More for seeing the results than anything else
-})
+});
 
 it("Calculates item resources", function() {
   let item = itemCalc.fixedItem(ref.baseItem(0),[]);

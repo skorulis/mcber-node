@@ -2,13 +2,13 @@ const fs = require('fs');
 const RefContainer = require("../util/RefContainer");
 const skillsData = JSON.parse(fs.readFileSync('static/ref/skills.json', 'utf8')).skills;
 const resources = JSON.parse(fs.readFileSync('static/ref/resources.json', 'utf8')).resources;
-const mods = JSON.parse(fs.readFileSync('static/ref/itemMods.json', 'utf8')).mods;
+const modData = JSON.parse(fs.readFileSync('static/ref/itemMods.json', 'utf8')).mods;
 const items = JSON.parse(fs.readFileSync('static/ref/items.json', 'utf8')).items;
 const baseItems = items.baseTypes;
 
 let skills = new RefContainer(skillsData,"id");
+let mods = new RefContainer(modData,"id");
 
-var modIndex = []
 const elements = skills.array.filter((s) => s.type == "elemental")
 const baseTypeMap = {}
 
@@ -24,12 +24,8 @@ const baseItemWithId = function(id) {
   return baseTypeMap[id]
 };
 
-const modAtIndex = function(index) {
-  return mods[index]
-};
-
 const getMod = function(id) {
-  return modIndex[id]
+  return mods.withId(id);
 };
 
 for(let e of skills.array) {
@@ -47,10 +43,6 @@ for (let id in resources.elemental) {
   getSkill(r.skill).resources.push(r)
 }
 
-for (m of mods) {
-  modIndex[m.id] = m
-}
-
 for (t of items.baseTypes) {
   baseTypeMap[t.name] = t
 }
@@ -63,7 +55,6 @@ module.exports = {
   getSkill,
   elements,
   baseItem,
-  modAtIndex,
   getMod,
   baseItems,
   baseItemWithId
