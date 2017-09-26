@@ -72,7 +72,7 @@ module.exports = {
     })
   },
   craft:function(req,res,next) {
-    var itemRef = ref.baseItemWithId(req.body.itemName)
+    var itemRef = ref.baseItems.withId(req.body.itemName)
     if (!itemRef) {
       return next(new util.RequestError("No item named " + req.body.itemName))   
     }

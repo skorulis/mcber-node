@@ -17,7 +17,7 @@ it("Calculates simple item stats",function() {
   const avatar = gen.withLevels([0,10,0,0,0,0,0,0,0,0])
 
   var mod = itemCalc.fixedMod(ref.getMod("+skill"),1,0)
-  var item = itemCalc.fixedItem(ref.baseItem(0),[mod])
+  var item = itemCalc.fixedItem(ref.baseItems.atIndex(0),[mod])
 
   avatar.setItem(item,"hand1")
   avatar.items.length.should.equal(1)

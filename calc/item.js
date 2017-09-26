@@ -59,7 +59,7 @@ const modPower = function(mod) {
 }
 
 const randomItem = function(power,elementId) {
-  let index = rand.getRandomInt(0, ref.baseItems.length - 1);
+  let index = rand.getRandomInt(0, ref.baseItems.array.length - 1);
   let baseItem = ref.baseItem(index);
   let item = gen.emptyItem(baseItem);
   let info = itemGenInfo(power,elementId);
@@ -94,7 +94,7 @@ const fixedMod = function(refType,power,elementId) {
 
 const requiredResources = function(item) {
   let resources = new Counter();
-  let itemRef = ref.baseItemWithId(item.name);
+  let itemRef = ref.baseItems.withId(item.name);
   for (r of itemRef.resources) {
     resources.add(r.id,r.quantity)
   }

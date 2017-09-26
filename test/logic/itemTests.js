@@ -15,7 +15,7 @@ it("Generates a plain item",function() {
 
 it("Generates a fixed item", function() {
   var mod = itemCalc.fixedMod(ref.getMod("+skill"),0,0)
-  var item = itemCalc.fixedItem(ref.baseItem(0),[mod])
+  var item = itemCalc.fixedItem(ref.baseItems.atIndex(0),[mod])
   item.name.should.equal("Sword")
   item.mods.length.should.equal(1)
 })
@@ -78,14 +78,14 @@ it("Generates a complex item", function() {
 });
 
 it("Calculates item resources", function() {
-  let item = itemCalc.fixedItem(ref.baseItem(0),[]);
+  let item = itemCalc.fixedItem(ref.baseItems.atIndex(0),[]);
   let resources = itemCalc.requiredResources(item);
   let r1 = resources[0];
   r1.should.deep.equal({id:"1",quantity:5})
 });
 
 it("Breaks down and item",function() {
-  var item = itemCalc.fixedItem(ref.baseItem(2),[])
+  var item = itemCalc.fixedItem(ref.baseItems.atIndex(2),[])
   var resources = itemCalc.breakdown(item)
   resources.should.deep.equal([{id:"1",quantity:1}])
 })
