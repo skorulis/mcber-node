@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var config = require("../server/config/config")
+let mongoose = require('mongoose');
+let config = require("../server/config/config");
 
 var schema = new mongoose.Schema({
   _id: String,

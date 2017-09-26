@@ -15,6 +15,24 @@ class Counter {
     }
   }
 
+  addAll(values,keyName,valueName) {
+    for (let x of values) {
+      this.add(x[keyName],x[valueName])
+    }
+  }
+
+  maxValue() {
+    var maxValue = 0;
+    var maxKey = null;
+    for (let key in this.counts) {
+      if(this.valueFor(key) > maxValue) {
+        maxValue = this.valueFor(key)
+          maxKey = key
+      }
+    }
+    return {key:maxKey,value:maxValue}
+  }
+
   valueFor(key) {
     let value = this.counts[key];
     return value ? value : 0

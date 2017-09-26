@@ -55,10 +55,10 @@ it("Generates elemental mods", function() {
 })
 
 it("Assigns items", function() {
-  const avatar = gen.emptyAvatar()
+  const avatar = gen.emptyAvatar();
 
-  var item1 = itemCalc.randomItem(0,0)
-  var item2 = itemCalc.randomItem(0,0)
+  let item1 = itemCalc.randomItem(0,0);
+  let item2 = itemCalc.randomItem(0,0);
 
   assert(avatar.setItem(item1,"hand1") == null)
   avatar.itemAt("hand1")._id.should.equal(item1._id)
@@ -66,7 +66,7 @@ it("Assigns items", function() {
 
   avatar.itemAt("hand1")._id.should.equal(item2._id)
 
-})
+});
 
 it("Generates a complex item", function() {
   rand.setNextInt(1);
@@ -85,7 +85,7 @@ it("Calculates item resources", function() {
 });
 
 it("Breaks down and item",function() {
-  var item = itemCalc.fixedItem(ref.baseItems.atIndex(2),[])
-  var resources = itemCalc.breakdown(item)
+  var item = itemCalc.fixedItem(ref.baseItems.atIndex(2),[]);
+  var resources = itemCalc.breakdown(item);
   resources.should.deep.equal([{id:"1",quantity:1}])
-})
+});

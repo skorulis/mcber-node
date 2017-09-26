@@ -7,8 +7,19 @@ const ref = require("../../calc/reference");
 const rand = require("../../calc/rand");
 const update = require("../../calc/update");
 
+it("Picks the item skill", function() {
+  var itemRef = ref.baseItems.atIndex(0);
+  var skill = craft.itemSkillAffiliation(itemRef);
+  skill.id.should.equal('0');
+
+  itemRef = ref.baseItems.atIndex(4);
+  skill = craft.itemSkillAffiliation(itemRef);
+  skill.id.should.equal('7')
+
+});
+
 it("Calculated initial values", function() {
   let avatar = gen.withLevels([10,15,0,0,0,0,0,0,0,0,0,11,7,15,0]);
-  //var itemRef = ref
-  //var constants = craft.initialValues(avatar);
+  let itemRef = ref.baseItems.atIndex(0);
+  let constants = craft.initialValues(itemRef, avatar);
 });

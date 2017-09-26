@@ -1,13 +1,14 @@
 const fs = require('fs');
 const RefContainer = require("../util/RefContainer");
 const skillsData = JSON.parse(fs.readFileSync('static/ref/skills.json', 'utf8')).skills;
-const resources = JSON.parse(fs.readFileSync('static/ref/resources.json', 'utf8')).resources;
+const resourceData = JSON.parse(fs.readFileSync('static/ref/resources.json', 'utf8')).resources;
 const modData = JSON.parse(fs.readFileSync('static/ref/itemMods.json', 'utf8')).mods;
 const items = JSON.parse(fs.readFileSync('static/ref/items.json', 'utf8')).items;
 
 let skills = new RefContainer(skillsData,"id");
 let mods = new RefContainer(modData,"id");
 let baseItems = new RefContainer(items.baseTypes,"name");
+let resources = new RefContainer(resourceData,"id");
 
 const elements = skills.array.filter((s) => s.type == "elemental")
 
@@ -28,9 +29,7 @@ for(let e of skills.array) {
   }
 }
 
-for (let id in resources.elemental) {
-  let r = resources.elemental[id];
-  r.id = id;
+for (r of resources.array) {
   getSkill(r.skill).resources.push(r)
 }
 

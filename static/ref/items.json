@@ -56,7 +56,7 @@
 			{
 				"name":"staff",
 				"type":"weapon",
-				"resources": [{"id":"23","quantity":1}]
+				"resources": [{"id":"23","quantity":2}]
 			},
 			{
 				"name":"Rusty helmet",
