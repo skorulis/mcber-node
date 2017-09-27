@@ -15,7 +15,7 @@ module.exports = function(supertest) {
         if (res.status == code) {
           return true
         }
-        console.log(res.error)
+        console.log(res.error);
         return false
       }
     }

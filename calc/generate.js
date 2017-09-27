@@ -50,12 +50,12 @@ const exploreActivity = function(realm,avatarId,initialValues) {
 }
 
 const emptyItem = function(baseItem) {
-  var item = new Item({_id:uniqid()})
-  item.type = baseItem.type
-  item.name = baseItem.name
-  item.mods = []
+  let item = new Item({_id:uniqid()});
+  item.type = baseItem.type;
+  item.name = baseItem.name;
+  item.mods = [];
   return item
-}
+};
 
 module.exports = {
   emptyAvatar:emptyAvatar,
@@ -68,14 +68,14 @@ module.exports = {
     return avatarUtil.updateStats(avatar)
   },
   randomAvatar:function(level) {
-    var avatar = emptyAvatar();
+    let avatar = emptyAvatar();
     while(level > 0) {
-      const index = rand.getRandomInt(0,9)
-      const value = rand.getRandomInt(1,level)
-      avatar.skills[index].level += value
+      const index = rand.getRandomInt(0,9);
+      const value = rand.getRandomInt(1,level);
+      avatar.skills[index].level += value;
       level -= value 
     }
-    avatarUtil.updateStats(avatar)
+    avatarUtil.updateStats(avatar);
     return avatar
   },
   basicRealm,

@@ -8,11 +8,11 @@ let auth = require("../../server/auth/authHelpers");
 let User = require("../../model").User;
 let helpers = require("../testHelpers")(supertest);
 
-var token = null;
-var avatar = null;
-var activity = null;
+let token = null;
+let avatar = null;
+let activity = null;
 
-describe("Performs all action methods",function() {
+describe.only("Performs all action methods",function() {
   it("Sets up the user",function(done) {
     supertest.post("/api/signup")
     .send({"email":"action@test.com",password:"dummy"})
@@ -61,6 +61,46 @@ describe("Performs all action methods",function() {
       res.body.result.resource.quantity.should.equal(1)
     })
     .end(done)
-  })
+  });
+
+  it("Can't craft fake items", function(done) {
+    token.should.be.a("string");
+    let body = {avatarId: avatar._id, itemId: "MAGIC SUPER SWORD!!"};
+    helpers.jsonAuthPost("/api/action/craft", token, body)
+      .expect(helpers.checkStatusCode(400))
+      .end(done);
+  });
+
+  it("Starts crafting", function(done) {
+  token.should.be.a("string");
+  let body = {avatarId:avatar._id,itemId:"Sword"};
+  helpers.jsonAuthPost("/api/action/craft",token,body)
+    .expect(helpers.checkStatusCode(200))
+    .expect(function(res) {
+      activity = res.body.activity;
+      console.log(activity);
+      activity.activityType.should.equal("craft");
+      activity._id.should.be.a("string");
+      activity.avatarId.should.equal(avatar._id);
+      activity.startTimestamp.should.be.a("number");
+      activity.calculated.should.be.a("object");
+      activity.calculated.duration.should.equal(69);
+      activity.calculated.skillLevel.should.equal(0);
+      activity.itemId.should.equal("Sword");
+    })
+    .end(done)
+  });
+
+  it("Completes crafting", function(done) {
+    helpers.jsonAuthPost("/api/action/complete",token,{activityId:activity._id})
+      .expect(helpers.checkStatusCode(200))
+      .expect(function(res) {
+        res.body.result.item.name.should.equal("Sword");
+        let xp = res.body.result.experience[0];
+        xp.xp.should.equal(69);
+        assert(!res.body.result.resource);
+      })
+      .end(done)
+    });
 });
 

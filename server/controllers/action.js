@@ -21,6 +21,15 @@ const exploreSchema = {
   }
 };
 
+const craftSchema = {
+  type:'object',
+  required:["itemId","avatarId"],
+  properties:{
+    itemId: {type:"string"},
+    avatarId: {type:"string"}
+  }
+};
+
 const cancelCompleteSchema = {
   type:'object',
   required:["activityId"],
@@ -32,8 +41,8 @@ const cancelCompleteSchema = {
 let completeActivity = function(activity,avatar) {
   if (activity.activityType == "explore") {
     return explore.completeActivity(activity,avatar);
-  } else if (activity.activity == "craft") {
-    return
+  } else if (activity.activityType == "craft") {
+    return craft.completeActivity(activity,avatar);
   }
 };
 
@@ -54,6 +63,7 @@ let findFreeAvatar = function(user,avatarId,errorBlock) {
 module.exports = {
   exploreSchema,
   cancelCompleteSchema,
+  craftSchema,
   explore:function(req,res,next) {
     let avatar = findFreeAvatar(req.user,req.body.avatarId,next);
     if (!avatar) {
@@ -73,8 +83,12 @@ module.exports = {
         return
     }
     let itemRef = ref.baseItems.withId(req.body.itemId);
+    if (!itemRef) {
+      return next(new util.RequestError("No item with Id" + req.body.itemId));
+    }
 
     let activity = craft.getActivity(itemRef,avatar);
+    activity.itemId = itemRef.name;
     req.user.activities.push(activity);
     req.user.save().then((user) => {
         res.send({activity:activity})
