@@ -2,6 +2,7 @@ const ref = require("./reference");
 const rand = require("./rand");
 const gen = require("./generate");
 const Counter = require("../util/Counter");
+const ItemMod = require("../model").ItemMod;
 
 const itemGenInfo = function(power,elementId) {
   return {
@@ -33,7 +34,7 @@ const chooseElement = function(modRef, info) {
 
   //Resort to plain
   return null
-}
+};
 
 const attemptMod = function(info) {
   if (info.currentPower == 0) {
@@ -41,22 +42,23 @@ const attemptMod = function(info) {
   }
   var index = rand.getRandomInt(0, ref.mods.array.length - 1);
   var modRef = ref.mods.atIndex(index);
-  var elementId = chooseElement(modRef,info)
-  const maxPowerMult = Math.floor(Math.pow(info.initialPower, 0.5))
-  var powerMult = rand.getRandomInt(1,maxPowerMult)
+  var elementId = chooseElement(modRef,info);
+  const maxPowerMult = Math.floor(Math.pow(info.initialPower, 0.5));
+  var powerMult = rand.getRandomInt(1,maxPowerMult);
 
-  var mod = {id:modRef.id,power:powerMult,elementId:elementId}
+  let mod = new ItemMod({refId:modRef.id,power:powerMult,elementId:elementId});
+
   if (modPower(mod) > info.currentPower) {
     return null
   }
 
   return mod
-}
+};
 
 const modPower = function(mod) {
-  var modRef = ref.getMod(mod.id)
+  let modRef = ref.getMod(mod.refId);
   return modRef.power * mod.power
-}
+};
 
 const randomItem = function(power,elementId) {
   let index = rand.getRandomInt(0, ref.baseItems.array.length - 1);
@@ -81,7 +83,7 @@ const randomItem = function(power,elementId) {
 };
 
 const fixedItem = function(refType,mods) {
-  var item = gen.emptyItem(refType)
+  let item = gen.emptyItem(refType);
   for (m of mods) {
     item.mods.push(m)
   }
@@ -89,7 +91,7 @@ const fixedItem = function(refType,mods) {
 };
 
 const fixedMod = function(refType,power,elementId) {
-  return {id:refType.id,power:power,elementId:elementId}
+  return new ItemMod({refId:refType.id,power:power,elementId:elementId});
 };
 
 const requiredResources = function(item) {

@@ -1,8 +1,8 @@
-const AvatarStats = require("../model").AvatarStats
-const ref = require("./reference")
+const AvatarStats = require("../model").AvatarStats;
+const ref = require("./reference");
 
-const kStatIdHealth = "1"
-const kStatIdSpeed = "2"
+const kStatIdHealth = "1";
+const kStatIdSpeed = "2";
 
 const avatarStats = function(avatar) {
   var stats = AvatarStats()
@@ -22,7 +22,7 @@ const avatarStats = function(avatar) {
   }
 
   for (mod of allMods) {
-    if (mod.id == "+skill") {
+    if (mod.refId == "+skill") {
       var old = stats.skill(mod.elementId)
       old += mod.power
       stats.setSkill(mod.elementId,old)

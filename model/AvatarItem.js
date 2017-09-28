@@ -1,16 +1,15 @@
-var mongoose = require('mongoose');
-var config = require("../server/config/config")
+let mongoose = require('mongoose');
+let config = require("../server/config/config");
+let modSchema = require("./ItemMod").schema;
 
-var schema = new mongoose.Schema({
+let schema = new mongoose.Schema({
   _id: String,
   type: String,
   name: String,
-  mods:[
-    {id:String, power:Number, elementId:String, _id:false}
-  ]
-})
+  mods:[modSchema]
+});
 
 module.exports = {
   schema: schema,
   model: mongoose.model('AvatarItem',schema)
-}
+};

@@ -25,7 +25,7 @@ it("Generates a mod", function() {
   var info = itemCalc.itemGenInfo(1,null)
   var mod = itemCalc.attemptMod(info)
   mod.should.not.be.null
-  mod.id.should.equal("+health")
+  mod.refId.should.equal("+health")
   mod.power.should.equal(1)
   assert(mod.elementId == null)
 })
@@ -39,20 +39,20 @@ it("Chooses and element",function() {
 })
 
 it("Generates elemental mods", function() {
-  rand.setNextInt(0)
-  rand.setNextInt(40)
-  var info = itemCalc.itemGenInfo(1,1)
-  var mod = itemCalc.attemptMod(info)
-  mod.id.should.equal("+skill")
-  mod.elementId.should.equal(1)
+  rand.setNextInt(0);
+  rand.setNextInt(40);
+  let info = itemCalc.itemGenInfo(1,1);
+  let mod = itemCalc.attemptMod(info);
+  mod.refId.should.equal("+skill");
+  mod.elementId.should.equal("1");
 
-  rand.setNextInt(0)
-  rand.setNextInt(4)
-  info = itemCalc.itemGenInfo(1,1)
-  mod = itemCalc.attemptMod(info)
-  mod.id.should.equal("+skill")
-  mod.elementId.should.equal(4)
-})
+  rand.setNextInt(0);
+  rand.setNextInt(4);
+  info = itemCalc.itemGenInfo(1,1);
+  mod = itemCalc.attemptMod(info);
+  mod.refId.should.equal("+skill");
+  mod.elementId.should.equal("4")
+});
 
 it("Assigns items", function() {
   const avatar = gen.emptyAvatar();
