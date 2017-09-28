@@ -13,16 +13,16 @@ let avatar = null;
 let activity = null;
 
 describe.only("Performs all action methods",function() {
-  it("Sets up the user",function(done) {
-    supertest.post("/api/signup")
-    .send({"email":"action@test.com",password:"dummy"})
-    .set('Content-Type', 'application/x-www-form-urlencoded')
-    .expect(function(res) {
-      token = res.body.auth.token;
-      token.should.be.a("string");
-      avatar = res.body.user.avatars[0]
+  before(function(done){
+    helpers.createNewUser("action@test.com",function(user,tkn) {
+        token = tkn.token;
+        token.should.be.a("string");
+        user.addResource({"id":"1",quantity:5});
+        avatar = user.avatars[0];
+        user.save((err,user) => {
+            done()
+        });
     })
-    .end(done)
   });
 
   it("Complains about missing realm", function(done) {

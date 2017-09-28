@@ -4,6 +4,7 @@ let craft = require("../../calc/craft");
 let ref = require("../../calc/reference");
 let updateCalc = require("../../calc/update");
 let util = require("../util/util.js");
+let itemCalc = require("../../calc/item");
 
 const exploreSchema = {
   type:'object',
@@ -85,6 +86,10 @@ module.exports = {
     let itemRef = ref.baseItems.withId(req.body.itemId);
     if (!itemRef) {
       return next(new util.RequestError("No item with Id" + req.body.itemId));
+    }
+    let resources = itemCalc.requiredResources(itemRef);
+    if (!req.user.hasResources(resources)) {
+        return next(new util.RequestError("User doesn't have enough resources to craft "));
     }
 
     let activity = craft.getActivity(itemRef,avatar);

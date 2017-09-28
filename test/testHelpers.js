@@ -1,5 +1,22 @@
+const bCrypt = require('bcrypt-nodejs');
+let auth = require("../server/auth/authHelpers");
+let gen = require("../calc/generate");
+
+const createHash = function(password) {
+    return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+};
+
 module.exports = function(supertest) {
   return {
+    createNewUser:function(email,done) {
+        user = gen.newUser();
+        user.email = email;
+        user.password = createHash("dummy");
+        user.save((err,user) => {
+            let token = auth.generateToken(user);
+            done(user,token)
+        })
+    },
     jsonAuthPost:function(url,token,body) {
       return supertest.post(url)
       .set('Content-Type', 'application/json')
@@ -21,4 +38,4 @@ module.exports = function(supertest) {
     }
 
   }
-}
+};

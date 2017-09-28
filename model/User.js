@@ -69,13 +69,13 @@ userSchema.methods.resourceCount = function(resourceId) {
 
 userSchema.methods.hasResources = function(resourceList) {
   for (r of resourceList) {
-    var count = this.resourceCount(r.id)
+    let count = this.resourceCount(r.id);
     if (count < r.quantity) {
       return false
     }
   }
   return true
-}
+};
 
 userSchema.methods.addResource = function(resource) {
   var found = this.resources.find( (r) => r.id == resource.id)

@@ -1,23 +1,23 @@
 const FacebookTokenStrategy = require('passport-facebook-token');
-const LocalStrategy   = require('passport-local').Strategy
+const LocalStrategy   = require('passport-local').Strategy;
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const uniqid = require('uniqid'); 
 const bCrypt = require('bcrypt-nodejs');
-const cred = require("../config/credentials")
-const User = require("../../model").User
-const gen = require("../../calc/generate")
+const cred = require("../config/credentials");
+const User = require("../../model").User;
+const gen = require("../../calc/generate");
 
 const jwtOpts = {secretOrKey:cred.secret,jwtFromRequest:ExtractJwt.fromAuthHeaderAsBearerToken()}
 
 
 const createHash = function(password) {
   return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null); 
-}
+};
 
 const checkPassword = function(password,hash) {
   return bCrypt.compareSync(password, hash);
-}
+};
 
 module.exports = function(passport) {
   passport.serializeUser(function(user, done) {
@@ -56,7 +56,7 @@ module.exports = function(passport) {
         if(user) {
           done("User already exists")
         } else {
-          user = gen.newUser()
+          user = gen.newUser();
           user.email = email;
           user.password = createHash(password);
           user.save((err,user) => {
@@ -98,4 +98,4 @@ module.exports = function(passport) {
 
 
 
-}
+};
