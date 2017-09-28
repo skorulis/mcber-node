@@ -14,7 +14,7 @@ const exploreSchema = {
       type:'object',
       required: ['elementId','level'],
       properties:{
-        elementId:{type:'number'},
+        elementId:{type:'string'},
         level:{type:'number',multipleOf:1,minimum:1}
       },
       avatarId: {type:"string"}

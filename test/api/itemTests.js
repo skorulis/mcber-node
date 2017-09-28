@@ -162,23 +162,6 @@ describe("Performs all item methods",function() {
     })
   })
 
-  it("Can't create a spear",function(done) {
-    var body = {itemName:"Spear",avatarId:avatar._id}
-    helpers.jsonAuthPost("/api/action/craft",token,body)
-    .expect(helpers.checkStatusCode(400))
-    .end(done)
-  })
-
-  it("Does create a sword",function(done) {
-    var body = {itemName:"Sword",avatarId:avatar._id}
-    helpers.jsonAuthPost("/api/action/craft",token,body)
-    .expect(helpers.checkStatusCode(200))
-    .expect(function(res) {
-      res.body.item._id.should.not.be.null
-      res.body.resources.should.deep.equal([{"id":"1","quantity":5}])
-    })
-    .end(done)
-  })
 
 
 })

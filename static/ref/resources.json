@@ -1,184 +1,184 @@
 {
-"resources":[
-	{
-				"id":"1",
-				"name":"Iron",
-				"skill":"0",
-				"rarity":1
-			},
-			{
-				"id":"2",
-				"name":"Gold",
-				"skill":"0",
-				"rarity":2
-			},
-			{
-				"id":"3",
-				"name":"Diamond",
-				"skill":"0",
-				"rarity":3
-			},
-			{
-				"id":"4",
-				"name":"Magma",
-				"skill":"1",
-				"rarity":1
-			},
-			{
-				"id":"5",
-				"name":"Firestone",
-				"skill":"1",
-				"rarity":2
-			},
-			{
-				"id":"6",
-				"name":"Ruby",
-				"skill":"1",
-				"rarity":3
-			},
-			{
-				"id":"7",
-				"name":"Copper",
-				"skill":"2",
-				"rarity":1
-			},
-			{
-				"id":"8",
-				"name":"Lightning 2",
-				"skill":"2",
-				"rarity":2
-			},
-			{
-				"id":"9",
-				"name":"Lightning 3",
-				"skill":"2",
-				"rarity":3
-			},
-			{
-				"id":"10",
-				"name":"Ice 1",
-				"skill":"3",
-				"rarity":1
-			},
-			{
-				"id":"11",
-				"name":"Ice 2",
-				"skill":"3",
-				"rarity":2
-			},
-			{
-				"id":"12",
-				"name":"Ice 3",
-				"skill":"3",
-				"rarity":3
-			},
-			{
-				"id":"13",
-				"name":"Air 1",
-				"skill":"4",
-				"rarity":1
-			},
-			{
-				"id":"14",
-				"name":"Air 2",
-				"skill":"4",
-				"rarity":2
-			},
-			{
-				"id":"15",
-				"name":"Air 3",
-				"skill":"4",
-				"rarity":3
-			},
-			{
-				"id":"16",
-				"name":"Dirt",
-				"skill":"5",
-				"rarity":1
-			},
-			{
-				"id":"17",
-				"name":"Stone",
-				"skill":"5",
-				"rarity":2
-			},
-			{
-				"id":"18",
-				"name":"Earth 3",
-				"skill":"5",
-				"rarity":3
-			},
-			{
-				"id":"19",
-				"name":"Leather",
-				"skill":"6",
-				"rarity":1
-			},
-			{
-				"id":"20",
-				"name":"Water 2",
-				"skill":"6",
-				"rarity":2
-			},
-			{
-				"id":"21",
-				"name":"Water 3",
-				"skill":"6",
-				"rarity":3
-			},
-			{
-				"id":"22",
-				"name":"Leaves",
-				"skill":"7",
-				"rarity":1
-			},
-			{
-				"id":"23",
-				"name":"Wood",
-				"skill":"7",
-				"rarity":2
-			},
-			{
-				"id":"24",
-				"name":"Amber",
-				"skill":"7",
-				"rarity":3
-			},
-			{
-				"id":"25",
-				"name":"Light 1",
-				"skill":"8",
-				"rarity":1
-			},
-			{
-				"id":"26",
-				"name":"Light 2",
-				"skill":"8",
-				"rarity":2
-			},
-			{
-				"id":"27",
-				"name":"Light 3",
-				"skill":"8",
-				"rarity":3
-			},
-			{
-				"id":"28",
-				"name":"Dark 1",
-				"skill":"9",
-				"rarity":1
-			},
-			{
-				"id":"29",
-				"name":"Dark 2",
-				"skill":"9",
-				"rarity":2
-			},
-			{
-				"id":"30",
-				"name":"Dark 3",
-				"skill":"9",
-				"rarity":3
-			}
-		]
+	"resources": [
+		{
+			"id": "1",
+			"name": "Iron",
+			"skill": "0",
+			"rarity": 1
+		},
+		{
+			"id": "2",
+			"name": "Gold",
+			"skill": "0",
+			"rarity": 2
+		},
+		{
+			"id": "3",
+			"name": "Diamond",
+			"skill": "0",
+			"rarity": 3
+		},
+		{
+			"id": "4",
+			"name": "Magma",
+			"skill": "1",
+			"rarity": 1
+		},
+		{
+			"id": "5",
+			"name": "Firestone",
+			"skill": "1",
+			"rarity": 2
+		},
+		{
+			"id": "6",
+			"name": "Ruby",
+			"skill": "1",
+			"rarity": 3
+		},
+		{
+			"id": "7",
+			"name": "Copper",
+			"skill": "2",
+			"rarity": 1
+		},
+		{
+			"id": "8",
+			"name": "Lightning 2",
+			"skill": "2",
+			"rarity": 2
+		},
+		{
+			"id": "9",
+			"name": "Lightning 3",
+			"skill": "2",
+			"rarity": 3
+		},
+		{
+			"id": "10",
+			"name": "Ice 1",
+			"skill": "3",
+			"rarity": 1
+		},
+		{
+			"id": "11",
+			"name": "Ice 2",
+			"skill": "3",
+			"rarity": 2
+		},
+		{
+			"id": "12",
+			"name": "Ice 3",
+			"skill": "3",
+			"rarity": 3
+		},
+		{
+			"id": "13",
+			"name": "Air 1",
+			"skill": "4",
+			"rarity": 1
+		},
+		{
+			"id": "14",
+			"name": "Air 2",
+			"skill": "4",
+			"rarity": 2
+		},
+		{
+			"id": "15",
+			"name": "Air 3",
+			"skill": "4",
+			"rarity": 3
+		},
+		{
+			"id": "16",
+			"name": "Dirt",
+			"skill": "5",
+			"rarity": 1
+		},
+		{
+			"id": "17",
+			"name": "Stone",
+			"skill": "5",
+			"rarity": 2
+		},
+		{
+			"id": "18",
+			"name": "Earth 3",
+			"skill": "5",
+			"rarity": 3
+		},
+		{
+			"id": "19",
+			"name": "Leather",
+			"skill": "6",
+			"rarity": 1
+		},
+		{
+			"id": "20",
+			"name": "Water 2",
+			"skill": "6",
+			"rarity": 2
+		},
+		{
+			"id": "21",
+			"name": "Water 3",
+			"skill": "6",
+			"rarity": 3
+		},
+		{
+			"id": "22",
+			"name": "Leaves",
+			"skill": "7",
+			"rarity": 1
+		},
+		{
+			"id": "23",
+			"name": "Wood",
+			"skill": "7",
+			"rarity": 2
+		},
+		{
+			"id": "24",
+			"name": "Amber",
+			"skill": "7",
+			"rarity": 3
+		},
+		{
+			"id": "25",
+			"name": "Light 1",
+			"skill": "8",
+			"rarity": 1
+		},
+		{
+			"id": "26",
+			"name": "Light 2",
+			"skill": "8",
+			"rarity": 2
+		},
+		{
+			"id": "27",
+			"name": "Light 3",
+			"skill": "8",
+			"rarity": 3
+		},
+		{
+			"id": "28",
+			"name": "Dark 1",
+			"skill": "9",
+			"rarity": 1
+		},
+		{
+			"id": "29",
+			"name": "Dark 2",
+			"skill": "9",
+			"rarity": 2
+		},
+		{
+			"id": "30",
+			"name": "Dark 3",
+			"skill": "9",
+			"rarity": 3
+		}
+	]
 }

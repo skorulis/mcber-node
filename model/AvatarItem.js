@@ -6,7 +6,7 @@ var schema = new mongoose.Schema({
   type: String,
   name: String,
   mods:[
-    {id:String, power:Number, elementId:Number, _id:false}
+    {id:String, power:Number, elementId:String, _id:false}
   ]
 })
 

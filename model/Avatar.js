@@ -1,11 +1,11 @@
-var mongoose = require('mongoose');
-var itemSchema = require("./AvatarItem").schema
-var statsSchema = require("./AvatarStats").schema
+let mongoose = require('mongoose');
+let itemSchema = require("./AvatarItem").schema;
+let statsSchema = require("./AvatarStats").schema;
 
-var schema = new mongoose.Schema({
+let schema = new mongoose.Schema({
   _id: String,
   skills: [
-    {id:Number,level:Number,xp:Number,xpNext:Number, _id:false},
+    {id:String,level:Number,xp:Number,xpNext:Number, _id:false},
   ],
   items: [
     {slot:String,item:itemSchema,_id:false}
@@ -14,7 +14,7 @@ var schema = new mongoose.Schema({
   name:String,
   level:Number,
   currentHealth:Number
-})
+});
 
 schema.methods.findSkill = function(skillId) {
   return this.skills.find((x) => x.id == skillId)

@@ -1,11 +1,11 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var schema = new mongoose.Schema({
+let schema = new mongoose.Schema({
   _id: String,
 
   //Calculated value of skills
   skills: [
-    {id:Number,level:Number, _id:false},
+    {id:String,level:Number, _id:false},
   ],
 
   //Calculated values of other avatar attributes
@@ -13,25 +13,25 @@ var schema = new mongoose.Schema({
     {id:String,value:Number,_id:false}
   ],
   
-})
+});
 
 schema.methods.elementalSkills = function() {
   return this.skills.slice(0,9) //TODO: Might need refactoring
-}
+};
 
 schema.methods.elementalLevel = function() {
   return this.elementalSkills().reduce((total,s) => {return total + s.level},0)
-}
+};
 
 
 schema.methods.skill = function(skillId) {
-  var skill = this.skills.find((x) => x.id == skillId)
+  let skill = this.skills.find((x) => x.id == skillId);
   if (skill) {
     return skill.level
   } else {
     return 0  
   }
-}
+};
 
 schema.methods.other = function(id) {
   var other = this.otherStats.find((x) => x.id == id)

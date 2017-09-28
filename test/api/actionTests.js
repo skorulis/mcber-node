@@ -12,7 +12,7 @@ let token = null;
 let avatar = null;
 let activity = null;
 
-describe.only("Performs all action methods",function() {
+describe("Performs all action methods",function() {
   before(function(done){
     helpers.createNewUser("action@test.com",function(user,tkn) {
         token = tkn.token;
@@ -34,7 +34,7 @@ describe.only("Performs all action methods",function() {
 
   it("Starts exploring", function(done) {
     token.should.be.a("string");
-    let realm = {elementId:0,level:1};
+    let realm = {elementId:"0",level:1};
     helpers.jsonAuthPost("/api/action/explore",token)
     .send({realm:realm,avatarId:avatar._id})
     .expect(helpers.checkStatusCode(200))

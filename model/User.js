@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
-var avatarSchema = require("./Avatar").schema
-var activitySchema = require("./Activity").schema
-var itemSchema = require("./AvatarItem").schema
+let mongoose = require('mongoose');
+let avatarSchema = require("./Avatar").schema;
+let activitySchema = require("./Activity").schema;
+let itemSchema = require("./AvatarItem").schema;
 
-var userSchema = new mongoose.Schema({
+let userSchema = new mongoose.Schema({
   _id: String,
   password: String,
   email: String,
@@ -17,11 +17,11 @@ var userSchema = new mongoose.Schema({
     _id:false
   }],
   realms:[{
-    elementId:Number,
+    elementId:String,
     maximumLevel:Number,
     _id:false
   }] 
-})
+});
 
 userSchema.methods.avatarActivity = function(avatarId) {
   for (a of this.activities) {
@@ -96,4 +96,4 @@ userSchema.methods.toJSON = function() {
 module.exports = {
   schema: userSchema,
   model: mongoose.model('User',userSchema)
-}
+};

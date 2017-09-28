@@ -36,47 +36,74 @@
 			{
 				"name":"Sword",
 				"type":"weapon",
-				"resources": [{"id":"1","quantity":5}]
+				"resources": [{"id":"1","quantity":5}],
+				"defaultMods":[
+
+				]
 			},
 			{
 				"name":"Club",
 				"type":"weapon",
-				"resources": [{"id":"23","quantity":1}]
+				"resources": [{"id":"23","quantity":1}],
+				"defaultMods":[
+
+				]
 			},
 			{
 				"name":"Spear",
 				"type":"weapon",
-				"resources": [{"id":"23","quantity":1},{"id":"1","quantity":2}]
+				"resources": [{"id":"23","quantity":1},{"id":"1","quantity":2}],
+				"defaultMods":[
+
+				]
 			},
 			{
 				"name":"Shovel",
 				"type":"tool",
-				"resources": [{"id":"23","quantity":1},{"id":"1","quantity":2}]
+				"resources": [{"id":"23","quantity":1},{"id":"1","quantity":2}],
+				"defaultMods":[
+
+				]
 			},
 			{
 				"name":"staff",
 				"type":"weapon",
-				"resources": [{"id":"23","quantity":2}]
+				"resources": [{"id":"23","quantity":2}],
+				"defaultMods":[
+
+				]
 			},
 			{
 				"name":"Rusty helmet",
 				"type":"helmet",
-				"resources": [{"id":"1","quantity":5}]
+				"resources": [{"id":"1","quantity":5}],
+				"defaultMods":[
+
+				]
 			},
 			{
 				"name":"Old shoes",
 				"type":"shoes",
-				"resources": [{"id":"19","quantity":5}]
+				"resources": [{"id":"19","quantity":5}],
+				"defaultMods":[
+
+				]
 			},
 			{
 				"name":"Brown pants",
 				"type":"pants",
-				"resources": [{"id":"19","quantity":5}]
+				"resources": [{"id":"19","quantity":5}],
+				"defaultMods":[
+
+				]
 			},
 			{
 				"name":"Ugly shirt",
 				"type":"shirt",
-				"resources": [{"id":"19","quantity":5}]
+				"resources": [{"id":"19","quantity":5}],
+				"defaultMods":[
+
+				]
 			}
 		]
 	}

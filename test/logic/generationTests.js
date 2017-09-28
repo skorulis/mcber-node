@@ -6,13 +6,14 @@ const ref = require("../../calc/reference");
 const statCalc = require("../../calc/statCalc");
 
 it("Generates an empty avatar",function() {
-  const avatar = gen.emptyAvatar()
-  avatar.level.should.equal(0)
-  avatar.stats.other(statCalc.kStatIdHealth).should.equal(10)
-  avatar.stats.other(statCalc.kStatIdSpeed).should.equal(100)
-  avatar.id.should.be.a('string')
-  avatar.skills.length.should.equal(15)
-  avatar.skills[0].xpNext.should.equal(50)
+  const avatar = gen.emptyAvatar();
+  avatar.level.should.equal(0);
+  avatar.stats.other(statCalc.kStatIdHealth).should.equal(10);
+  avatar.stats.other(statCalc.kStatIdSpeed).should.equal(100);
+  avatar.id.should.be.a('string');
+  avatar.skills[0].id.should.be.a("string");
+  avatar.skills.length.should.equal(15);
+  avatar.skills[0].xpNext.should.equal(50);
 });
 
 it("Generates a fixed avatar",function() {

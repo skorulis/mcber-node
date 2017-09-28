@@ -20,12 +20,12 @@ const emptyAvatar = function() {
 };
 
 const basicRealm = function(elementId,level) {
-  var realm = {
+  let realm = {
     level:level,
     elementId:elementId
-  }
+  };
   return realm;
-}
+};
 
 const newUser = function() {
   var user = new User({_id:uniqid()})
