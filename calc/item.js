@@ -3,50 +3,53 @@ const rand = require("./rand");
 const gen = require("./generate");
 const Counter = require("../util/Counter");
 const ItemMod = require("../model").ItemMod;
+const uniqid = require('uniqid');
 
 const itemGenInfo = function(power,elementId) {
   return {
     initialPower:power,
     currentPower:power,
-    coreElement:elementId
+    coreElement:ref.getSkill(elementId)
   }
 };
 
 const chooseElement = function(modRef, info) {
-  console.log(modRef);
   let number = rand.getRandomInt(0,100);
-
-  //Check if we have picked the index of an element
-  if (number < ref.elements.length) { 
-    if (modRef.elementalMultiplier > 0) {
-      return number
-    }
+  if (modRef.skillType == "none") {
+    return null
   }
 
-  //TOOD: Add option for picking a trade
-
-  //Use the core element used to generate this item
-  if (modRef.elementalMultiplier > 0) {
-    return info.coreElement
+  let skills = [];
+  if (modRef.skillType == "all" || modRef.skillType == "elemental") {
+    skills = skills.concat(ref.elements);
+  }
+  if (modRef.skillType == "all" || modRef.skillType == "trade") {
+    skills = skills.concat(ref.trades);
   }
 
-  //TODO: Handle no core element and non plain items
+  //Check if we have picked the index of a skill
+  if (number < skills.length) {
+    return skills[number];
+  }
 
-  //Resort to plain
-  return null
+  return info.coreElement
 };
 
 const attemptMod = function(info) {
   if (info.currentPower == 0) {
     return null
   }
-  var index = rand.getRandomInt(0, ref.mods.array.length - 1);
-  var modRef = ref.mods.atIndex(index);
-  var elementId = chooseElement(modRef,info);
+  let index = rand.getRandomInt(0, ref.mods.array.length - 1);
+    console.log(index);
+  let modRef = ref.mods.atIndex(index);
+  let element = chooseElement(modRef,info);
+  let elementId = element ? element.id : null;
+  console.log(elementId);
   const maxPowerMult = Math.floor(Math.pow(info.initialPower, 0.5));
-  var powerMult = rand.getRandomInt(1,maxPowerMult);
+  let powerMult = rand.getRandomInt(1,maxPowerMult);
+  console.log(powerMult);
 
-  let mod = new ItemMod({refId:modRef.id,power:powerMult,elementId:elementId});
+  let mod = new ItemMod({_id:uniqid(),refId:modRef.id,power:powerMult,elementId:elementId});
 
   if (modPower(mod) > info.currentPower) {
     return null
@@ -57,7 +60,7 @@ const attemptMod = function(info) {
 
 const modPower = function(mod) {
   let modRef = ref.getMod(mod.refId);
-  return modRef.power * mod.power
+  return modRef.levelMult * mod.power
 };
 
 const randomItem = function(power,elementId) {
@@ -91,7 +94,7 @@ const fixedItem = function(refType,mods) {
 };
 
 const fixedMod = function(refType,power,elementId) {
-  return new ItemMod({refId:refType.id,power:power,elementId:elementId});
+  return new ItemMod({_id:uniqid(),refId:refType.id,power:power,elementId:elementId});
 };
 
 const requiredResources = function(item) {
@@ -104,13 +107,13 @@ const requiredResources = function(item) {
 };
 
 const breakdown = function(item) {
-  var resources = requiredResources(item)
+  let resources = requiredResources(item);
   resources = resources.map(function(x) { 
     return {id:x.id, quantity:Math.floor(x.quantity/2)} 
-  })
-  resources = resources.filter((x) => x.quantity > 0)
+  });
+  resources = resources.filter((x) => x.quantity > 0);
   return resources
-}
+};
 
 module.exports = {
   randomItem,

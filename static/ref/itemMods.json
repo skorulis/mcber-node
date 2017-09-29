@@ -3,9 +3,8 @@
 		{
 			"id":"+skill",
 			"postfix":"of Skill",
-			"elementalMultiplier":1,
-			"tradeMultiplier":1,
-			"baseMultiplier":1,
+			"skillType":"elemental",
+			"levelMult":1,
 			"power":1,
 			"descriptionFormatter":"+{{power}} to {{skill}} level"
 		},
@@ -13,25 +12,24 @@
 			"id":"+health",
 			"postfix":"of Health",
 			"prefix":"Healthy",
-			"plainMultiplier":1,
-			"baseMultiplier":5,
-			"power":1,
+			"skillType":"none",
+			"levelMult":1,
+			"power":5,
 			"descriptionFormatter":"+{{power}} health"
 		},
 		{
 			"id":"%skill",
 			"postfix":"of Skill",
-			"elementalMultiplier":1,
-			"tradeMultiplier":1,
-			"baseMultiplier":2,
+			"skillType":"elemental",
+			"levelMult":1,
 			"power":1,
 			"descriptionFormatter":"{{power}}% increase to {{skill}} level"
 		},
 		{
 			"id":"extra-attack",
 			"postfix":"of Extra Attacks",
-			"elementalMultiplier":1,
-			"baseMultiplier":1,
+			"skillType":"none",
+			"levelMult":1,
 			"power":2,
 			"descriptionFormatter":"{{power}}% chance of an extra attack"
 		}

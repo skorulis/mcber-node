@@ -31,6 +31,16 @@ const craftSchema = {
   }
 };
 
+const craftGemSchema = {
+    type:'object',
+    required:["modId","avatarId","level"],
+    properties:{
+        modId: {type:"string"},
+        avatarId: {type:"string"},
+        level:{type:'number',multipleOf:1,minimum:1}
+    }
+};
+
 const cancelCompleteSchema = {
   type:'object',
   required:["activityId"],
@@ -99,18 +109,27 @@ module.exports = {
         res.send({activity:activity})
     })
   },
+  craftGem:function(req,res,next) {
+    let avatar = findFreeAvatar(req.user,req.body.avatarId,next);
+    if (!avatar) {
+      return
+    }
+    let modRef = ref.getMod(req.modId)
+
+
+  },
   cancel:function(req,res,next) {
-    var activity = req.user.findActivity(req.body.activityId)
+    let activity = req.user.findActivity(req.body.activityId);
     if (activity == null) {
       return next(new util.RequestError("Could not find activity " + activity))
     }
-    req.user.removeActivity(req.body.activityId)
+    req.user.removeActivity(req.body.activityId);
     req.user.save().then(user => {
       res.send({activities:user.activities})  
     })
   },
   complete:function(req,res,next) {
-    var activity = req.user.findActivity(req.body.activityId)
+    let activity = req.user.findActivity(req.body.activityId)
     if (activity == null) {
       return next(new util.RequestError("Could not find activity " + req.body.activityId))
     }

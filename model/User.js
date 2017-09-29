@@ -2,6 +2,7 @@ let mongoose = require('mongoose');
 let avatarSchema = require("./Avatar").schema;
 let activitySchema = require("./Activity").schema;
 let itemSchema = require("./AvatarItem").schema;
+let modSchema = require("./ItemMod").schema;
 
 let userSchema = new mongoose.Schema({
   _id: String,
@@ -11,6 +12,7 @@ let userSchema = new mongoose.Schema({
   avatars:[avatarSchema],
   activities:[activitySchema],
   items:[itemSchema], //Unassigned items
+  gems:[modSchema],
   resources:[{
     id:String,
     quantity:Number,
@@ -30,42 +32,42 @@ userSchema.methods.avatarActivity = function(avatarId) {
     }
   }
   return null;
-}
+};
 
 userSchema.methods.findAvatar = function(avatarId) {
   return this.avatars.find((a) => a._id == avatarId)
-}
+};
 
 userSchema.methods.findActivity = function(activityId) {
   return this.activities.find( (a) => a._id == activityId)
-}
+};
 
 userSchema.methods.findRealm = function(elementId) {
   return this.realms.find( (r) => r.elementId == elementId)
-}
+};
 
 userSchema.methods.findItem = function(itemId) {
   return this.items.find( (x) => x._id == itemId )
-}
+};
 
 userSchema.methods.addItem = function(item) {
   this.items.push(item)
-}
+};
 
 userSchema.methods.removeItem = function(itemId) {
-  var item = this.findItem(itemId);
-  this.items = this.items.filter( (x) => x._id != itemId )
+  let item = this.findItem(itemId);
+  this.items = this.items.filter( (x) => x._id != itemId );
   return item
-}
+};
 
 userSchema.methods.removeActivity = function(activityId) {
   this.activities = this.activities.filter((a) => a._id != activityId)
-}
+};
 
 userSchema.methods.resourceCount = function(resourceId) {
-  var found = this.resources.find( (r) => r.id == resourceId)
+  let found = this.resources.find( (r) => r.id == resourceId)
   return found ? found.quantity : 0
-}
+};
 
 userSchema.methods.hasResources = function(resourceList) {
   for (r of resourceList) {
@@ -78,20 +80,20 @@ userSchema.methods.hasResources = function(resourceList) {
 };
 
 userSchema.methods.addResource = function(resource) {
-  var found = this.resources.find( (r) => r.id == resource.id)
+  let found = this.resources.find( (r) => r.id == resource.id);
   if (found) {
     found.quantity += resource.quantity
   } else {
     this.resources.push(resource)
   }
-}
+};
 
 userSchema.methods.toJSON = function() {
-  var obj = this.toObject()
-  delete obj.password
-  delete obj.__v
+  let obj = this.toObject();
+  delete obj.password;
+  delete obj.__v;
   return obj
-}
+};
 
 module.exports = {
   schema: userSchema,

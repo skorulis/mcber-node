@@ -10,7 +10,8 @@ let mods = new RefContainer(modData,"id");
 let baseItems = new RefContainer(items.baseTypes,"name");
 let resources = new RefContainer(resourceData,"id");
 
-const elements = skills.array.filter((s) => s.type == "elemental")
+const elements = skills.array.filter((s) => s.type == "elemental");
+const trades = skills.array.filter((s) => s.type == "trade");
 
 const getSkill = function(id) {
   return skills.withId(id)
@@ -40,6 +41,7 @@ module.exports = {
   items,
   getSkill,
   elements,
+  trades,
   getMod,
   baseItems
 };

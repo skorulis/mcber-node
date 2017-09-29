@@ -26,6 +26,10 @@ let itemResourceCost = function(itemRef) {
   return total;
 };
 
+let gemResourceCost = function(modRef,level) {
+
+};
+
 let initialValues = function(itemRef,avatar) {
   let itemSkill = itemSkillAffiliation(itemRef);
   let skill = avatar.stats.skill(itemSkill.id);
@@ -66,5 +70,6 @@ module.exports = {
   initialValues,
   getResult,
   getActivity,
-  completeActivity
+  completeActivity,
+  gemResourceCost
 };
