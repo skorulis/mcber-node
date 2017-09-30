@@ -36,7 +36,7 @@ const chooseElement = function(modRef, info) {
 };
 
 const attemptMod = function(info) {
-  if (info.currentPower == 0) {
+  if (info.currentPower === 0) {
     return null
   }
   let index = rand.getRandomInt(0, ref.mods.array.length - 1);

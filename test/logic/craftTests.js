@@ -6,14 +6,17 @@ const craft = require("../../calc/craft");
 const ref = require("../../calc/reference");
 const rand = require("../../calc/rand");
 const update = require("../../calc/update");
+const ResourceContainer = require("../../util/ResourceContainer");
 
 it("Picks the item skill", function() {
   let itemRef = ref.baseItems.atIndex(0);
-  let skill = craft.itemSkillAffiliation(itemRef);
+  let resources = new ResourceContainer(itemRef.resources,ref.resources,ref.skills,null,1);
+  let skill = resources.skillAffiliation();
   skill.id.should.equal('0');
 
   itemRef = ref.baseItems.atIndex(4);
-  skill = craft.itemSkillAffiliation(itemRef);
+  resources = new ResourceContainer(itemRef.resources,ref.resources,ref.skills,null,1);
+  skill = resources.skillAffiliation();
   skill.id.should.equal('7')
 
 });
@@ -52,4 +55,20 @@ it("Creates and completes an activity", function() {
     let result = craft.completeActivity(activity,avatar);
     result.item.id.should.be.a("String");
     result.item.name.should.equal("Club");
+});
+
+it("Calculated gem initial values", function() {
+  let avatar = gen.withLevels([10,15,0,0,0,0,0,0,0,0,0,11,7,15,0]);
+
+  let modRef = ref.mods.atIndex(0);
+  let element = ref.skills.atIndex(1);
+  let initial = craft.initialGemValues(modRef,1,element,avatar);
+  initial.resources.should.deep.equal([{id:"4",quantity:5}]);
+  initial.skillLevel.should.equal(26);
+  initial.duration.should.equal(3);
+  initial.usedSkills.should.deep.equal(["1","102"]);
+
+  initial = craft.initialGemValues(modRef,2,element,avatar);
+  initial.resources.should.deep.equal([{id:"4",quantity:15}]);
+  initial.duration.should.equal(10);
 });

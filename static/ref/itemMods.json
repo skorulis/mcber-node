@@ -6,7 +6,8 @@
 			"skillType":"elemental",
 			"levelMult":1,
 			"power":1,
-			"descriptionFormatter":"+{{power}} to {{skill}} level"
+			"descriptionFormatter":"+{{power}} to {{skill}} level",
+			"resources":[{"elementRarity":1,"quantity":5}]
 		},
 		{
 			"id":"+health",
@@ -15,7 +16,8 @@
 			"skillType":"none",
 			"levelMult":1,
 			"power":5,
-			"descriptionFormatter":"+{{power}} health"
+			"descriptionFormatter":"+{{power}} health",
+			"resources":[{"id":"16","quantity":5},{"id":"19","quantity":1}]
 		},
 		{
 			"id":"%skill",
@@ -23,7 +25,8 @@
 			"skillType":"elemental",
 			"levelMult":1,
 			"power":1,
-			"descriptionFormatter":"{{power}}% increase to {{skill}} level"
+			"descriptionFormatter":"{{power}}% increase to {{skill}} level",
+			"resources":[{"elementRarity":1,"quantity":8}]
 		},
 		{
 			"id":"extra-attack",
