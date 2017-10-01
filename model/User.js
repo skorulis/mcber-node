@@ -50,6 +50,10 @@ userSchema.methods.findItem = function(itemId) {
   return this.items.find( (x) => x._id == itemId )
 };
 
+userSchema.methods.findGem = function(gemId) {
+  return this.gems.find( (x) => x._id === gemId )
+};
+
 userSchema.methods.addItem = function(item) {
   this.items.push(item)
 };
@@ -58,6 +62,12 @@ userSchema.methods.removeItem = function(itemId) {
   let item = this.findItem(itemId);
   this.items = this.items.filter( (x) => x._id != itemId );
   return item
+};
+
+userSchema.methods.removeGem = function(gemId) {
+  let gem = this.findGem(gemId)
+  this.gems = this.gems.filter( (x) => x._id != gemId );
+  return gem
 };
 
 userSchema.methods.removeActivity = function(activityId) {

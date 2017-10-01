@@ -34,7 +34,8 @@
 			"skillType":"none",
 			"levelMult":1,
 			"power":2,
-			"descriptionFormatter":"{{power}}% chance of an extra attack"
+			"descriptionFormatter":"{{power}}% chance of an extra attack",
+			"resources":[{"id":"13","quantity":5},{"id":"25","quantity":5}]
 		}
 	]
 }

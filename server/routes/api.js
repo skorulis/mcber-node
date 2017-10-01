@@ -1,6 +1,6 @@
 const controllers = require('../controllers');
-const auth = require("../auth/authHelpers.js")
-const validate = require('express-jsonschema').validate
+const auth = require("../auth/authHelpers.js");
+const validate = require('express-jsonschema').validate;
 
 module.exports = (app,passport) => {
 	app.get('/api/user/current',passport.authenticate("jwt-verify"), controllers.user.current);
@@ -20,6 +20,7 @@ module.exports = (app,passport) => {
 
   app.post('/api/item/assign',passport.authenticate("jwt-verify"), validate({body:controllers.item.assignItemSchema}),  controllers.item.assignItem);
   app.post('/api/item/breakdown',passport.authenticate("jwt-verify"), validate({body:controllers.item.breakdownSchema}),  controllers.item.breakdownItem);
+  app.post('/api/item/breakdownGem',passport.authenticate("jwt-verify"), validate({body:controllers.item.breakdownGemSchema}),  controllers.item.breakdownGem);
   
 
   app.get('/api/*', function(req, res) {
@@ -30,4 +31,4 @@ module.exports = (app,passport) => {
     res.status(404).send({message:"404 for " + req.method + " at " + req.originalUrl})  
   });
 
-}
+};

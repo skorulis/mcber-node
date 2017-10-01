@@ -47,6 +47,8 @@ class ResourceContainer {
     counter.addAll(container.adjustedList,"id","quantity");
     this.adjustedList = counter.asNamedArray("id","quantity");
   }
+
+
 }
 
 module.exports = ResourceContainer;

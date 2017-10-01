@@ -26,7 +26,7 @@ let initialValues = function(itemRef,avatar) {
 };
 
 let initialGemValues = function(modRef,level,elementRef,avatar) {
-  let resources = item.gemResources(modRef,level,elementRef);
+  let resources = item.gemRefResources(modRef,level,elementRef);
   let usedSkill = resources.skillAffiliation();
   let skill = avatar.stats.skill(kCraftSkill) + avatar.stats.skill(usedSkill.id);
   let time = 10 * Math.pow(resources.totalCost(),1.2) / (skill + 1);

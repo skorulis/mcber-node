@@ -153,15 +153,15 @@ describe("Performs all item methods",function() {
         res.body.resources[0].should.deep.equal({id:"1",quantity:1})
       })
       .end(done)
-  })
+  });
 
   it("Checks for missing item", function(done) {
     User.findOne({email:"item@test.com"}, (err,u) => {
-      u.items.length.should.equal(1)
+      u.items.length.should.equal(1);
       done()
     })
   })
 
 
 
-})
+});

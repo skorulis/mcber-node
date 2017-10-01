@@ -105,10 +105,19 @@ const fixedMod = function(refType,power,elementId) {
   return new ItemMod({_id:uniqid(),refId:refType.id,power:power,elementId:elementId});
 };
 
-const gemResources = function(modRef,level,elementRef) {
+const gemRefResources = function(modRef,level,elementRef) {
   let multiplier = Math.round(Math.pow(level,1.5));
   let resources = new ResourceContainer(modRef.resources,ref.resources,ref.skills,elementRef,multiplier);
   return resources
+};
+
+const gemResources = function(gem) {
+  let modRef = ref.mods.withId(gem.refId);
+  let elementRef = null;
+  if (gem.elementId) {
+    elementRef = ref.skills.withId(gem.elementId)
+  }
+  return gemRefResources(modRef,gem.power,elementRef);
 };
 
 const itemResources = function(itemRef) {
@@ -119,13 +128,7 @@ const breakdown = function(item) {
   let itemRef = ref.baseItems.withId(item.name);
   let resources = itemResources(itemRef);
   for (m of item.mods) {
-    let modRef = ref.mods.withId(m.refId);
-    let elementRef = null;
-    if (m.elementId) {
-      elementRef = ref.skills.withId(m.elementId)
-    }
-    let gemRes = gemResources(modRef,m.power,elementRef);
-    resources.addOther(gemRes)
+    resources.addOther(gemResources(m));
   }
   resources = resources.adjustedList;
   resources = resources.map(function(x) { 
@@ -136,7 +139,13 @@ const breakdown = function(item) {
 };
 
 const breakdownGem = function (gem) {
-
+  let resources = gemResources(gem);
+  resources = resources.adjustedList;
+  resources = resources.map(function(x) {
+    return {id:x.id, quantity:Math.floor(x.quantity/2)}
+  });
+  resources = resources.filter((x) => x.quantity > 0);
+  return resources
 };
 
 module.exports = {
@@ -149,6 +158,7 @@ module.exports = {
   chooseElement,
   breakdown,
   breakdownGem,
+  gemRefResources,
   gemResources,
   itemResources
 };
