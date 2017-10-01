@@ -22,7 +22,7 @@ const exploreGain = function(realm,time) {
   ]
 };
 
-let craftGain = function(itemRef,initial) {
+let craftGain = function(initial) {
   let amount = Math.round(initial.duration);
   return initial.usedSkills.map(function(sId) {
     return {type:typeElemental,xp:amount,skillId:sId}
@@ -40,15 +40,15 @@ const addExperienceToSkill = function(skillXpProgress,xpObject) {
 }
 
 const addExperience = function(avatar,xpObject) {
-  var skill = avatar.findSkill(xpObject.skillId)
+  let skill = avatar.findSkill(xpObject.skillId);
   addExperienceToSkill(skill,xpObject)
-}
+};
 
 const addAllExperience = function(avatar,xpList) {
   for (xp of xpList) {
     addExperience(avatar,xp)
   }
-}
+};
 
 module.exports = {
   addExperience,

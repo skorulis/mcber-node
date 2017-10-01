@@ -72,3 +72,30 @@ it("Calculated gem initial values", function() {
   initial.resources.should.deep.equal([{id:"4",quantity:15}]);
   initial.duration.should.equal(10);
 });
+
+it("Crafts a gem",function() {
+  let avatar = gen.emptyAvatar();
+  let modRef = ref.mods.atIndex(0);
+  let element = ref.skills.atIndex(1);
+  let constants = craft.initialGemValues(modRef,1,element,avatar);
+  constants.skillLevel.should.equal(0);
+  constants.duration.should.equal(69);
+  let result = craft.getGemResult(modRef,1,element,avatar,constants);
+  let xp1 = result.experience[0];
+  xp1.xp.should.equal(69);
+  result.gem._id.should.be.a("String");
+  result.gem.elementId.should.equal("1");
+  result.gem.power.should.equal(1);
+
+  let activity = craft.getGemActivity(modRef,1,element,avatar);
+  activity.calculated.resources[0].id.should.equal("4");
+  activity.calculated.resources[0].quantity.should.equal(5);
+  activity.calculated.duration.should.equal(69);
+  activity.activityType.should.equal("craft-gem");
+
+  let activityResult = craft.completeGemActivity(activity,avatar);
+  activityResult.experience.should.deep.equal(result.experience);
+  activityResult.gem._id.should.be.a("String");
+  activityResult.gem.elementId.should.equal("1");
+  activityResult.gem.power.should.equal(1);
+});

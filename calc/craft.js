@@ -42,9 +42,16 @@ let initialGemValues = function(modRef,level,elementRef,avatar) {
 
 let getResult = function(itemRef,avatar,initial) {
   let result = {};
-  result.experience = xp.craftGain(itemRef,initial);
+  result.experience = xp.craftGain(initial);
   result.item = item.fixedItem(itemRef,[]);
 
+  return result;
+};
+
+let getGemResult = function(modRef,level,elementRef,avatar,initial) {
+  let result = {};
+  result.experience = xp.craftGain(initial);
+  result.gem = item.fixedMod(modRef,level,elementRef.id);
   return result;
 };
 
@@ -55,16 +62,32 @@ let getActivity = function(itemRef,avatar) {
   return activitiy
 };
 
+let getGemActivity = function(modRef,level,elementRef,avatar) {
+  let initial = initialGemValues(modRef,level,elementRef,avatar);
+  let activity = gen.baseActivity(avatar._id,"craft-gem",initial);
+  activity.gem = {elementId:elementRef.id,level:level,modId:modRef.id};
+  return activity;
+};
+
 let completeActivity = function(activity,avatar) {
   let itemRef = ref.baseItems.withId(activity.itemId);
   let result = getResult(itemRef,avatar,activity.calculated);
   return result
 };
 
+let completeGemActivity = function(activity,avatar) {
+  let modRef = ref.mods.withId(activity.gem.modId);
+  let elementRef = ref.skills.withId(activity.gem.elementId);
+  return getGemResult(modRef,activity.gem.level,elementRef,avatar,activity.calculated);
+};
+
 module.exports = {
   initialValues,
   initialGemValues,
   getResult,
+  getGemResult,
   getActivity,
-  completeActivity
+  getGemActivity,
+  completeActivity,
+  completeGemActivity
 };

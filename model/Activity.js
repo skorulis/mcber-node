@@ -7,10 +7,16 @@ let schema = new mongoose.Schema({
   activityType:String,
   startTimestamp:{type:Number},
   itemId:String,
+  gem:{
+    elementId:String,
+    modId:String,
+    level:Number
+  },
   calculated: {
     duration:Number,
     usedSkills:[String],
     skillLevel:Number,
+    resources:[{id:String,quantity:Number,_id:false}],
     _id:false
   },
   realm: {
