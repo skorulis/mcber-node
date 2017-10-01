@@ -51,15 +51,15 @@ const singleResult = function(realm,avatar,initial) {
 
 //Calculates the results of exploring for this length of time, no changes are made
 const explore = function(realm,avatar,time) {
-  var constants = initialValues(realm,avatar)
-  var ticks = Math.floor(time / constants.duration)
-  var results = []
-  for(var i = 0; i < ticks; ++i) {
+  let constants = initialValues(realm,avatar);
+  let ticks = Math.floor(time / constants.duration);
+  let results = [];
+  for(let i = 0; i < ticks; ++i) {
     results.push(singleResult(realm,avatar,constants))
   }
 
   return results
-}
+};
 
 const completeActivity = function(activity,avatar) {
   //TODO: Decide if I should be handling multiple results

@@ -1,4 +1,6 @@
-'use strict'; 
+'use strict';
+
+let rand = require("../calc/rand");
 
 class RefContainer {
   constructor(items,idKey) {
@@ -16,6 +18,11 @@ class RefContainer {
 
   withId(id) {
     return this.dict[id]
+  }
+
+  randomElement() {
+    let index = rand.getRandomInt(0, this.array.length - 1);
+    return this.atIndex(index)
   }
 }
 

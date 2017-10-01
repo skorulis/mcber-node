@@ -35,7 +35,7 @@ it("Chooses and element",function() {
   let info = itemCalc.itemGenInfo(1,2);
   let mod = ref.mods.atIndex(0);
   rand.setNextInt(40);
-  let element = itemCalc.chooseElement(mod,info);
+  let element = itemCalc.chooseElement(mod,info.coreElement);
   element.id.should.equal("2")
 });
 

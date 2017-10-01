@@ -90,3 +90,20 @@ it("Finds a new item", function() {
   update.completeActivity("0",user,avatar,r1);
   user.items.length.should.equal(1);
 });
+
+it("Finds a new gem", function() {
+  let user = gen.newUser();
+  let realm = user.findRealm(1);
+  realm.level = realm.maximumLevel;
+  let avatar = user.avatars[0];
+  rand.setNextInt(0);rand.setNextInt(100);rand.setNextInt(0);
+  let results = explore.explore(realm,avatar,30);
+  results.length.should.equal(1);
+  let r1 = results[0];
+
+  //console.log(r1);
+  r1.gem.should.be.a("object");
+  r1.gem.refId.should.be.a("string");
+  r1.gem.power.should.be.a("number")
+
+});

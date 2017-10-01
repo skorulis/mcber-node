@@ -13,17 +13,17 @@ const itemGenInfo = function(power,elementId) {
   }
 };
 
-const chooseElement = function(modRef, info) {
+const chooseElement = function(modRef, coreElement) {
   let number = rand.getRandomInt(0,100);
-  if (modRef.skillType == "none") {
+  if (modRef.skillType === "none") {
     return null
   }
 
   let skills = [];
-  if (modRef.skillType == "all" || modRef.skillType == "elemental") {
+  if (modRef.skillType === "all" || modRef.skillType === "elemental") {
     skills = skills.concat(ref.elements);
   }
-  if (modRef.skillType == "all" || modRef.skillType == "trade") {
+  if (modRef.skillType === "all" || modRef.skillType === "trade") {
     skills = skills.concat(ref.trades);
   }
 
@@ -32,16 +32,15 @@ const chooseElement = function(modRef, info) {
     return skills[number];
   }
 
-  return info.coreElement
+  return coreElement
 };
 
 const attemptMod = function(info) {
   if (info.currentPower === 0) {
     return null
   }
-  let index = rand.getRandomInt(0, ref.mods.array.length - 1);
-  let modRef = ref.mods.atIndex(index);
-  let element = chooseElement(modRef,info);
+  let modRef = ref.mods.randomElement();
+  let element = chooseElement(modRef,info.coreElement);
   let elementId = element ? element.id : null;
   const maxPowerMult = Math.floor(Math.pow(info.initialPower, 0.5));
   let powerMult = rand.getRandomInt(1,maxPowerMult);
@@ -83,7 +82,14 @@ const randomItem = function(power,elementId) {
 };
 
 const randomGem = function(power,elementId) {
+  let modRef = ref.mods.randomElement();
+  let elementRef = ref.skills.withId(elementId);
+  let element = chooseElement(modRef,elementRef);
+  let powerMult = rand.getRandomInt(1,Math.floor(power/modRef.levelMult));
+  let usedElementId = element ? element.id : null;
 
+  let mod = new ItemMod({_id:uniqid(),refId:modRef.id,power:powerMult,elementId:usedElementId});
+  return mod;
 };
 
 const fixedItem = function(refType,mods) {
