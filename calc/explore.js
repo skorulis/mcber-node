@@ -27,21 +27,27 @@ const calculateResourceQuantity = function(realm,avatar,resource) {
 };
 
 const singleResult = function(realm,avatar,initial) {
-  var result = {}
-  result.experience = xp.exploreGain(realm, initial.duration)
-  var resource = chooseResource(realm,avatar)
-  var quantity = calculateResourceQuantity(realm,avatar,resource)
-  result.resource = {id:resource.id,quantity:quantity}
+  let result = {};
+  result.experience = xp.exploreGain(realm, initial.duration);
+  let resource = chooseResource(realm,avatar);
+  let quantity = calculateResourceQuantity(realm,avatar,resource);
+  result.resource = {id:resource.id,quantity:quantity};
   if (rand.getRandomInt(0,100) > 90) { //10% chance to unlock a realm)
     result.realmUnlock = {elementId:realm.elementId,level:realm.level + 1}
   }
-  if (rand.getRandomInt(0,100) > 90) { //10% chance of getting an item
-    var maxPower = realm.level
-    result.item = item.randomItem(maxPower,realm.elementId)
+  if (rand.makesChance(90)) { //10% chance of getting an item or mod
+    let maxPower = realm.level;
+    if (rand.makesChance(50)) {
+      result.item = item.randomItem(maxPower,realm.elementId)
+    } else {
+      maxPower = maxPower * 2;
+      result.gem = item.randomGem(maxPower,realm.elementId);
+    }
+
   }
 
   return result
-}
+};
 
 //Calculates the results of exploring for this length of time, no changes are made
 const explore = function(realm,avatar,time) {
@@ -58,7 +64,7 @@ const explore = function(realm,avatar,time) {
 const completeActivity = function(activity,avatar) {
   //TODO: Decide if I should be handling multiple results
   return singleResult(activity.realm,avatar,activity.calculated)
-}
+};
 
 module.exports = {
   initialValues,
@@ -66,4 +72,4 @@ module.exports = {
   chooseResource,
   calculateResourceQuantity,
   completeActivity
-}
+};

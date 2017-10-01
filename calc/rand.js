@@ -1,4 +1,11 @@
-var intSequence = [];
+let intSequence = [];
+
+const getRandomInt = function(min, max) {
+  if (intSequence.length > 0) {
+    return intSequence.shift()
+  }
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
 
 module.exports = {
   setNextInt:function(value) {
@@ -7,10 +14,8 @@ module.exports = {
   setNextIntArray:function(array) {
     intSequence = intSequence.concat(array)
   },
-  getRandomInt:function(min, max) {
-    if (intSequence.length > 0) {
-      return intSequence.shift()
-    }
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }  
-}
+  getRandomInt:getRandomInt,
+  makesChance:function(chance) {
+    return getRandomInt(0,100) > chance
+  }
+};

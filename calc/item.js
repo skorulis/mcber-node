@@ -82,6 +82,10 @@ const randomItem = function(power,elementId) {
   return item
 };
 
+const randomGem = function(power,elementId) {
+
+};
+
 const fixedItem = function(refType,mods) {
   let item = gen.emptyItem(refType);
   for (m of mods) {
@@ -114,6 +118,7 @@ const breakdown = function(item) {
 
 module.exports = {
   randomItem,
+  randomGem,
   fixedItem,
   fixedMod,
   attemptMod,
