@@ -27,6 +27,7 @@ class ResourceContainer {
       let resourceRef = this.refResources.withId(r.id);
       counts.add(resourceRef.skill,r.quantity);
     }
+
     let skillId = counts.maxValue().key;
     return this.refSkills.withId(skillId);
   }
@@ -38,6 +39,13 @@ class ResourceContainer {
       total += r.quantity * resourceRef.rarity
     }
     return total
+  }
+
+  addOther(container) {
+    let counter = new Counter();
+    counter.addAll(this.adjustedList,"id","quantity");
+    counter.addAll(container.adjustedList,"id","quantity");
+    this.adjustedList = counter.asNamedArray("id","quantity");
   }
 }
 

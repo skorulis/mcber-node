@@ -80,7 +80,8 @@ it("Generates a complex item", function() {
 
 it("Calculates item resources", function() {
   let item = itemCalc.fixedItem(ref.baseItems.atIndex(0),[]);
-  let resources = itemCalc.requiredResources(item);
+  let itemRef = ref.baseItems.withId(item.name);
+  let resources = itemCalc.itemResources(itemRef).adjustedList;
   let r1 = resources[0];
   r1.should.deep.equal({id:"1",quantity:5})
 });

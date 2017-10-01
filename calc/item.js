@@ -4,6 +4,7 @@ const gen = require("./generate");
 const Counter = require("../util/Counter");
 const ItemMod = require("../model").ItemMod;
 const uniqid = require('uniqid');
+let ResourceContainer = require("../util/ResourceContainer");
 
 const itemGenInfo = function(power,elementId) {
   return {
@@ -104,22 +105,38 @@ const fixedMod = function(refType,power,elementId) {
   return new ItemMod({_id:uniqid(),refId:refType.id,power:power,elementId:elementId});
 };
 
-const requiredResources = function(item) {
-  let resources = new Counter();
-  let itemRef = ref.baseItems.withId(item.name);
-  for (r of itemRef.resources) {
-    resources.add(r.id,r.quantity)
-  }
-  return resources.asNamedArray("id","quantity")
+const gemResources = function(modRef,level,elementRef) {
+  let multiplier = Math.round(Math.pow(level,1.5));
+  let resources = new ResourceContainer(modRef.resources,ref.resources,ref.skills,elementRef,multiplier);
+  return resources
+};
+
+const itemResources = function(itemRef) {
+  return new ResourceContainer(itemRef.resources,ref.resources,ref.skills,null,1);
 };
 
 const breakdown = function(item) {
-  let resources = requiredResources(item);
+  let itemRef = ref.baseItems.withId(item.name);
+  let resources = itemResources(itemRef);
+  for (m of item.mods) {
+    let modRef = ref.mods.withId(m.refId);
+    let elementRef = null;
+    if (m.elementId) {
+      elementRef = ref.skills.withId(m.elementId)
+    }
+    let gemRes = gemResources(modRef,m.power,elementRef);
+    resources.addOther(gemRes)
+  }
+  resources = resources.adjustedList;
   resources = resources.map(function(x) { 
     return {id:x.id, quantity:Math.floor(x.quantity/2)} 
   });
   resources = resources.filter((x) => x.quantity > 0);
   return resources
+};
+
+const breakdownGem = function (gem) {
+
 };
 
 module.exports = {
@@ -130,6 +147,8 @@ module.exports = {
   attemptMod,
   itemGenInfo,
   chooseElement,
-  requiredResources,
-  breakdown
+  breakdown,
+  breakdownGem,
+  gemResources,
+  itemResources
 };

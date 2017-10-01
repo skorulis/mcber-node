@@ -106,7 +106,7 @@ module.exports = {
     if (!itemRef) {
       return next(new util.RequestError("No item with Id" + req.body.itemId));
     }
-    let resources = itemCalc.requiredResources(itemRef);
+    let resources = itemCalc.itemResources(itemRef).adjustedList;
     if (!req.user.hasResources(resources)) {
         return next(new util.RequestError("User doesn't have enough resources to craft "));
     }
