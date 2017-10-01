@@ -6,25 +6,25 @@ const item = require("./item");
 let kExploreSkill = "104";
 
 const initialValues = function(realm,avatar) {
-  var skill = avatar.stats.skill(realm.elementId)
-  skill += avatar.stats.skill(kExploreSkill)
-  var time = 30 * realm.level * realm.level / (skill + 1)
-  time = Math.max(time,2)
+  let skill = avatar.stats.skill(realm.elementId);
+  skill += avatar.stats.skill(kExploreSkill);
+  let time = 30 * realm.level * realm.level / (skill + 1);
+  time = Math.max(time,2);
   return {
     skillLevel:skill,
     duration: time
   }
-}
+};
 
 const chooseResource = function(realm,avatar) {
-  var skill = ref.getSkill(realm.elementId)
+  let skill = ref.getSkill(realm.elementId);
   return skill.resources[0]
-}
+};
 
 const calculateResourceQuantity = function(realm,avatar,resource) {
-  var rarity = resource.rarity || 1
+  let rarity = resource.rarity || 1;
   return Math.round(Math.pow(realm.level,1.5) / rarity)
-}
+};
 
 const singleResult = function(realm,avatar,initial) {
   var result = {}

@@ -15,13 +15,15 @@ let activity = null;
 describe("Performs all action methods",function() {
   before(function(done){
     helpers.createNewUser("action@test.com",function(user,tkn) {
-        token = tkn.token;
-        token.should.be.a("string");
-        user.addResource({"id":"1",quantity:5});
-        avatar = user.avatars[0];
-        user.save((err,user) => {
-            done()
-        });
+      token = tkn.token;
+      token.should.be.a("string");
+      user.addResource({"id":"1",quantity:5});
+      user.addResource({"id":"16",quantity:14});
+      user.addResource({"id":"19",quantity:3});
+      avatar = user.avatars[0];
+      user.save((err,user) => {
+          done()
+      });
     })
   });
 
@@ -78,7 +80,6 @@ describe("Performs all action methods",function() {
     .expect(helpers.checkStatusCode(200))
     .expect(function(res) {
       activity = res.body.activity;
-      console.log(activity);
       activity.activityType.should.equal("craft");
       activity._id.should.be.a("string");
       activity.avatarId.should.equal(avatar._id);
@@ -102,5 +103,32 @@ describe("Performs all action methods",function() {
       })
       .end(done)
     });
+
+  it("Starts gem crafting",function(done) {
+    let body = {avatarId:avatar._id,modId:"+health",level:2};
+    helpers.jsonAuthPost("/api/action/craftGem",token,body)
+      .expect(helpers.checkStatusCode(200))
+      .expect(function(res) {
+        activity = res.body.activity;
+        activity.activityType.should.equal('craft-gem');
+        activity.gem.modId.should.equal("+health");
+        activity.gem.level.should.equal(2);
+      })
+      .end(done)
+  });
+
+  it("Completes gem crafting", function(done) {
+    helpers.jsonAuthPost("/api/action/complete",token,{activityId:activity._id})
+      .expect(helpers.checkStatusCode(200))
+      .expect(function(res) {
+        res.body.result.gem._id.should.be.a("string");
+        res.body.result.gem.refId.should.equal("+health");
+        res.body.result.gem.power.should.equal(2);
+        let xp = res.body.result.experience[0];
+        xp.xp.should.equal(43);
+        assert(!res.body.result.resource);
+      })
+      .end(done)
+  })
 });
 

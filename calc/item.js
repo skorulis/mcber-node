@@ -40,14 +40,11 @@ const attemptMod = function(info) {
     return null
   }
   let index = rand.getRandomInt(0, ref.mods.array.length - 1);
-    console.log(index);
   let modRef = ref.mods.atIndex(index);
   let element = chooseElement(modRef,info);
   let elementId = element ? element.id : null;
-  console.log(elementId);
   const maxPowerMult = Math.floor(Math.pow(info.initialPower, 0.5));
   let powerMult = rand.getRandomInt(1,maxPowerMult);
-  console.log(powerMult);
 
   let mod = new ItemMod({_id:uniqid(),refId:modRef.id,power:powerMult,elementId:elementId});
 

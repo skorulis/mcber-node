@@ -70,6 +70,9 @@ userSchema.methods.resourceCount = function(resourceId) {
 };
 
 userSchema.methods.hasResources = function(resourceList) {
+  if(!resourceList) {
+    return true;
+  }
   for (r of resourceList) {
     let count = this.resourceCount(r.id);
     if (count < r.quantity) {

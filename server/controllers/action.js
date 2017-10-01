@@ -35,9 +35,10 @@ const craftGemSchema = {
     type:'object',
     required:["modId","avatarId","level"],
     properties:{
-        modId: {type:"string"},
-        avatarId: {type:"string"},
-        level:{type:'number',multipleOf:1,minimum:1}
+      modId: {type:"string"},
+      avatarId: {type:"string"},
+      elementId: {type:"string"},
+      level:{type:'number',multipleOf:1,minimum:1}
     }
 };
 
@@ -50,11 +51,14 @@ const cancelCompleteSchema = {
 };
 
 let completeActivity = function(activity,avatar) {
-  if (activity.activityType == "explore") {
+  if (activity.activityType === "explore") {
     return explore.completeActivity(activity,avatar);
-  } else if (activity.activityType == "craft") {
+  } else if (activity.activityType === "craft") {
     return craft.completeActivity(activity,avatar);
+  } else if (activity.activityType === "craft-gem") {
+    return craft.completeGemActivity(activity,avatar);
   }
+  console.log("DON'T KNOW HOW TO COMPLETE " + activity);
 };
 
 let findFreeAvatar = function(user,avatarId,errorBlock) {
@@ -71,10 +75,18 @@ let findFreeAvatar = function(user,avatarId,errorBlock) {
     return avatar;
 };
 
+let packageAndSave = function(req,res,next) {
+  req.user.activities.push(req.activity);
+  req.user.save().then((user) => {
+    res.send({activity:req.activity})
+  })
+};
+
 module.exports = {
   exploreSchema,
   cancelCompleteSchema,
   craftSchema,
+  craftGemSchema,
   explore:function(req,res,next) {
     let avatar = findFreeAvatar(req.user,req.body.avatarId,next);
     if (!avatar) {
@@ -82,11 +94,8 @@ module.exports = {
     }
 
     let initial = explore.initialValues(req.body.realm,avatar);
-    let activity = gen.exploreActivity(req.body.realm,req.body.avatarId,initial);
-    req.user.activities.push(activity);
-    req.user.save().then((user) => {
-      res.send({activity:activity})  
-    })
+    req.activity = gen.exploreActivity(req.body.realm,req.body.avatarId,initial);
+    packageAndSave(req,res,next)
   },
   craft:function(req,res,next) {
     let avatar = findFreeAvatar(req.user,req.body.avatarId,next);
@@ -102,20 +111,30 @@ module.exports = {
         return next(new util.RequestError("User doesn't have enough resources to craft "));
     }
 
-    let activity = craft.getActivity(itemRef,avatar);
-    activity.itemId = itemRef.name;
-    req.user.activities.push(activity);
-    req.user.save().then((user) => {
-        res.send({activity:activity})
-    })
+    req.activity = craft.getActivity(itemRef,avatar);
+    req.activity.itemId = itemRef.name;
+    packageAndSave(req,res,next);
   },
   craftGem:function(req,res,next) {
     let avatar = findFreeAvatar(req.user,req.body.avatarId,next);
     if (!avatar) {
       return
     }
-    let modRef = ref.getMod(req.modId)
+    let modRef = ref.getMod(req.body.modId);
+    if (!modRef) {
+      return next(new util.RequestError("No mod with id " + req.body.modId));
+    }
+    let elementRef = null;
+    if (req.body.elementId) {
+      elementRef = ref.skills.withId(req.body.elementId);
+    }
 
+    req.activity = craft.getGemActivity(modRef,req.body.level,elementRef,avatar);
+    if (!req.user.hasResources(req.activity.calculated.resources)) {
+      return next(new util.RequestError("User doesn't have enough resources to craft "));
+    }
+    req.activity.gem = {modId:modRef.id,elementId:req.body.elementId,level:req.body.level};
+    packageAndSave(req,res,next)
 
   },
   cancel:function(req,res,next) {

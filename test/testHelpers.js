@@ -33,7 +33,7 @@ module.exports = function(supertest) {
           return true
         }
         console.log(res.error);
-        return false
+        return new Error("Code mismatch")
       }
     }
 

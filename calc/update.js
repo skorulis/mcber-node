@@ -19,6 +19,9 @@ const completeActivity = function(activityId,user,avatar,result) {
   if (result.item) {
     user.items.push(result.item)
   }
+  if (result.gem) {
+    user.gems.push(result.gem);
+  }
 
   //TODO: Add anything else that comes up
 };
