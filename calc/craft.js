@@ -64,7 +64,7 @@ let getActivity = function(itemRef,avatar) {
 
 let getGemActivity = function(modRef,level,elementRef,avatar) {
   let initial = initialGemValues(modRef,level,elementRef,avatar);
-  let activity = gen.baseActivity(avatar._id,"craft-gem",initial);
+  let activity = gen.baseActivity(avatar._id,"craft gem",initial);
   let elementId = elementRef ? elementRef.id : null;
   activity.gem = {elementId:elementId,level:level,modId:modRef.id};
   return activity;

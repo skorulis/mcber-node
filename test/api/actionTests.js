@@ -73,6 +73,17 @@ describe("Performs all action methods",function() {
       .end(done);
   });
 
+  it("Estimates crafting", function(done) {
+    let body = {avatarId:avatar._id,itemId:"Sword",estimateOnly:true};
+    helpers.jsonAuthPost("/api/action/craft",token,body)
+      .expect(helpers.checkStatusCode(200))
+      .expect(function(res) {
+        res.body.estimate.should.equal(true);
+        res.body.activity.calculated.resources.should.deep.equal([{id:"1",quantity:5}])
+      })
+      .end(done)
+  });
+
   it("Starts crafting", function(done) {
   token.should.be.a("string");
   let body = {avatarId:avatar._id,itemId:"Sword"};
@@ -110,7 +121,7 @@ describe("Performs all action methods",function() {
       .expect(helpers.checkStatusCode(200))
       .expect(function(res) {
         activity = res.body.activity;
-        activity.activityType.should.equal('craft-gem');
+        activity.activityType.should.equal('craft gem');
         activity.gem.modId.should.equal("+health");
         activity.gem.level.should.equal(2);
       })

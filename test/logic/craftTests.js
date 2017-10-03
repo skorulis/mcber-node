@@ -91,7 +91,7 @@ it("Crafts a gem",function() {
   activity.calculated.resources[0].id.should.equal("4");
   activity.calculated.resources[0].quantity.should.equal(5);
   activity.calculated.duration.should.equal(69);
-  activity.activityType.should.equal("craft-gem");
+  activity.activityType.should.equal("craft gem");
 
   let activityResult = craft.completeGemActivity(activity,avatar);
   activityResult.experience.should.deep.equal(result.experience);

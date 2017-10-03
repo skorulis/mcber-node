@@ -17,7 +17,8 @@ const exploreSchema = {
         elementId:{type:'string'},
         level:{type:'number',multipleOf:1,minimum:1}
       },
-      avatarId: {type:"string"}
+      avatarId: {type:"string"},
+      estimateOnly: {type: "bool"}
     }
   }
 };
@@ -27,7 +28,8 @@ const craftSchema = {
   required:["itemId","avatarId"],
   properties:{
     itemId: {type:"string"},
-    avatarId: {type:"string"}
+    avatarId: {type:"string"},
+    estimateOnly: {type: "bool"}
   }
 };
 
@@ -38,6 +40,7 @@ const craftGemSchema = {
       modId: {type:"string"},
       avatarId: {type:"string"},
       elementId: {type:"string"},
+      estimateOnly: {type: "bool"},
       level:{type:'number',multipleOf:1,minimum:1}
     }
 };
@@ -55,7 +58,7 @@ let completeActivity = function(activity,avatar) {
     return explore.completeActivity(activity,avatar);
   } else if (activity.activityType === "craft") {
     return craft.completeActivity(activity,avatar);
-  } else if (activity.activityType === "craft-gem") {
+  } else if (activity.activityType === "craft gem") {
     return craft.completeGemActivity(activity,avatar);
   }
   console.log("DON'T KNOW HOW TO COMPLETE " + activity);
@@ -76,10 +79,20 @@ let findFreeAvatar = function(user,avatarId,errorBlock) {
 };
 
 let packageAndSave = function(req,res,next) {
-  req.user.activities.push(req.activity);
-  req.user.save().then((user) => {
-    res.send({activity:req.activity})
-  })
+  let hasResources = req.user.hasResources(req.activity.calculated.resources);
+
+  if (req.body.estimateOnly) {
+    res.send({activity:req.activity,estimate:true,hasResources:hasResources})
+  } else {
+    if (!hasResources) {
+      return next(new util.RequestError("User doesn't have enough resources to craft "));
+    }
+    req.user.activities.push(req.activity);
+    req.user.save().then((user) => {
+      res.send({activity:req.activity,estimate:false})
+    })
+  }
+
 };
 
 module.exports = {
@@ -106,10 +119,6 @@ module.exports = {
     if (!itemRef) {
       return next(new util.RequestError("No item with Id" + req.body.itemId));
     }
-    let resources = itemCalc.itemResources(itemRef).adjustedList;
-    if (!req.user.hasResources(resources)) {
-        return next(new util.RequestError("User doesn't have enough resources to craft "));
-    }
 
     req.activity = craft.getActivity(itemRef,avatar);
     req.activity.itemId = itemRef.name;
@@ -129,10 +138,9 @@ module.exports = {
       elementRef = ref.skills.withId(req.body.elementId);
     }
 
+    console.log(req.body.level);
+
     req.activity = craft.getGemActivity(modRef,req.body.level,elementRef,avatar);
-    if (!req.user.hasResources(req.activity.calculated.resources)) {
-      return next(new util.RequestError("User doesn't have enough resources to craft "));
-    }
     req.activity.gem = {modId:modRef.id,elementId:req.body.elementId,level:req.body.level};
     packageAndSave(req,res,next)
 

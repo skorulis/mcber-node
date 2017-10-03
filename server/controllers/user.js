@@ -21,16 +21,16 @@ module.exports = {
     })
   },
   refreshToken: function(req,res) {
-    const token = req.decodedToken
+    const token = req.decodedToken;
     if(!req.decodedToken) {
       res.status(400).send({message:"Could not decode token"})
     } else if(!req.user) {
       res.status(400).send({message:"Could not find User"})
     } else {
-      const obj = {status:"ok",auth:auth.generateToken(req.user),user:req.user}
+      const obj = {status:"ok",auth:auth.generateToken(req.user),user:req.user};
       res.send(obj)
     }
     
   }
 
-}
+};

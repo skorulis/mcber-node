@@ -9,7 +9,7 @@ const initialValues = function(realm,avatar) {
   let skill = avatar.stats.skill(realm.elementId);
   skill += avatar.stats.skill(kExploreSkill);
   let time = 30 * realm.level * realm.level / (skill + 1);
-  time = Math.max(time,2);
+  time = Math.max(Math.round(time),2);
   return {
     skillLevel:skill,
     duration: time
