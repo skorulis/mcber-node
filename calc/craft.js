@@ -39,6 +39,10 @@ let initialGemValues = function(modRef,level,elementRef,avatar) {
   }
 };
 
+let initialSocketValues = function(item,gem,avatar) {
+
+};
+
 let getResult = function(itemRef,avatar,initial) {
   let result = {};
   result.experience = xp.craftGain(initial);
@@ -86,6 +90,7 @@ let completeGemActivity = function(activity,avatar) {
 module.exports = {
   initialValues,
   initialGemValues,
+  initialSocketValues,
   getResult,
   getGemResult,
   getActivity,

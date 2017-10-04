@@ -12,7 +12,7 @@ let token = null;
 let avatar = null;
 let activity = null;
 
-describe.only("Performs all action methods",function() {
+describe("Performs all action methods",function() {
   before(function(done){
     helpers.createNewUser("action@test.com",function(user,tkn) {
       token = tkn.token;
@@ -107,7 +107,7 @@ describe.only("Performs all action methods",function() {
     helpers.jsonAuthPost("/api/action/complete",token,{activityId:activity._id})
       .expect(helpers.checkStatusCode(200))
       .expect(function(res) {
-        res.body.result.item.name.should.equal("Sword");
+        res.body.result.item.refId.should.equal("Sword");
         let xp = res.body.result.experience[0];
         xp.xp.should.equal(69);
         assert(!res.body.result.resource);

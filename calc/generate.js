@@ -52,7 +52,7 @@ const exploreActivity = function(realm,avatarId,initialValues) {
 const emptyItem = function(baseItem) {
   let item = new Item({_id:uniqid()});
   item.type = baseItem.type;
-  item.name = baseItem.name;
+  item.refId = baseItem.name;
   item.mods = [];
   return item
 };

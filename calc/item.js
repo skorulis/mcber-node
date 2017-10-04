@@ -125,7 +125,7 @@ const itemResources = function(itemRef) {
 };
 
 const breakdown = function(item) {
-  let itemRef = ref.baseItems.withId(item.name);
+  let itemRef = ref.baseItems.withId(item.refId);
   let resources = itemResources(itemRef);
   for (m of item.mods) {
     resources.addOther(gemResources(m));

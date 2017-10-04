@@ -9,14 +9,14 @@ const itemCalc = require("../../calc/item");
 it("Generates a plain item",function() {
   rand.setNextInt(1);
   let item = itemCalc.randomItem(0,0);
-  item.name.should.equal("Club");
+  item.refId.should.equal("Club");
   item.mods.length.should.equal(0)
 });
 
 it("Generates a fixed item", function() {
   let mod = itemCalc.fixedMod(ref.getMod("+skill"),0,0);
   let item = itemCalc.fixedItem(ref.baseItems.atIndex(0),[mod]);
-  item.name.should.equal("Sword");
+  item.refId.should.equal("Sword");
   item.mods.length.should.equal(1)
 });
 
@@ -72,7 +72,7 @@ it("Assigns items", function() {
 it("Generates a complex item", function() {
   rand.setNextInt(1);
   let item = itemCalc.randomItem(10,0);
-  item.name.should.equal("Club");
+  item.refId.should.equal("Club");
   
   console.log(item)
   //TODO: More for seeing the results than anything else
@@ -80,7 +80,7 @@ it("Generates a complex item", function() {
 
 it("Calculates item resources", function() {
   let item = itemCalc.fixedItem(ref.baseItems.atIndex(0),[]);
-  let itemRef = ref.baseItems.withId(item.name);
+  let itemRef = ref.baseItems.withId(item.refId);
   let resources = itemCalc.itemResources(itemRef).adjustedList;
   let r1 = resources[0];
   r1.should.deep.equal({id:"1",quantity:5})

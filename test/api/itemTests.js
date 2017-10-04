@@ -44,13 +44,13 @@ describe("Performs all item methods",function() {
   it("Creates 2 items", function(done) {
     rand.setNextInt(1)
     var item = itemCalc.randomItem(0,0)
-    item.name.should.equal("Club")
+    item.refId.should.equal("Club")
     assert(user != null)
     user.items.push(item)
 
     rand.setNextInt(2)
     item = itemCalc.randomItem(0,0)
-    item.name.should.equal("Spear")
+    item.refId.should.equal("Spear")
     user.items.push(item)
 
     user.items.length.should.equal(2)
@@ -63,10 +63,10 @@ describe("Performs all item methods",function() {
     helpers.authGet("/api/user/current",token)
     .expect(function(res) {
       var u = res.body.user;
-      u.items.length.should.equal(2)
-      item1 = u.items[0]
-      item1.name.should.equal("Club")
-      item1._id.should.not.be.null
+      u.items.length.should.equal(2);
+      item1 = u.items[0];
+      item1.refId.should.equal("Club");
+      item1._id.should.be.a("string");
 
       item2 = u.items[1]
     })
@@ -82,7 +82,7 @@ describe("Performs all item methods",function() {
         res.body.avatar.items.length.should.equal(1)
         assert(res.body.removedItem == null)
         var item = res.body.avatar.items[0]
-        item.item.name.should.equal("Club")
+        item.item.refId.should.equal("Club")
         item.slot.should.equal("hand1")
       })
       .end(done)
@@ -93,7 +93,7 @@ describe("Performs all item methods",function() {
     .expect(function(res) {
       var u = res.body.user;
       u.items.length.should.equal(1)
-      u.items[0].name.should.equal("Spear")
+      u.items[0].refId.should.equal("Spear")
       u.avatars[0].items.length.should.equal(1)
     })
     .end(done)
@@ -107,8 +107,8 @@ describe("Performs all item methods",function() {
         res.body.avatar.should.not.be.null
         res.body.avatar.items.length.should.equal(1)
         var item = res.body.avatar.items[0]
-        item.item.name.should.equal("Spear")
-        item.slot.should.equal("hand1")
+        item.item.refId.should.equal("Spear");
+        item.slot.should.equal("hand1");
 
         res.body.removedItem.should.not.be.null
         res.body.removedItem._id.should.equal(item1._id)
@@ -124,7 +124,7 @@ describe("Performs all item methods",function() {
   })
 
   it("Removes an item",function(done) {
-    var body = {avatarId:avatar._id,slot:"hand1"}
+    var body = {avatarId:avatar._id,slot:"hand1"};
     helpers.jsonAuthPost("/api/item/assign",token,body)
       .expect(200)
       .expect(function(res) {
@@ -145,11 +145,11 @@ describe("Performs all item methods",function() {
   })
 
   it("Breaks down an item", function(done) {
-    var body = {itemId:item2._id}
+    let body = {itemId:item2._id};
     helpers.jsonAuthPost("/api/item/breakdown",token,body)
       .expect(200)
       .expect(function(res) {
-        res.body.resources.length.should.equal(1)
+        res.body.resources.length.should.equal(1);
         res.body.resources[0].should.deep.equal({id:"1",quantity:1})
       })
       .end(done)

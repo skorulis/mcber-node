@@ -83,7 +83,7 @@ it("Finds a new item", function() {
   results.length.should.equal(1);
   let r1 = results[0];
   r1.item.should.be.a("object");
-  r1.item.name.should.be.a("string");
+  r1.item.refId.should.be.a("string");
   assert(!r1.realmUnlock);
 
   user.items.length.should.equal(0);

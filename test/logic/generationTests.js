@@ -49,14 +49,14 @@ it("Generates a realm", function() {
 })
 
 it("Generates an item", function() {
-  var baseItem = ref.items.baseTypes[0]
-  var item = gen.emptyItem(baseItem)
-  item._id.should.not.be.null
-  item.name.should.equal("Sword")
-  item.type.should.equal("weapon")
+  let baseItem = ref.items.baseTypes[0];
+  let item = gen.emptyItem(baseItem);
+  item._id.should.be.a("string");
+  item.refId.should.equal("Sword");
+  item.type.should.equal("weapon");
 
-  var baseItem = ref.items.baseTypes[3]
-  var item = gen.emptyItem(baseItem)
-  item.name.should.equal("Shovel")
+  baseItem = ref.items.baseTypes[3];
+  item = gen.emptyItem(baseItem);
+  item.refId.should.equal("Shovel");
   item.type.should.equal("tool")
-})
+});

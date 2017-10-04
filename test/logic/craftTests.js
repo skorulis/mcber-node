@@ -4,8 +4,7 @@ const assert = chai.assert;
 const gen = require("../../calc/generate");
 const craft = require("../../calc/craft");
 const ref = require("../../calc/reference");
-const rand = require("../../calc/rand");
-const update = require("../../calc/update");
+const itemCalc = require("../../calc/item");
 const ResourceContainer = require("../../util/ResourceContainer");
 
 it("Picks the item skill", function() {
@@ -54,7 +53,7 @@ it("Creates and completes an activity", function() {
 
     let result = craft.completeActivity(activity,avatar);
     result.item.id.should.be.a("String");
-    result.item.name.should.equal("Club");
+    result.item.refId.should.equal("Club");
 });
 
 it("Calculated gem initial values", function() {
@@ -69,8 +68,8 @@ it("Calculated gem initial values", function() {
   initial.usedSkills.should.deep.equal(["1","102"]);
 
   initial = craft.initialGemValues(modRef,2,element,avatar);
-  initial.resources.should.deep.equal([{id:"4",quantity:15}]);
-  initial.duration.should.equal(10);
+  initial.resources.should.deep.equal([{id:"4",quantity:14}]);
+  initial.duration.should.equal(9);
 });
 
 it("Crafts a gem",function() {
@@ -98,4 +97,13 @@ it("Crafts a gem",function() {
   activityResult.gem._id.should.be.a("String");
   activityResult.gem.elementId.should.equal("1");
   activityResult.gem.power.should.equal(1);
+});
+
+it("Calculates socket initial values", function() {
+  let avatar = gen.emptyAvatar();
+  let gem = itemCalc.fixedMod(ref.mods.atIndex(1),1,null);
+  let item = itemCalc.fixedItem(ref.baseItems.atIndex(0),[]);
+
+  gem.refId.should.equal("+health");
+  item.refId.should.equal("Sword");
 });

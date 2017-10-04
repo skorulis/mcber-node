@@ -5,7 +5,7 @@ let modSchema = require("./ItemMod").schema;
 let schema = new mongoose.Schema({
   _id: String,
   type: String,
-  name: String,
+  refId: String,
   mods:[modSchema]
 });
 
