@@ -26,6 +26,16 @@ const completeActivity = function(activityId,user,avatar,result) {
   //TODO: Add anything else that comes up
 };
 
+const updateItem = function(item) {
+  let level = 0;
+  for (gem of item.mods) {
+    level = level + gem.power;
+  }
+  item.level = level;
+  return item;
+};
+
 module.exports = {
-  completeActivity
+  completeActivity,
+  updateItem
 };

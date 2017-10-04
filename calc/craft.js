@@ -40,7 +40,14 @@ let initialGemValues = function(modRef,level,elementRef,avatar) {
 };
 
 let initialSocketValues = function(item,gem,avatar) {
+  let skill = avatar.stats.skill(kCraftSkill);
+  //let finalLevel =
 
+  return {
+    skillLevel:skill,
+    duration: time,
+    usedSkills:[kCraftSkill],
+  }
 };
 
 let getResult = function(itemRef,avatar,initial) {

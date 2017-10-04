@@ -13,10 +13,11 @@ it("Generates a plain item",function() {
   item.mods.length.should.equal(0)
 });
 
-it("Generates a fixed item", function() {
-  let mod = itemCalc.fixedMod(ref.getMod("+skill"),0,0);
+it.only("Generates a fixed item", function() {
+  let mod = itemCalc.fixedMod(ref.getMod("+skill"),1,0);
   let item = itemCalc.fixedItem(ref.baseItems.atIndex(0),[mod]);
   item.refId.should.equal("Sword");
+  item.level.should.equal(1);
   item.mods.length.should.equal(1)
 });
 
@@ -83,11 +84,19 @@ it("Calculates item resources", function() {
   let itemRef = ref.baseItems.withId(item.refId);
   let resources = itemCalc.itemResources(itemRef).adjustedList;
   let r1 = resources[0];
-  r1.should.deep.equal({id:"1",quantity:5})
+  r1.should.deep.equal({id:"1",quantity:5});
+  item.level.should.equal(0);
 });
 
-it("Breaks down and item",function() {
+it("Breaks down an item",function() {
   let item = itemCalc.fixedItem(ref.baseItems.atIndex(2),[]);
   let resources = itemCalc.breakdown(item);
   resources.should.deep.equal([{id:"1",quantity:1}])
+});
+
+it("Breaks down a gem", function() {
+  let gemRef = ref.mods.atIndex(3);
+  let gem = itemCalc.fixedMod(gemRef,3);
+  let resources = itemCalc.breakdownGem(gem);
+  resources.should.deep.equal([ { id: '13', quantity: 13 }, { id: '25', quantity: 13 } ]);
 });

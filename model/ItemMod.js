@@ -4,7 +4,7 @@ let config = require("../server/config/config");
 let schema = new mongoose.Schema({
     _id: String,
     refId: String,
-    power:Number,
+    power:Number, //Level
     elementId:String
 
 });

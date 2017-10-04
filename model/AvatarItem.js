@@ -6,6 +6,7 @@ let schema = new mongoose.Schema({
   _id: String,
   type: String,
   refId: String,
+  level: Number,
   mods:[modSchema]
 });
 

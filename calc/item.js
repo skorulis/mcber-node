@@ -4,6 +4,7 @@ const gen = require("./generate");
 const Counter = require("../util/Counter");
 const ItemMod = require("../model").ItemMod;
 const uniqid = require('uniqid');
+const update =require("./update");
 let ResourceContainer = require("../util/ResourceContainer");
 
 const itemGenInfo = function(power,elementId) {
@@ -98,7 +99,7 @@ const fixedItem = function(refType,mods) {
   for (m of mods) {
     item.mods.push(m)
   }
-  return item
+  return update.updateItem(item);
 };
 
 const fixedMod = function(refType,power,elementId) {

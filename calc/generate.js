@@ -28,13 +28,13 @@ const basicRealm = function(elementId,level) {
 };
 
 const newUser = function() {
-  var user = new User({_id:uniqid()})
-  user.avatars.push(emptyAvatar())
-  for(var i = 0; i < ref.elements.length; ++i) {
+  let user = new User({_id:uniqid()});
+  user.avatars.push(emptyAvatar());
+  for(let i = 0; i < ref.elements.length; ++i) {
     user.realms.push({elementId:i,maximumLevel:1})
   }
   return user
-}
+};
 
 const baseActivity = function(avatarId,type,initial) {
   let start = Math.floor(Date.now() / 1000);
@@ -53,6 +53,7 @@ const emptyItem = function(baseItem) {
   let item = new Item({_id:uniqid()});
   item.type = baseItem.type;
   item.refId = baseItem.id;
+  item.level = 0;
   item.mods = [];
   return item
 };
