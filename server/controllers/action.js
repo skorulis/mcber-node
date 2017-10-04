@@ -45,6 +45,17 @@ const craftGemSchema = {
     }
 };
 
+const socketGemSchema = {
+  type:'object',
+  required:["gemId","avatarId","itemId"],
+  properties:{
+    gemId: {type:"string"},
+    itemId: {type:"string"},
+    avatarId: {type:"string"},
+    estimateOnly: {type: "bool"},
+  }
+};
+
 const cancelCompleteSchema = {
   type:'object',
   required:["activityId"],
@@ -143,6 +154,9 @@ module.exports = {
     req.activity = craft.getGemActivity(modRef,req.body.level,elementRef,avatar);
     req.activity.gem = {modId:modRef.id,elementId:req.body.elementId,level:req.body.level};
     packageAndSave(req,res,next)
+
+  },
+  socketGem:function(req,res,next) {
 
   },
   cancel:function(req,res,next) {

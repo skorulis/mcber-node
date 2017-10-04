@@ -5,6 +5,7 @@ const gen = require("../../calc/generate");
 const craft = require("../../calc/craft");
 const ref = require("../../calc/reference");
 const itemCalc = require("../../calc/item");
+const rand = require("../../calc/rand");
 const ResourceContainer = require("../../util/ResourceContainer");
 
 it("Picks the item skill", function() {
@@ -129,6 +130,7 @@ it("Gets socket results", function() {
   initial.failureChance.should.equal(0.5);
   initial.duration.should.equal(15);
 
+  rand.setNextDouble(1);
   let result = craft.getSocketResult(item,gem,initial);
   result.experience.should.deep.equal([ { type: 'elemental', xp: 15, skillId: '102' } ])
   result.item.level.should.equal(1);

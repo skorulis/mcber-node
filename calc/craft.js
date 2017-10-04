@@ -97,6 +97,13 @@ let getGemActivity = function(modRef,level,elementRef,avatar) {
   return activity;
 };
 
+let getSocketActivity = function(item,gem,avatar) {
+  let initial = initialSocketValues(item,gem,avatar);
+  let activity = gen.baseActivity(avatar._id,"socket gem",initial);
+  activity.socketGem = {itemId:item._id,gemId:gem._id};
+  return activity;
+};
+
 let completeActivity = function(activity,avatar) {
   let itemRef = ref.baseItems.withId(activity.itemId);
   let result = getResult(itemRef,avatar,activity.calculated);
@@ -110,6 +117,13 @@ let completeGemActivity = function(activity,avatar) {
   return result
 };
 
+let completeSocketActivity = function(activity,avatar,user) {
+  let item = user.removeBusyItem(activity.socketGem.itemId);
+  let gem = user.removeBusyGem(activity.socketGem.gemId);
+  let result = getSocketResult(item,gem,activity.calculated);
+  return result;
+};
+
 module.exports = {
   initialValues,
   initialGemValues,
@@ -119,6 +133,8 @@ module.exports = {
   getSocketResult,
   getActivity,
   getGemActivity,
+  getSocketActivity,
   completeActivity,
-  completeGemActivity
+  completeGemActivity,
+  completeSocketActivity
 };
