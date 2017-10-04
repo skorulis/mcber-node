@@ -13,7 +13,7 @@ it("Generates a plain item",function() {
   item.mods.length.should.equal(0)
 });
 
-it.only("Generates a fixed item", function() {
+it("Generates a fixed item", function() {
   let mod = itemCalc.fixedMod(ref.getMod("+skill"),1,0);
   let item = itemCalc.fixedItem(ref.baseItems.atIndex(0),[mod]);
   item.refId.should.equal("Sword");
@@ -29,7 +29,7 @@ it("Generates a mod", function() {
   mod.should.be.a("object");
   mod.refId.should.equal("+health");
   mod.power.should.equal(1);
-  assert(mod.elementId == null)
+  assert(mod.elementId === null)
 });
 
 it("Chooses and element",function() {

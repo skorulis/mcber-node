@@ -41,12 +41,15 @@ let initialGemValues = function(modRef,level,elementRef,avatar) {
 
 let initialSocketValues = function(item,gem,avatar) {
   let skill = avatar.stats.skill(kCraftSkill);
-  //let finalLevel =
+  let difficulty = Math.round(Math.pow(item.level + gem.power + item.mods.length,1.5));
+  let failure = Math.min(difficulty / (skill + 1),1);
+  let time = 30 * difficulty;
 
   return {
     skillLevel:skill,
     duration: time,
     usedSkills:[kCraftSkill],
+    failureChance:failure
   }
 };
 
@@ -64,6 +67,10 @@ let getGemResult = function(modRef,level,elementRef,avatar,initial) {
   let elementId = elementRef ? elementRef.id : null;
   result.gem = item.fixedMod(modRef,level,elementId);
   return result;
+};
+
+let getSocketResult = function(item,gem,initial) {
+
 };
 
 let getActivity = function(itemRef,avatar) {
@@ -100,6 +107,7 @@ module.exports = {
   initialSocketValues,
   getResult,
   getGemResult,
+  getSocketResult,
   getActivity,
   getGemActivity,
   completeActivity,

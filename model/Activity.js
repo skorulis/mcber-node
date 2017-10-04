@@ -17,6 +17,7 @@ let schema = new mongoose.Schema({
     usedSkills:[String],
     skillLevel:Number,
     resources:[{id:String,quantity:Number,_id:false}],
+    failureChance:Number,
     _id:false
   },
   realm: {

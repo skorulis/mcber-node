@@ -106,4 +106,15 @@ it("Calculates socket initial values", function() {
 
   gem.refId.should.equal("+health");
   item.refId.should.equal("Sword");
+
+  let initial = craft.initialSocketValues(item,gem,avatar);
+  initial.skillLevel.should.equal(0);
+  initial.failureChance.should.equal(1);
+  initial.duration.should.equal(30);
+
+  avatar = gen.withLevels([10,15,0,0,0,0,0,0,0,0,0,11,7,15,0]);
+  initial = craft.initialSocketValues(item,gem,avatar);
+  initial.skillLevel.should.equal(11);
+  initial.failureChance.should.be.closeTo(0.083333,0.001);
+
 });

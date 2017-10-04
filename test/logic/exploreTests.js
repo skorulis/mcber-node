@@ -59,23 +59,23 @@ it("Calculates single results",function() {
 
 it("Unlocks a new realm level",function() {
   var user = gen.newUser()
-  var realm = user.findRealm(0)
+  var realm = user.findRealm("0")
   realm.level = realm.maximumLevel
   var avatar = user.avatars[0]
   rand.setNextInt(100)
   var results = explore.explore(realm,avatar,30)
   results.length.should.equal(1)
-  var r1 = results[0]
-  r1.realmUnlock.level.should.equal(2)
-  r1.realmUnlock.elementId.should.equal(realm.elementId)
+  let r1 = results[0];
+  r1.realmUnlock.level.should.equal(2);
+  r1.realmUnlock.elementId.should.equal(realm.elementId);
 
-  update.completeActivity("0",user,avatar,r1)
-  user.findRealm(0).maximumLevel.should.equal(2)
+  update.completeActivity("0",user,avatar,r1);
+  user.findRealm("0").maximumLevel.should.equal(2)
 });
 
 it("Finds a new item", function() {
   let user = gen.newUser();
-  let realm = user.findRealm(0);
+  let realm = user.findRealm("0");
   realm.level = realm.maximumLevel;
   let avatar = user.avatars[0];
   rand.setNextInt(0);rand.setNextInt(100);rand.setNextInt(55);
@@ -93,7 +93,7 @@ it("Finds a new item", function() {
 
 it("Finds a new gem", function() {
   let user = gen.newUser();
-  let realm = user.findRealm(1);
+  let realm = user.findRealm("1");
   realm.level = realm.maximumLevel;
   let avatar = user.avatars[0];
   rand.setNextInt(0);rand.setNextInt(100);rand.setNextInt(0);
