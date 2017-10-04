@@ -44,15 +44,15 @@ const baseActivity = function(avatarId,type,initial) {
 };
 
 const exploreActivity = function(realm,avatarId,initialValues) {
-  var activity = baseActivity(avatarId,"explore",initialValues)
-  activity.realm = realm
+  let activity = baseActivity(avatarId,"explore",initialValues);
+  activity.realm = realm;
   return activity
-}
+};
 
 const emptyItem = function(baseItem) {
   let item = new Item({_id:uniqid()});
   item.type = baseItem.type;
-  item.refId = baseItem.name;
+  item.refId = baseItem.id;
   item.mods = [];
   return item
 };

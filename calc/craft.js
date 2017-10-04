@@ -62,7 +62,7 @@ let getGemResult = function(modRef,level,elementRef,avatar,initial) {
 let getActivity = function(itemRef,avatar) {
   let initial = initialValues(itemRef,avatar);
   let activitiy = gen.baseActivity(avatar._id,"craft",initial);
-  activitiy.itemId = itemRef.name;
+  activitiy.itemId = itemRef.id;
   return activitiy
 };
 

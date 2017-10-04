@@ -48,7 +48,7 @@ it("Creates and completes an activity", function() {
     let activity = craft.getActivity(itemRef,avatar);
     activity.activityType.should.equal("craft");
     activity.calculated.duration.should.equal(23);
-    activity.itemId.should.equal(itemRef.name);
+    activity.itemId.should.equal(itemRef.id);
     activity.avatarId.should.equal(avatar._id);
 
     let result = craft.completeActivity(activity,avatar);

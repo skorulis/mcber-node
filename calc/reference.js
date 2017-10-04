@@ -7,7 +7,7 @@ const items = JSON.parse(fs.readFileSync('static/ref/items.json', 'utf8')).items
 
 let skills = new RefContainer(skillsData,"id");
 let mods = new RefContainer(modData,"id");
-let baseItems = new RefContainer(items.baseTypes,"name");
+let baseItems = new RefContainer(items.baseTypes,"id");
 let resources = new RefContainer(resourceData,"id");
 
 const elements = skills.array.filter((s) => s.type == "elemental");

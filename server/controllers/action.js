@@ -121,7 +121,7 @@ module.exports = {
     }
 
     req.activity = craft.getActivity(itemRef,avatar);
-    req.activity.itemId = itemRef.name;
+    req.activity.itemId = itemRef.id;
     packageAndSave(req,res,next);
   },
   craftGem:function(req,res,next) {
