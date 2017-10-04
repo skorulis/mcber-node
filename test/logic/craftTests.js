@@ -116,5 +116,22 @@ it("Calculates socket initial values", function() {
   initial = craft.initialSocketValues(item,gem,avatar);
   initial.skillLevel.should.equal(11);
   initial.failureChance.should.be.closeTo(0.083333,0.001);
+  initial.duration.should.equal(3);
+});
+
+it("Gets socket results", function() {
+  let avatar = gen.withLevels([10,15,0,0,0,0,0,0,0,0,0,1,7,15,0]);
+  let gem = itemCalc.fixedMod(ref.mods.atIndex(1),1,null);
+  let item = itemCalc.fixedItem(ref.baseItems.atIndex(0),[]);
+
+  let initial = craft.initialSocketValues(item,gem,avatar);
+  initial.skillLevel.should.equal(1);
+  initial.failureChance.should.equal(0.5);
+  initial.duration.should.equal(15);
+
+  let result = craft.getSocketResult(item,gem,initial);
+  result.experience.should.deep.equal([ { type: 'elemental', xp: 15, skillId: '102' } ])
+  result.item.level.should.equal(1);
+  result.item.mods.length.should.equal(1);
 
 });

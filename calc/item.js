@@ -80,7 +80,7 @@ const randomItem = function(power,elementId) {
     }
   }
 
-  return item
+  return update.updateItem(item);
 };
 
 const randomGem = function(power,elementId) {

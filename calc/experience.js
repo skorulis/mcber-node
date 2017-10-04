@@ -25,6 +25,7 @@ const exploreGain = function(realm,time) {
 let craftGain = function(initial) {
   let amount = Math.round(initial.duration);
   return initial.usedSkills.map(function(sId) {
+    //TODO: Look into removing type
     return {type:typeElemental,xp:amount,skillId:sId}
   })
 };

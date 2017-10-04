@@ -1,4 +1,5 @@
 let intSequence = [];
+let doubleSequence = [];
 
 const getRandomInt = function(min, max) {
   if (intSequence.length > 0) {
@@ -11,11 +12,20 @@ module.exports = {
   setNextInt:function(value) {
     intSequence.push(value)
   },
+  setNextDouble:function(value) {
+    doubleSequence.push(value);
+  },
   setNextIntArray:function(array) {
     intSequence = intSequence.concat(array)
   },
   getRandomInt:getRandomInt,
   makesChance:function(chance) {
     return getRandomInt(0,100) > chance
+  },
+  randomDouble:function() {
+    if (doubleSequence.length > 0) {
+      return doubleSequence.shift()
+    }
+    return Math.random()
   }
 };

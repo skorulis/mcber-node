@@ -1,8 +1,9 @@
 let rand = require("./rand");
 let ref = require("./reference");
 let xp = require("./experience");
-let item = require("./item");
+let itemCalc = require("./item");
 let gen = require("./generate");
+let update = require("./update");
 let Counter = require("../util/Counter");
 let ResourceContainer = require("../util/ResourceContainer");
 
@@ -26,7 +27,7 @@ let initialValues = function(itemRef,avatar) {
 };
 
 let initialGemValues = function(modRef,level,elementRef,avatar) {
-  let resources = item.gemRefResources(modRef,level,elementRef);
+  let resources = itemCalc.gemRefResources(modRef,level,elementRef);
   let usedSkill = resources.skillAffiliation();
   let skill = avatar.stats.skill(kCraftSkill) + avatar.stats.skill(usedSkill.id);
   let time = 10 * Math.pow(resources.totalCost(),1.2) / (skill + 1);
@@ -43,7 +44,7 @@ let initialSocketValues = function(item,gem,avatar) {
   let skill = avatar.stats.skill(kCraftSkill);
   let difficulty = Math.round(Math.pow(item.level + gem.power + item.mods.length,1.5));
   let failure = Math.min(difficulty / (skill + 1),1);
-  let time = 30 * difficulty;
+  let time = Math.max(Math.round( (30 * difficulty) / (skill + 1) ), 2);
 
   return {
     skillLevel:skill,
@@ -56,7 +57,7 @@ let initialSocketValues = function(item,gem,avatar) {
 let getResult = function(itemRef,avatar,initial) {
   let result = {};
   result.experience = xp.craftGain(initial);
-  result.item = item.fixedItem(itemRef,[]);
+  result.item = itemCalc.fixedItem(itemRef,[]);
 
   return result;
 };
@@ -65,12 +66,20 @@ let getGemResult = function(modRef,level,elementRef,avatar,initial) {
   let result = {};
   result.experience = xp.craftGain(initial);
   let elementId = elementRef ? elementRef.id : null;
-  result.gem = item.fixedMod(modRef,level,elementId);
+  result.gem = itemCalc.fixedMod(modRef,level,elementId);
   return result;
 };
 
 let getSocketResult = function(item,gem,initial) {
-
+  let result = {};
+  result.experience = xp.craftGain(initial);
+  if (rand.randomDouble() > initial.failureChance) {
+    item.mods.push(gem)
+  } else {
+    result.failure = true;
+  }
+  result.item = update.updateItem(item);
+  return result;
 };
 
 let getActivity = function(itemRef,avatar) {

@@ -10,7 +10,13 @@ let schema = new mongoose.Schema({
   gem:{
     elementId:String,
     modId:String,
-    level:Number
+    level:Number,
+    _id:false
+  },
+  socketGem:{
+    itemId:String,
+    gemId:String,
+    _id:false
   },
   calculated: {
     duration:Number,
