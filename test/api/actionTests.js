@@ -12,7 +12,7 @@ let token = null;
 let avatar = null;
 let activity = null;
 
-describe("Performs all action methods",function() {
+describe.only("Performs all action methods",function() {
   before(function(done){
     helpers.createNewUser("action@test.com",function(user,tkn) {
       token = tkn.token;
@@ -122,6 +122,10 @@ describe("Performs all action methods",function() {
       .expect(function(res) {
         activity = res.body.activity;
         activity.activityType.should.equal('craft gem');
+        activity.calculated.duration.should.equal(150);
+        let r1 = activity.calculated.resources[0];
+        r1.id.should.equal("16");
+        r1.quantity.should.equal(14);
         activity.gem.modId.should.equal("+health");
         activity.gem.level.should.equal(2);
       })
@@ -136,7 +140,7 @@ describe("Performs all action methods",function() {
         res.body.result.gem.refId.should.equal("+health");
         res.body.result.gem.power.should.equal(2);
         let xp = res.body.result.experience[0];
-        xp.xp.should.equal(43);
+        xp.xp.should.equal(150); //TODO: Should be more due to higher level item
         assert(!res.body.result.resource);
       })
       .end(done)

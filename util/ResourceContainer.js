@@ -12,11 +12,11 @@ class ResourceContainer {
       if (resource.elementRarity) {
         for (r of elementRef.resources) {
           if (r.rarity === resource.elementRarity) {
-            return {id:r.id,quantity:resource.quantity * multiplier}
+            return {id:r.id,quantity:Math.round(resource.quantity * multiplier)}
           }
         }
       } else {
-        return resource
+        return {id:resource.id,quantity:Math.round(resource.quantity * multiplier) }
       }
     });
   }

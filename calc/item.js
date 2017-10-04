@@ -106,7 +106,7 @@ const fixedMod = function(refType,power,elementId) {
 };
 
 const gemRefResources = function(modRef,level,elementRef) {
-  let multiplier = Math.round(Math.pow(level,1.5));
+  let multiplier = Math.pow(level,1.5);
   let resources = new ResourceContainer(modRef.resources,ref.resources,ref.skills,elementRef,multiplier);
   return resources
 };
