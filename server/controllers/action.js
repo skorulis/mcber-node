@@ -64,13 +64,15 @@ const cancelCompleteSchema = {
   }
 };
 
-let completeActivity = function(activity,avatar) {
+let completeActivity = function(activity,avatar,user) {
   if (activity.activityType === "explore") {
     return explore.completeActivity(activity,avatar);
   } else if (activity.activityType === "craft") {
     return craft.completeActivity(activity,avatar);
   } else if (activity.activityType === "craft gem") {
     return craft.completeGemActivity(activity,avatar);
+  } else if (activity.activityType === "socket gem") {
+    return craft.completeSocketActivity(activity,avatar,user);
   }
   console.log("DON'T KNOW HOW TO COMPLETE " + activity);
 };
@@ -111,6 +113,7 @@ module.exports = {
   cancelCompleteSchema,
   craftSchema,
   craftGemSchema,
+  socketGemSchema,
   explore:function(req,res,next) {
     let avatar = findFreeAvatar(req.user,req.body.avatarId,next);
     if (!avatar) {
@@ -149,15 +152,29 @@ module.exports = {
       elementRef = ref.skills.withId(req.body.elementId);
     }
 
-    console.log(req.body.level);
-
     req.activity = craft.getGemActivity(modRef,req.body.level,elementRef,avatar);
-    req.activity.gem = {modId:modRef.id,elementId:req.body.elementId,level:req.body.level};
     packageAndSave(req,res,next)
 
   },
   socketGem:function(req,res,next) {
+    let avatar = findFreeAvatar(req.user,req.body.avatarId,next);
+    if (!avatar) {
+      return
+    }
+    let item = req.user.removeItem(req.body.itemId);
+    if (!item) {
+      return next(new util.RequestError("Could not find item " + req.body.itemId));
+    }
 
+    let gem = req.user.removeGem(req.body.gemId);
+    if (!gem) {
+      return next(new util.RequestError("Could not find gem " + req.body.gemId));
+    }
+    req.user.busyGems.push(gem);
+    req.user.busyItems.push(item);
+
+    req.activity = craft.getSocketActivity(item,gem,avatar);
+    packageAndSave(req,res,next);
   },
   cancel:function(req,res,next) {
     let activity = req.user.findActivity(req.body.activityId);
@@ -170,7 +187,7 @@ module.exports = {
     })
   },
   complete:function(req,res,next) {
-    let activity = req.user.findActivity(req.body.activityId)
+    let activity = req.user.findActivity(req.body.activityId);
     if (activity == null) {
       return next(new util.RequestError("Could not find activity " + req.body.activityId))
     }
@@ -179,7 +196,7 @@ module.exports = {
       return next(new util.RequestError("Activity has not completed")) 
     }
     let avatar = req.user.findAvatar(activity.avatarId);
-    let result = completeActivity(activity,avatar);
+    let result = completeActivity(activity,avatar,req.user);
 
     updateCalc.completeActivity(req.body.activityId,req.user,avatar,result);
 

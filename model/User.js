@@ -12,7 +12,7 @@ let userSchema = new mongoose.Schema({
   avatars:[avatarSchema],
   activities:[activitySchema],
   items:[itemSchema], //Unassigned items
-  busyItem:[itemSchema], //Items assigned to some task
+  busyItems:[itemSchema], //Items assigned to some task
   gems:[modSchema], //Gems that can be used
   busyGems:[modSchema], //Gems assigned to some task
   resources:[{

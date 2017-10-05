@@ -7,10 +7,13 @@ let supertest = require("supertest")(app);
 let auth = require("../../server/auth/authHelpers");
 let User = require("../../model").User;
 let helpers = require("../testHelpers")(supertest);
+let rand = require("../../calc/rand");
 
 let token = null;
 let avatar = null;
 let activity = null;
+let savedItem = null;
+let savedGem = null;
 
 describe("Performs all action methods",function() {
   before(function(done){
@@ -107,6 +110,7 @@ describe("Performs all action methods",function() {
     helpers.jsonAuthPost("/api/action/complete",token,{activityId:activity._id})
       .expect(helpers.checkStatusCode(200))
       .expect(function(res) {
+        savedItem = res.body.result.item;
         res.body.result.item.refId.should.equal("Sword");
         let xp = res.body.result.experience[0];
         xp.xp.should.equal(69);
@@ -136,6 +140,7 @@ describe("Performs all action methods",function() {
     helpers.jsonAuthPost("/api/action/complete",token,{activityId:activity._id})
       .expect(helpers.checkStatusCode(200))
       .expect(function(res) {
+        savedGem = res.body.result.gem;
         res.body.result.gem._id.should.be.a("string");
         res.body.result.gem.refId.should.equal("+health");
         res.body.result.gem.power.should.equal(2);
@@ -144,6 +149,43 @@ describe("Performs all action methods",function() {
         assert(!res.body.result.resource);
       })
       .end(done)
-  })
+  });
+
+  it("Starts socketing ",function(done) {
+    let body = {avatarId:avatar._id,itemId:savedItem._id,gemId:savedGem._id};
+    helpers.jsonAuthPost("/api/action/socketGem",token,body)
+      .expect(helpers.checkStatusCode(200))
+      .expect(function(res) {
+        activity = res.body.activity;
+        activity.activityType.should.equal('socket gem');
+        activity.socketGem.itemId.should.equal(savedItem._id);
+        activity.socketGem.gemId.should.equal(savedGem._id);
+        activity.calculated.failureChance.should.equal(1);
+        console.log(activity);
+
+      })
+      .end(done)
+  });
+
+  it("Completes socketing", function(done) {
+    rand.setNextDouble(2);
+    helpers.jsonAuthPost("/api/action/complete",token,{activityId:activity._id})
+      .expect(helpers.checkStatusCode(200))
+      .expect(function(res) {
+        console.log(res.body.result);
+
+        let item = res.body.result.item;
+        item._id.should.be.a("string");
+        item.mods.length.should.equal(1);
+        item.level.should.equal(2);
+
+
+        let xp = res.body.result.experience[0];
+        xp.xp.should.equal(30);
+        assert(!res.body.result.resource);
+      })
+      .end(done)
+  });
+
 });
 
