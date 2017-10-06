@@ -1,6 +1,3 @@
-const typeElemental = "elemental";
-const typeTrade = "trade";
-
 const tradeSkillMine = "101";
 const tradeSkillCraft = "102";
 const tradeSkillBattle = "103";
@@ -15,28 +12,27 @@ const elementalRequirement = function(level) {
 
 //Returns all the experience gained exploring the given realm for that amount of time
 const exploreGain = function(realm,time) {
-  let amount = Math.round(realm.level*time + realm.level * 10)
+  let amount = Math.round(realm.level*time + realm.level * 10);
   return [
-    {type:typeElemental,xp:amount,skillId:realm.elementId},
-    {type:typeTrade,xp:amount,skillId:tradeSkillExplore},
+    {xp:amount,skillId:realm.elementId},
+    {xp:amount,skillId:tradeSkillExplore},
   ]
 };
 
 let craftGain = function(initial) {
   let amount = Math.round(initial.duration);
   return initial.usedSkills.map(function(sId) {
-    //TODO: Look into removing type
-    return {type:typeElemental,xp:amount,skillId:sId}
+    return {xp:amount,skillId:sId}
   })
 };
 
 const addExperienceToSkill = function(skillXpProgress,xpObject) {
-  var xpTotal = skillXpProgress.xp + xpObject.xp
+  var xpTotal = skillXpProgress.xp + xpObject.xp;
     while(xpTotal >= elementalRequirement(skillXpProgress.level + 1)) {
       xpTotal -= elementalRequirement(skillXpProgress.level + 1);
       skillXpProgress.level = skillXpProgress.level + 1;
     }
-    skillXpProgress.xp = xpTotal
+    skillXpProgress.xp = xpTotal;
     skillXpProgress.xpNext = elementalRequirement(skillXpProgress.level + 1)
 }
 

@@ -2,6 +2,7 @@ const rand = require("./rand");
 const ref = require("./reference");
 const xp = require("./experience");
 const item = require("./item");
+const gen = require("./generate");
 
 let kExploreSkill = "104";
 
@@ -27,11 +28,11 @@ const calculateResourceQuantity = function(realm,avatar,resource) {
 };
 
 const singleResult = function(realm,avatar,initial) {
-  let result = {};
+  let result = gen.baseActivityResult();
   result.experience = xp.exploreGain(realm, initial.duration);
   let resource = chooseResource(realm,avatar);
   let quantity = calculateResourceQuantity(realm,avatar,resource);
-  result.resource = {id:resource.id,quantity:quantity};
+  result.resources = [{id:resource.id,quantity:quantity}];
   if (rand.getRandomInt(0,100) > 90) { //10% chance to unlock a realm)
     result.realmUnlock = {elementId:realm.elementId,level:realm.level + 1}
   }

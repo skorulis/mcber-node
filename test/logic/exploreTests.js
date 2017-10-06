@@ -43,19 +43,19 @@ it("Calculates resource quantity", function() {
 });
 
 it("Calculates single results",function() {
-  var realm = gen.basicRealm(0,1)
-  var avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0])
-  var results = explore.explore(realm,avatar,30)
-  results.length.should.equal(1)
+  let realm = gen.basicRealm(0,1);
+  let avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0]);
+  let results = explore.explore(realm,avatar,30);
+  results.length.should.equal(1);
 
-  var r1 = results[0]
-  var xp = r1.experience[0]
-  xp.xp.should.equal(40)
-  xp.type.should.equal("elemental")
-  xp.skillId.should.equal(0)
-  r1.resource.quantity.should.equal(1)
-  r1.resource.id.should.equal("1")
-})
+  let r1 = results[0];
+  let xp = r1.experience[0];
+  xp.xp.should.equal(40);
+  xp.skillId.should.equal("0");
+  let res1 = r1.resources[0];
+  res1.quantity.should.equal(1);
+  res1.id.should.equal("1")
+});
 
 it("Unlocks a new realm level",function() {
   var user = gen.newUser()
@@ -82,9 +82,11 @@ it("Finds a new item", function() {
   let results = explore.explore(realm,avatar,30);
   results.length.should.equal(1);
   let r1 = results[0];
+
+  should.not.exist(r1.realmUnlock);
+
   r1.item.should.be.a("object");
   r1.item.refId.should.be.a("string");
-  assert(!r1.realmUnlock);
 
   user.items.length.should.equal(0);
   update.completeActivity("0",user,avatar,r1);

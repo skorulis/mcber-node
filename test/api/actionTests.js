@@ -61,9 +61,11 @@ describe("Performs all action methods",function() {
     .send({activityId:activity._id})
     .expect(200)
     .expect(function(res) {
+      console.log(res.body);
       let xp = res.body.result.experience[0];
       xp.xp.should.equal(40);
-      res.body.result.resource.quantity.should.equal(1)
+      let res1 = res.body.result.resources[0]
+      res1.quantity.should.equal(1)
     })
     .end(done)
   });

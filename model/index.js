@@ -4,5 +4,6 @@ module.exports = {
   Activity:require("./Activity").model,
   AvatarItem:require("./AvatarItem").model,
   AvatarStats:require("./AvatarStats").model,
-  ItemMod:require("./ItemMod").model
+  ItemMod:require("./ItemMod").model,
+  ActivityResult:require("./ActivityResult").model
 };

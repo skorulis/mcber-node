@@ -1,6 +1,6 @@
-const cred = require("../config/credentials")
+const cred = require("../config/credentials");
 const jwt = require('jsonwebtoken');
-const User = require("../../model").User
+const User = require("../../model").User;
 
 const expiry = 60*60*24;
 
@@ -66,4 +66,4 @@ module.exports = {
   generateToken: generate,
   generateTokenId: generateId,
   decodeToken: decodeToken
-}
+};

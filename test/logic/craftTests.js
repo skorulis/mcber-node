@@ -132,7 +132,7 @@ it("Gets socket results", function() {
 
   rand.setNextDouble(1);
   let result = craft.getSocketResult(item,gem,initial);
-  result.experience.should.deep.equal([ { type: 'elemental', xp: 15, skillId: '102' } ]);
+  result.experience.should.deep.equal([ {  xp: 15, skillId: '102' } ]);
   result.item.level.should.equal(1);
   result.item.mods.length.should.equal(1);
 
