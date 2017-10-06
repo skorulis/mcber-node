@@ -94,7 +94,14 @@ it("Crafts a gem",function() {
   activity.activityType.should.equal("craft gem");
 
   let activityResult = craft.completeGemActivity(activity,avatar);
-  activityResult.experience.should.deep.equal(result.experience);
+  xp1 = result.experience[0];
+  xp1.skillId.should.equal("1");
+  xp1.xp.should.equal(69);
+
+  let xp2 = result.experience[1];
+  xp2.skillId.should.equal("102");
+  xp2.xp.should.equal(69);
+
   activityResult.gem._id.should.be.a("String");
   activityResult.gem.elementId.should.equal("1");
   activityResult.gem.power.should.equal(1);
@@ -132,7 +139,10 @@ it("Gets socket results", function() {
 
   rand.setNextDouble(1);
   let result = craft.getSocketResult(item,gem,initial);
-  result.experience.should.deep.equal([ {  xp: 15, skillId: '102' } ]);
+  let xp1 = result.experience[0];
+  xp1.xp.should.equal(15);
+  xp1.skillId.should.equal("102");
+
   result.item.level.should.equal(1);
   result.item.mods.length.should.equal(1);
 

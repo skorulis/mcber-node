@@ -55,7 +55,7 @@ let initialSocketValues = function(item,gem,avatar) {
 };
 
 let getResult = function(itemRef,avatar,initial) {
-  let result = {};
+  let result = gen.baseActivityResult();
   result.experience = xp.craftGain(initial);
   result.item = itemCalc.fixedItem(itemRef,[]);
 
@@ -63,7 +63,7 @@ let getResult = function(itemRef,avatar,initial) {
 };
 
 let getGemResult = function(modRef,level,elementRef,avatar,initial) {
-  let result = {};
+  let result = gen.baseActivityResult();
   result.experience = xp.craftGain(initial);
   let elementId = elementRef ? elementRef.id : null;
   result.gem = itemCalc.fixedMod(modRef,level,elementId);
@@ -71,7 +71,7 @@ let getGemResult = function(modRef,level,elementRef,avatar,initial) {
 };
 
 let getSocketResult = function(item,gem,initial) {
-  let result = {};
+  let result = gen.baseActivityResult();
   result.experience = xp.craftGain(initial);
   if (rand.randomDouble() > initial.failureChance) {
     item.mods.push(gem)
