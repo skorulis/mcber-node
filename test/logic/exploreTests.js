@@ -103,7 +103,6 @@ it("Finds a new gem", function() {
   results.length.should.equal(1);
   let r1 = results[0];
 
-  //console.log(r1);
   r1.gem.should.be.a("object");
   r1.gem.refId.should.be.a("string");
   r1.gem.power.should.be.a("number")

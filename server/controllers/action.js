@@ -178,7 +178,7 @@ module.exports = {
   },
   cancel:function(req,res,next) {
     let activity = req.user.findActivity(req.body.activityId);
-    if (activity == null) {
+    if (activity === null) {
       return next(new util.RequestError("Could not find activity " + activity))
     }
     req.user.removeActivity(req.body.activityId);
@@ -188,7 +188,7 @@ module.exports = {
   },
   complete:function(req,res,next) {
     let activity = req.user.findActivity(req.body.activityId);
-    if (activity == null) {
+    if (activity === null) {
       return next(new util.RequestError("Could not find activity " + req.body.activityId))
     }
 

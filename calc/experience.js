@@ -20,6 +20,8 @@ const exploreGain = function(realm,time) {
 };
 
 let craftGain = function(initial) {
+  console.log("Craft gain");
+  console.log(initial);
   let amount = Math.round(initial.duration);
   return initial.usedSkills.map(function(sId) {
     return {xp:amount,skillId:sId}

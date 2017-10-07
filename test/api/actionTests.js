@@ -61,7 +61,6 @@ describe("Performs all action methods",function() {
     .send({activityId:activity._id})
     .expect(200)
     .expect(function(res) {
-      console.log(res.body);
       let xp = res.body.result.experience[0];
       xp.xp.should.equal(40);
       let res1 = res.body.result.resources[0]
@@ -162,8 +161,7 @@ describe("Performs all action methods",function() {
         activity.activityType.should.equal('socket gem');
         activity.socketGem.itemId.should.equal(savedItem._id);
         activity.socketGem.gemId.should.equal(savedGem._id);
-        activity.calculated.failureChance.should.equal(1);
-        console.log(activity);
+        activity.calculated.failureChance.should.equal(0.75);
 
       })
       .end(done)
@@ -180,10 +178,10 @@ describe("Performs all action methods",function() {
         item._id.should.be.a("string");
         item.mods.length.should.equal(1);
         item.level.should.equal(2);
-
-
+        console.log(res.body.result);
+        res.body.result.experience.length.should.equal(2);
         let xp = res.body.result.experience[0];
-        xp.xp.should.equal(30);
+        xp.xp.should.equal(23);
         assert(!res.body.result.resource);
       })
       .end(done)

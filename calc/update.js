@@ -5,8 +5,8 @@ let avatarCalc = require("./avatar");
 
 const completeActivity = function(activityId,user,avatar,result) {
   user.removeActivity(activityId);
-  if (result.resource) {
-    user.addResource(result.resource);
+  for (res of result.resources) {
+    user.addResource(res);
   }
 
   xp.addAllExperience(avatar,result.experience);

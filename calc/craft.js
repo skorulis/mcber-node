@@ -41,7 +41,9 @@ let initialGemValues = function(modRef,level,elementRef,avatar) {
 };
 
 let initialSocketValues = function(item,gem,avatar) {
-  let skill = avatar.stats.skill(kCraftSkill);
+  let gemResources = itemCalc.gemResources(gem);
+  let usedSkill = gemResources.skillAffiliation();
+  let skill = avatar.stats.skill(kCraftSkill) + avatar.stats.skill(usedSkill.id);
   let difficulty = Math.round(Math.pow(item.level + gem.power + item.mods.length,1.5));
   let failure = Math.min(difficulty / (skill + 1),1);
   let time = Math.max(Math.round( (30 * difficulty) / (skill + 1) ), 2);
@@ -49,7 +51,7 @@ let initialSocketValues = function(item,gem,avatar) {
   return {
     skillLevel:skill,
     duration: time,
-    usedSkills:[kCraftSkill],
+    usedSkills:[kCraftSkill,usedSkill.id],
     failureChance:failure
   }
 };
