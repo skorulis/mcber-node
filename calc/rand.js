@@ -27,5 +27,9 @@ module.exports = {
       return doubleSequence.shift()
     }
     return Math.random()
+  },
+  randomElement:function(array) {
+    let index = getRandomInt(0,array.length - 1);
+    return array[index];
   }
 };

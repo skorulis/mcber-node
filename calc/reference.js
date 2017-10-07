@@ -4,14 +4,15 @@ const skillsData = JSON.parse(fs.readFileSync('static/ref/skills.json', 'utf8'))
 const resourceData = JSON.parse(fs.readFileSync('static/ref/resources.json', 'utf8')).resources;
 const modData = JSON.parse(fs.readFileSync('static/ref/itemMods.json', 'utf8')).mods;
 const items = JSON.parse(fs.readFileSync('static/ref/items.json', 'utf8')).items;
+const names = JSON.parse(fs.readFileSync('static/ref/names.json', 'utf8')).names;
 
 let skills = new RefContainer(skillsData,"id");
 let mods = new RefContainer(modData,"id");
 let baseItems = new RefContainer(items.baseTypes,"id");
 let resources = new RefContainer(resourceData,"id");
 
-const elements = skills.array.filter((s) => s.type == "elemental");
-const trades = skills.array.filter((s) => s.type == "trade");
+const elements = skills.array.filter((s) => s.type === "elemental");
+const trades = skills.array.filter((s) => s.type === "trade");
 
 const getSkill = function(id) {
   return skills.withId(id)
@@ -24,7 +25,7 @@ const getMod = function(id) {
 for(let e of skills.array) {
   e.resources = [];
 
-  if (e.type == "elemental") {
+  if (e.type === "elemental") {
     e.totalAttack = e.damageModifiers.reduce((total,amount) => total + amount );
     e.totalDefense = skills.array.reduce( (total,element) => {return total + element.damageModifiers[e.index]},0)
   }
@@ -43,5 +44,6 @@ module.exports = {
   elements,
   trades,
   getMod,
-  baseItems
+  baseItems,
+  names
 };

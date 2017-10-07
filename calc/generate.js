@@ -10,8 +10,16 @@ const ref = require("./reference");
 const xp = require("./experience");
 const statCalc = require("./statCalc");
 
+const avatarName = function() {
+  let first = rand.randomElement(ref.names.first);
+  let last = rand.randomElement(ref.names.last);
+  return first + " " + last;
+};
+
 const emptyAvatar = function() {
   let avatar = new Avatar({_id:uniqid()});
+  avatar.name = "TEST";
+  //avatar.name = avatarName();
   avatar.skills = [];
   for(let i = 0; i < ref.skills.array.length; ++i) {
     let skill = ref.skills.array[i];
@@ -89,5 +97,6 @@ module.exports = {
   exploreActivity,
   emptyItem,
   baseActivity,
-  baseActivityResult
+  baseActivityResult,
+  avatarName
 };
