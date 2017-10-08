@@ -32,7 +32,9 @@ for(let e of skills.array) {
 }
 
 for (r of resources.array) {
-  getSkill(r.skill).resources.push(r)
+  if (r.skill) {
+    getSkill(r.skill).resources.push(r)
+  }
 }
 
 module.exports = {

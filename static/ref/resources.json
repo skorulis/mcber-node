@@ -179,6 +179,11 @@
 			"name": "Dark 3",
 			"skill": "9",
 			"rarity": 3
+		},
+		{
+			"id":"currency",
+			"name":"Credits",
+			"rarity":1
 		}
 	]
 }
