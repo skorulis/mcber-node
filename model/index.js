@@ -6,5 +6,6 @@ module.exports = {
   AvatarStats:require("./AvatarStats").model,
   ItemMod:require("./ItemMod").model,
   ActivityResult:require("./ActivityResult").model,
-  WorldEvent:require("./WorldEvent").model
+  WorldEvent:require("./WorldEvent").model,
+  BattleResults:require("./BattleResults").model,
 };

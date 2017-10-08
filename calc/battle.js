@@ -1,5 +1,6 @@
 const rand = require("./rand");
 const ref = require("./reference");
+const gen = require("./generate");
 
 const chooseSkill = function(avatar) {
   let val = rand.getRandomInt(1,avatar.stats.elementalLevel());
@@ -43,13 +44,8 @@ const attack = function(a1,a2) {
 
 //Returns the result of the 2 avatars battling. No changes are made
 const battle = function(a1,a2) {
-  let res = {
-    winner:null,
-    a1Attacks:[],
-    a2Attacks:[],
-    a1TotalDamage:0,
-    a2TotalDamage:0
-  };
+  let res = gen.emptyBattleResults(a1,a2);
+
   let attackRes;
 
   while(true) {
@@ -57,7 +53,7 @@ const battle = function(a1,a2) {
     res.a1Attacks.push(attackRes);
     res.a1TotalDamage += attackRes.damage;
     if (res.a1TotalDamage >= a2.currentHealth) {
-      res.winner = a1;
+      res.winnerId = a1._id;
       return res
     }
 
@@ -65,7 +61,7 @@ const battle = function(a1,a2) {
     res.a2Attacks.push(attackRes);
     res.a2TotalDamage += attackRes.damage;
     if (res.a2TotalDamage >= a1.currentHealth) {
-      res.winner = a2;
+      res.winnerId = a2._id;
       return res
     }
   }

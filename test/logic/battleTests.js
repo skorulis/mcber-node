@@ -44,7 +44,7 @@ it("Completes a battle",function() {
   const a1 = gen.withLevels([10,0,0,0,0,0,0,0,0,0]);
   const a2 = gen.withLevels([10,0,0,0,0,0,0,0,0,0]);
   const result = battle.battle(a1,a2);
-  assert(result.winner == a1)
+  result.winnerId.should.equal(a1._id);
   result.a1Attacks.length.should.equal(4);
   result.a1TotalDamage.should.equal(20);
   result.a2TotalDamage.should.equal(15);

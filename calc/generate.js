@@ -7,6 +7,7 @@ const Activity = require("../model").Activity;
 const ActivityResult = require("../model").ActivityResult;
 const WorldEvent = require("../model").WorldEvent;
 const Item = require("../model").AvatarItem;
+const BattleResults = require("../model").BattleResults;
 const ref = require("./reference");
 const xp = require("./experience");
 const statCalc = require("./statCalc");
@@ -78,6 +79,10 @@ const emptyItem = function(baseItem) {
   return item
 };
 
+const emptyBattleResults = function(avatar1,avatar2) {
+  return BattleResults({_id:uniqid(),avatar1:avatar1,avatar2:avatar2})
+};
+
 module.exports = {
   emptyAvatar:emptyAvatar,
   withLevels:function(elements) {
@@ -106,5 +111,6 @@ module.exports = {
   baseActivity,
   baseActivityResult,
   baseEvent,
+  emptyBattleResults,
   avatarName
 };
