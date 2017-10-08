@@ -6,6 +6,7 @@ let itemSchema = require("./AvatarItem").schema;
 let schema = new mongoose.Schema({
   _id: String,
   success:Boolean,
+  currency:Number,
   item:{type:itemSchema,default:null},
   gem:{type:modSchema,default:null},
   realmUnlock:{type:{elementId:String,level:Number,_id:false},default:null},

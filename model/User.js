@@ -9,12 +9,14 @@ let userSchema = new mongoose.Schema({
   password: String,
   email: String,
   fbid: String,
+  currency:Number, //May change this to a string later to handle larger values
   avatars:[avatarSchema],
   activities:[activitySchema],
   items:[itemSchema], //Unassigned items
   busyItems:[itemSchema], //Items assigned to some task
   gems:[modSchema], //Gems that can be used
   busyGems:[modSchema], //Gems assigned to some task
+  consumables:[{refId:String,quantity:Number,_id:false}],
   resources:[{
     id:String,
     quantity:Number,

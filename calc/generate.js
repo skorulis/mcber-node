@@ -39,6 +39,7 @@ const basicRealm = function(elementId,level) {
 const newUser = function() {
   let user = new User({_id:uniqid()});
   user.avatars.push(emptyAvatar());
+  user.currency = 0;
   for(let i = 0; i < ref.elements.length; ++i) {
     user.realms.push({elementId:i,maximumLevel:1})
   }
@@ -59,7 +60,7 @@ const exploreActivity = function(realm,avatarId,initialValues) {
 };
 
 const baseActivityResult = function() {
-  return new ActivityResult({_id:uniqid(),success:true,realmUnlock:null});
+  return new ActivityResult({_id:uniqid(),success:true,realmUnlock:null,currency:0});
 };
 
 const emptyItem = function(baseItem) {

@@ -29,7 +29,9 @@ const calculateResourceQuantity = function(realm,avatar,resource) {
 
 const singleResult = function(realm,avatar,initial) {
   let result = gen.baseActivityResult();
+  let maxCurrency = Math.round(Math.pow(realm.level,1.1));
   result.experience = xp.exploreGain(realm, initial.duration);
+  result.currency = rand.getRandomInt(0,maxCurrency);
   let resource = chooseResource(realm,avatar);
   let quantity = calculateResourceQuantity(realm,avatar,resource);
   result.resources = [{id:resource.id,quantity:quantity}];

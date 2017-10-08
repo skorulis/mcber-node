@@ -1,31 +1,30 @@
 const chai = require('chai');
 const should = chai.should();
-const assert = chai.assert;
-const gen = require("../../calc/generate")
-const explore = require("../../calc/explore")
-const ref = require("../../calc/reference")
-const rand = require("../../calc/rand")
-const update = require("../../calc/update")
+const gen = require("../../calc/generate");
+const explore = require("../../calc/explore");
+const ref = require("../../calc/reference");
+const rand = require("../../calc/rand");
+const update = require("../../calc/update");
 
 it("Calculates explore constants",function() {
-  var realm = gen.basicRealm(0,1)
-  var avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0])
-  var constants = explore.initialValues(realm,avatar);
-  constants.duration.should.equal(30)
-  constants.skillLevel.should.equal(0)
+  let realm = gen.basicRealm(0,1);
+  let avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0]);
+  let constants = explore.initialValues(realm,avatar);
+  constants.duration.should.equal(30);
+  constants.skillLevel.should.equal(0);
 
-  avatar = gen.withLevels([10,15,0,0,0,0,0,0,0,0,0,0,7,15,0])
+  avatar = gen.withLevels([10,15,0,0,0,0,0,0,0,0,0,0,7,15,0]);
   constants = explore.initialValues(realm,avatar);
-  constants.skillLevel.should.equal(25)
+  constants.skillLevel.should.equal(25);
   constants.duration.should.equal(2)
-})
+});
 
 it("Calculates empty results", function() {
-  var realm = gen.basicRealm(0,1)
-  var avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0])
-  var results = explore.explore(realm,avatar,20)
+  let realm = gen.basicRealm(0,1);
+  let avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0]);
+  let results = explore.explore(realm,avatar,20);
   results.length.should.equal(0)
-})
+});
 
 it("Chooses a resource", function() {
   var realm = gen.basicRealm(0,1)
@@ -58,14 +57,16 @@ it("Calculates single results",function() {
 });
 
 it("Unlocks a new realm level",function() {
-  var user = gen.newUser()
-  var realm = user.findRealm("0")
-  realm.level = realm.maximumLevel
-  var avatar = user.avatars[0]
-  rand.setNextInt(100)
-  var results = explore.explore(realm,avatar,30)
-  results.length.should.equal(1)
+  let user = gen.newUser();
+  let realm = user.findRealm("0");
+  realm.level = realm.maximumLevel;
+  let avatar = user.avatars[0];
+  rand.setNextInt(1);
+  rand.setNextInt(100);
+  let results = explore.explore(realm,avatar,30);
+  results.length.should.equal(1);
   let r1 = results[0];
+  r1.currency.should.equal(1);
   r1.realmUnlock.level.should.equal(2);
   r1.realmUnlock.elementId.should.equal(realm.elementId);
 
@@ -78,19 +79,21 @@ it("Finds a new item", function() {
   let realm = user.findRealm("0");
   realm.level = realm.maximumLevel;
   let avatar = user.avatars[0];
-  rand.setNextInt(0);rand.setNextInt(100);rand.setNextInt(55);
+  rand.setNextInt(1);rand.setNextInt(0);rand.setNextInt(100);rand.setNextInt(55);
   let results = explore.explore(realm,avatar,30);
   results.length.should.equal(1);
   let r1 = results[0];
 
   should.not.exist(r1.realmUnlock);
 
+  r1.currency.should.equal(1);
   r1.item.should.be.a("object");
   r1.item.refId.should.be.a("string");
 
   user.items.length.should.equal(0);
   update.completeActivity("0",user,avatar,r1);
   user.items.length.should.equal(1);
+  user.currency.should.equal(1);
 });
 
 it("Finds a new gem", function() {
@@ -98,7 +101,7 @@ it("Finds a new gem", function() {
   let realm = user.findRealm("1");
   realm.level = realm.maximumLevel;
   let avatar = user.avatars[0];
-  rand.setNextInt(0);rand.setNextInt(100);rand.setNextInt(0);
+  rand.setNextInt(0);rand.setNextInt(0);rand.setNextInt(100);rand.setNextInt(0);
   let results = explore.explore(realm,avatar,30);
   results.length.should.equal(1);
   let r1 = results[0];
