@@ -2,6 +2,8 @@ const rand = require("./rand");
 const ref = require("./reference");
 const gen = require("./generate");
 
+const kBattleSkill = "103";
+
 const chooseSkill = function(avatar) {
   let val = rand.getRandomInt(1,avatar.stats.elementalLevel());
   let index = 0;
@@ -79,9 +81,11 @@ const getActivityResult = function(battleResults) {
   results.battleResult = battleResults;
   for (let att of battleResults.a1Attacks) {
     results.addExperience(att.attackSkillId,att.damage);
+    results.addExperience(kBattleSkill,att.damage);
   }
   for (let def of battleResults.a2Attacks) {
     results.addExperience(def.defenceSkillId,def.damage);
+    results.addExperience(kBattleSkill,def.damage);
   }
 
   return results;

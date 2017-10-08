@@ -166,7 +166,13 @@ let craftGem = function(req,res,next) {
 };
 
 let battle = function(req,res,next) {
-  //let initial = battleCalc.initialValues()
+  let battleResult = battleCalc.randomBattle(req.avatar,req.realm);
+  let battleReward = battleCalc.getActivityResult(battleResult);
+
+  updateCalc.completeActivity(null,req.user,req.avatar,battleReward);
+  req.user.save().then(user => {
+    res.send({activities:req.user.activities,result:battleReward,avatar:req.avatar})
+  })
 };
 
 

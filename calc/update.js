@@ -2,10 +2,12 @@
 let xp = require("./experience");
 let avatarCalc = require("./avatar");
 
-
 const completeActivity = function(activityId,user,avatar,result) {
-  user.removeActivity(activityId);
-  for (res of result.resources) {
+  if (activityId) {
+    user.removeActivity(activityId);
+  }
+
+  for (let res of result.resources) {
     user.addResource(res);
   }
 
