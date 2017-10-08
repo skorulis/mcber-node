@@ -20,8 +20,6 @@ const exploreGain = function(realm,time) {
 };
 
 let craftGain = function(initial) {
-  console.log("Craft gain");
-  console.log(initial);
   let amount = Math.round(initial.duration);
   return initial.usedSkills.map(function(sId) {
     return {xp:amount,skillId:sId}
@@ -29,7 +27,7 @@ let craftGain = function(initial) {
 };
 
 const addExperienceToSkill = function(skillXpProgress,xpObject) {
-  var xpTotal = skillXpProgress.xp + xpObject.xp;
+  let xpTotal = skillXpProgress.xp + xpObject.xp;
     while(xpTotal >= elementalRequirement(skillXpProgress.level + 1)) {
       xpTotal -= elementalRequirement(skillXpProgress.level + 1);
       skillXpProgress.level = skillXpProgress.level + 1;

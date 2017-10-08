@@ -172,13 +172,11 @@ describe("Performs all action methods",function() {
     helpers.jsonAuthPost("/api/action/complete",token,{activityId:activity._id})
       .expect(helpers.checkStatusCode(200))
       .expect(function(res) {
-        console.log(res.body.result);
 
         let item = res.body.result.item;
         item._id.should.be.a("string");
         item.mods.length.should.equal(1);
         item.level.should.equal(2);
-        console.log(res.body.result);
         res.body.result.experience.length.should.equal(2);
         let xp = res.body.result.experience[0];
         xp.xp.should.equal(23);

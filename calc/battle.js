@@ -37,8 +37,8 @@ const attack = function(a1,a2) {
   const defenceSkill = chooseSkill(a2);
   return {
     damage:calculateDamage(a1,a2,attackSkill,defenceSkill),
-    attackSkill:attackSkill.id,
-    defenceSkill:defenceSkill.id
+    attackSkillId:attackSkill.id,
+    defenceSkillId:defenceSkill.id
   }
 };
 
@@ -67,9 +67,31 @@ const battle = function(a1,a2) {
   }
 };
 
+const randomBattle = function(avatar,realm) {
+  let minLevel = 2 * realm.level;
+  let maxLevel = 5 * realm.level;
+  let opponent = gen.randomAvatar(rand.getRandomInt(minLevel,maxLevel));
+  return battle(avatar,opponent);
+};
+
+const getActivityResult = function(battleResults) {
+  let results = gen.baseActivityResult();
+  results.battleResult = battleResults;
+  for (let att of battleResults.a1Attacks) {
+    results.addExperience(att.attackSkillId,att.damage);
+  }
+  for (let def of battleResults.a2Attacks) {
+    results.addExperience(def.defenceSkillId,def.damage);
+  }
+
+  return results;
+};
+
 module.exports = {
   attack,
   chooseSkill,
   calculateDamage,
-  battle
+  battle,
+  randomBattle,
+  getActivityResult
 };
