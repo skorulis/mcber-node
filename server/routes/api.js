@@ -11,10 +11,10 @@ module.exports = (app,passport) => {
   app.post('/api/login/password',passport.authenticate('local-login'),controllers.user.loginComplete);
   app.post('/api/signup',passport.authenticate('local-signup'), controllers.user.signup);
 
-  app.post('/api/action/explore',passport.authenticate("jwt-verify"), validate({body:controllers.action.exploreSchema}),  controllers.action.explore);
-  app.post('/api/action/craft',validate({body:controllers.action.craftSchema}), passport.authenticate("jwt-verify"),  controllers.action.craft);
-  app.post('/api/action/craftGem',validate({body:controllers.action.craftGemSchema}), passport.authenticate("jwt-verify"),  controllers.action.craftGem);
-  app.post('/api/action/socketGem',validate({body:controllers.action.socketGemSchema}), passport.authenticate("jwt-verify"),  controllers.action.socketGem);
+  app.post('/api/action/explore',passport.authenticate("jwt-verify"), controllers.action.explore);
+  app.post('/api/action/craft', passport.authenticate("jwt-verify"),  controllers.action.craft);
+  app.post('/api/action/craftGem',passport.authenticate("jwt-verify"),  controllers.action.craftGem);
+  app.post('/api/action/socketGem',passport.authenticate("jwt-verify"),  controllers.action.socketGem);
 
   app.post('/api/action/cancel',passport.authenticate("jwt-verify"), validate({body:controllers.action.cancelCompleteSchema}),  controllers.action.cancel);
   app.post('/api/action/complete',passport.authenticate("jwt-verify"), validate({body:controllers.action.cancelCompleteSchema}),  controllers.action.complete);
