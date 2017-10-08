@@ -5,6 +5,7 @@ const Avatar = require('../model').Avatar;
 const User = require('../model').User;
 const Activity = require("../model").Activity;
 const ActivityResult = require("../model").ActivityResult;
+const WorldEvent = require("../model").WorldEvent;
 const Item = require("../model").AvatarItem;
 const ref = require("./reference");
 const xp = require("./experience");
@@ -63,6 +64,11 @@ const baseActivityResult = function() {
   return new ActivityResult({_id:uniqid(),success:true,realmUnlock:null,currency:0});
 };
 
+const baseEvent = function(duration,type) {
+  let start = Math.floor(Date.now() / 1000);
+  return new WorldEvent({_id:uniqid(),eventType:type,expiry:start+duration})
+};
+
 const emptyItem = function(baseItem) {
   let item = new Item({_id:uniqid()});
   item.type = baseItem.type;
@@ -99,5 +105,6 @@ module.exports = {
   emptyItem,
   baseActivity,
   baseActivityResult,
+  baseEvent,
   avatarName
 };

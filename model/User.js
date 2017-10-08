@@ -3,6 +3,7 @@ let avatarSchema = require("./Avatar").schema;
 let activitySchema = require("./Activity").schema;
 let itemSchema = require("./AvatarItem").schema;
 let modSchema = require("./ItemMod").schema;
+let eventSchema = require("./WorldEvent").schema;
 
 let userSchema = new mongoose.Schema({
   _id: String,
@@ -17,6 +18,7 @@ let userSchema = new mongoose.Schema({
   gems:[modSchema], //Gems that can be used
   busyGems:[modSchema], //Gems assigned to some task
   consumables:[{refId:String,quantity:Number,_id:false}],
+  events:[eventSchema],
   resources:[{
     id:String,
     quantity:Number,
