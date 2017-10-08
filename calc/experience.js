@@ -36,7 +36,7 @@ const addExperienceToSkill = function(skillXpProgress,xpObject) {
     }
     skillXpProgress.xp = xpTotal;
     skillXpProgress.xpNext = elementalRequirement(skillXpProgress.level + 1)
-}
+};
 
 const addExperience = function(avatar,xpObject) {
   let skill = avatar.findSkill(xpObject.skillId);

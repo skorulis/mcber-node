@@ -17,8 +17,8 @@ let schema = new mongoose.Schema({
 });
 
 schema.methods.findSkill = function(skillId) {
-  return this.skills.find((x) => x.id == skillId)
-}
+  return this.skills.find((x) => x.id === skillId)
+};
 
 schema.methods.itemAt = function(slot) {
   var space = this.items.find((x) => x.slot == slot)

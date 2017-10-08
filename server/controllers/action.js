@@ -1,6 +1,7 @@
 let gen = require("../../calc/generate");
 let exploreCalc = require("../../calc/explore");
 let craftCalc = require("../../calc/craft");
+let battleCalc = require("../../calc/battle");
 let ref = require("../../calc/reference");
 let updateCalc = require("../../calc/update");
 let util = require("../util/util.js");
@@ -64,6 +65,8 @@ const cancelCompleteSchema = {
     activityId:{type:"string"}
   }
 };
+
+const battleSchema = exploreSchema;
 
 let completeActivity = function(activity,avatar,user) {
   if (activity.activityType === "explore") {
@@ -160,8 +163,12 @@ let craftGem = function(req,res,next) {
 
   req.activity = craftCalc.getGemActivity(modRef,req.body.level,elementRef,req.avatar);
   packageAndSave(req,res,next)
-
 };
+
+let battle = function(req,res,next) {
+  //let initial = battleCalc.initialValues()
+};
+
 
 module.exports = {
   exploreSchema,
@@ -173,6 +180,7 @@ module.exports = {
   craft:[validate({body:craftSchema}),findAvatar,craft],
   craftGem:[validate({body:craftGemSchema}),findAvatar,craftGem],
   socketGem:[validate({body:socketGemSchema}),findAvatar,socketGem],
+  battle:[validate({body:battleSchema}),findAvatar,battle],
   cancel:function(req,res,next) {
     let activity = req.user.findActivity(req.body.activityId);
     if (activity === null) {
@@ -200,8 +208,5 @@ module.exports = {
     req.user.save().then(user => {
       res.send({activities:req.user.activities,result:result,avatar:avatar})  
     })
-
-    
-    
   }
 };

@@ -11,7 +11,7 @@ let schema = new mongoose.Schema({
   gem:{type:modSchema,default:null},
   realmUnlock:{type:{elementId:String,level:Number,_id:false},default:null},
   resources:[{id:String,quantity:Number,_id:false}],
-  experience:[{skillId:String,xp:Number,_id:false}],
+  experience:[{skillId:String,xp:Number,_id:false}]
 });
 
 module.exports = {
