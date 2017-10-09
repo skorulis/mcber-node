@@ -20,8 +20,7 @@ const avatarName = function() {
 
 const emptyAvatar = function() {
   let avatar = new Avatar({_id:uniqid()});
-  avatar.name = "TEST";
-  //avatar.name = avatarName();
+  avatar.name = avatarName();
   avatar.skills = [];
   for(let i = 0; i < ref.skills.array.length; ++i) {
     let skill = ref.skills.array[i];

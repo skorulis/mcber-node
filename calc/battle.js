@@ -5,18 +5,26 @@ const gen = require("./generate");
 const kBattleSkill = "103";
 
 const chooseSkill = function(avatar) {
-  let val = rand.getRandomInt(1,avatar.stats.elementalLevel());
+  let level = avatar.stats.elementalLevel();
   let index = 0;
-  while(val > 0 && index < ref.elements.length) {
-    val -= avatar.stats.skill(index);
-    index ++
+  if (level === 0) {
+    index = rand.getRandomInt(1,10);
+  } else {
+    let val = rand.getRandomInt(1,avatar.stats.elementalLevel());
+    while(val > 0 && index < ref.elements.length) {
+      val -= avatar.stats.skill(index);
+      index ++
+    }
   }
+
   return avatar.skills[index - 1];
 };
 
 const calculateDamage = function(a1,a2,sAttack,sDefence) {
-  const att = getTotalAttack(a1,sAttack,sDefence);
-  const def = getTotalDefence(a2,sDefence);
+  let att = getTotalAttack(a1,sAttack,sDefence);
+  let def = getTotalDefence(a2,sDefence);
+
+  if (att === 0) { att = 1}
 
   return Math.ceil(att * att / (att + def) )
 };

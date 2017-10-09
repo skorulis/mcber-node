@@ -40,6 +40,13 @@ it("Performs an attack 3",function() {
   result.defenceSkillId.should.equal("0");
 });
 
+it("Handles zero level avatars", function() {
+  const a1 = gen.withLevels([0,0,0,0,0,0,0,0,0,0]);
+  const a2 = gen.withLevels([0,0,0,0,0,0,0,0,0,0]);
+  const result = battle.attack(a1,a2);
+  result.damage.should.equal(1);
+});
+
 it("Completes a battle",function() {
   const a1 = gen.withLevels([10,0,0,0,0,0,0,0,0,0]);
   const a2 = gen.withLevels([10,0,0,0,0,0,0,0,0,0]);
