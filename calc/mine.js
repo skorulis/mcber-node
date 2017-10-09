@@ -16,7 +16,8 @@ const initialValues = function(realm,avatar) {
 };
 
 const getResult = function(realm,avatar,initial) {
-
+  let result = gen.baseActivityResult();
+  result.experience = xp.exploreGain(realm, initial.duration);
 };
 
 const getActivity = function(realm,avatar) {

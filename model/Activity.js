@@ -1,5 +1,6 @@
 let mongoose = require('mongoose');
 let config = require("../server/config/config");
+let calculatedSchema = require("./ActivityPreCalculation").schema;
 
 let schema = new mongoose.Schema({
   _id: String,
@@ -18,14 +19,7 @@ let schema = new mongoose.Schema({
     gemId:String,
     _id:false
   },
-  calculated: {
-    duration:Number,
-    usedSkills:[String],
-    skillLevel:Number,
-    resources:[{id:String,quantity:Number,_id:false}],
-    failureChance:Number,
-    _id:false
-  },
+  calculated: calculatedSchema,
   realm: {
     elementId:String,
     level:Number,

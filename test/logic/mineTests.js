@@ -1,5 +1,3 @@
-const chai = require('chai');
-const should = chai.should();
 const gen = require("../../calc/generate");
 const mineCalc = require("../../calc/mine");
 const ref = require("../../calc/reference");
@@ -20,4 +18,8 @@ it("Should calculate initial values",function() {
   console.log(initial);
   initial.skillLevel.should.equal(30);
   initial.duration.should.equal(24);
+});
+
+it("Should get results",function() {
+
 });
