@@ -13,6 +13,7 @@ const initialValues = function(realm,avatar) {
   time = Math.max(Math.round(time),2);
   return {
     skillLevel:skill,
+    usedSkills:[realm.elementId,kExploreSkill],
     duration: time
   }
 };

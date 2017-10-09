@@ -7,7 +7,7 @@ const rand = require("../../calc/rand");
 const update = require("../../calc/update");
 
 it("Calculates explore constants",function() {
-  let realm = gen.basicRealm(0,1);
+  let realm = gen.basicRealm("0",1);
   let avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0]);
   let constants = explore.initialValues(realm,avatar);
   constants.duration.should.equal(30);
@@ -20,21 +20,21 @@ it("Calculates explore constants",function() {
 });
 
 it("Calculates empty results", function() {
-  let realm = gen.basicRealm(0,1);
+  let realm = gen.basicRealm("0",1);
   let avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0]);
   let results = explore.explore(realm,avatar,20);
   results.length.should.equal(0)
 });
 
 it("Chooses a resource", function() {
-  var realm = gen.basicRealm(0,1)
-  var resource = explore.chooseResource(realm)
-  resource.name.should.equal("Iron")
+  let realm = gen.basicRealm("0",1);
+  let resource = explore.chooseResource(realm);
+  resource.name.should.equal("Iron");
   resource.id.should.equal("1")
-})
+});
 
 it("Calculates resource quantity", function() {
-  let realm = gen.basicRealm(0,1);
+  let realm = gen.basicRealm("0",1);
   let resource = ref.skills.array[0].resources[0];
   let quantity = explore.calculateResourceQuantity(realm,null,resource);
   quantity.should.equal(1);
@@ -42,7 +42,7 @@ it("Calculates resource quantity", function() {
 });
 
 it("Calculates single results",function() {
-  let realm = gen.basicRealm(0,1);
+  let realm = gen.basicRealm("0",1);
   let avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0]);
   let results = explore.explore(realm,avatar,30);
   results.length.should.equal(1);

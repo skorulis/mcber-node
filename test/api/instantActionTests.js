@@ -29,7 +29,10 @@ describe("Instant action tests", function() {
       .send({realm:realm,avatarId:avatar._id})
       .expect(helpers.checkStatusCode(200))
       .expect(function(res) {
-        console.log(res.body)
+        let br = res.body.result.battleResult;
+        br.should.be.a("object");
+        br.a1TotalDamage.should.be.a("number");
+        br.a2TotalDamage.should.be.a("number");
       })
       .end(done)
   });
