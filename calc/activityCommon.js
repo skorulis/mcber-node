@@ -1,3 +1,6 @@
+let rand = require("./rand");
+let gen = require("./generate");
+
 const failureRate = function(skill,difficulty) {
   if (difficulty === 1) {
     return 0;
@@ -14,6 +17,16 @@ const failureRate = function(skill,difficulty) {
   return failure;
 };
 
+const activityResult = function(initial) {
+  let result = gen.baseActivityResult();
+  if(initial.failureChance > 0) {
+    result.success = rand.randomDouble("failureCheck") > initial.failureChance;
+  }
+
+  return result;
+};
+
 module.exports = {
-  failureRate
+  failureRate,
+  activityResult
 };

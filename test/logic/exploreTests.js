@@ -16,7 +16,7 @@ it("Calculates explore constants",function() {
   avatar = gen.withLevels([10,15,0,0,0,0,0,0,0,0,0,0,7,15,0]);
   constants = explore.initialValues(realm,avatar);
   constants.skillLevel.should.equal(25);
-  constants.duration.should.equal(2)
+  constants.duration.should.equal(3)
 });
 
 it("Calculates empty results", function() {
@@ -54,6 +54,16 @@ it("Calculates single results",function() {
   let res1 = r1.resources[0];
   res1.quantity.should.equal(1);
   res1.id.should.equal("1")
+});
+
+
+it.only("Fails exploring", function() {
+  let realm = gen.basicRealm("0",5);
+  let avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0]);
+  let initial = explore.initialValues(realm,avatar);
+  rand.setNextDouble(0.5,"failureCheck");
+  let result = explore.singleResult(realm,avatar,initial);
+  result.success.should.equal(false);
 });
 
 it("Unlocks a new realm level",function() {
@@ -109,5 +119,4 @@ it("Finds a new gem", function() {
   r1.gem.should.be.a("object");
   r1.gem.refId.should.be.a("string");
   r1.gem.power.should.be.a("number")
-
 });

@@ -1,4 +1,4 @@
-const general = require("../../calc/generalFunctions");
+const general = require("../../calc/activityCommon");
 
 it("Calculates failure rates", function() {
   general.failureRate(20,20).should.equal(0.5);

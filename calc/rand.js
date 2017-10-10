@@ -1,5 +1,6 @@
 let intSequence = [];
 let doubleSequence = [];
+let namedDoubles = {};
 
 const getRandomInt = function(min, max) {
   if (intSequence.length > 0) {
@@ -12,8 +13,18 @@ module.exports = {
   setNextInt:function(value) {
     intSequence.push(value)
   },
-  setNextDouble:function(value) {
-    doubleSequence.push(value);
+  setNextDouble:function(value,name) {
+    console.log(name);
+    if (name === undefined) {
+      doubleSequence.push(value);
+    } else {
+      let array = namedDoubles[name];
+      if (array) {
+        array.push(value);
+      } else {
+        namedDoubles[name] = [value];
+      }
+    }
   },
   setNextIntArray:function(array) {
     intSequence = intSequence.concat(array)
@@ -22,10 +33,18 @@ module.exports = {
   makesChance:function(chance) {
     return getRandomInt(0,100) > chance
   },
-  randomDouble:function() {
-    if (doubleSequence.length > 0) {
-      return doubleSequence.shift()
+  randomDouble:function(named) {
+    if (named === undefined) {
+      if (doubleSequence.length > 0) {
+        return doubleSequence.shift()
+      }
+    } else {
+      let seq = namedDoubles[named];
+      if (seq && seq.length > 0) {
+        return seq.shift();
+      }
     }
+
     return Math.random()
   },
   randomElement:function(array) {

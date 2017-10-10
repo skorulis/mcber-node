@@ -3,6 +3,7 @@ const ref = require("./reference");
 const xp = require("./experience");
 const item = require("./item");
 const gen = require("./generate");
+const common = require("./activityCommon");
 
 let kExploreSkill = "104";
 
@@ -10,12 +11,12 @@ const initialValues = function(realm,avatar) {
   let skill = avatar.stats.skill(realm.elementId);
   skill += avatar.stats.skill(kExploreSkill);
   let time = 30 * realm.level * realm.level / (skill + 1);
-  time = Math.max(Math.round(time),2);
-  return {
-    skillLevel:skill,
-    usedSkills:[realm.elementId,kExploreSkill],
-    duration: time
-  }
+  let initial = gen.baseActivityCalculation(time);
+  initial.difficulty = Math.pow(realm.level,2);
+  initial.skillLevel = skill;
+  initial.usedSkills = [realm.elementId,kExploreSkill];
+  initial.failureChance = common.failureRate(skill,initial.difficulty);
+  return initial;
 };
 
 const chooseResource = function(realm,avatar) {
@@ -29,7 +30,10 @@ const calculateResourceQuantity = function(realm,avatar,resource) {
 };
 
 const singleResult = function(realm,avatar,initial) {
-  let result = gen.baseActivityResult();
+  let result = common.activityResult(initial);
+  if (!result.success) {
+    return result;
+  }
   let maxCurrency = Math.round(Math.pow(realm.level,1.1));
   result.experience = xp.exploreGain(realm, initial.duration);
   result.currency = rand.getRandomInt(0,maxCurrency);
@@ -75,5 +79,6 @@ module.exports = {
   explore,
   chooseResource,
   calculateResourceQuantity,
-  completeActivity
+  completeActivity,
+  singleResult
 };
