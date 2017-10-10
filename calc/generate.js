@@ -8,6 +8,7 @@ const ActivityResult = require("../model").ActivityResult;
 const WorldEvent = require("../model").WorldEvent;
 const Item = require("../model").AvatarItem;
 const BattleResults = require("../model").BattleResults;
+const ActivityPreCalculation = require("../model").ActivityPreCalculation;
 const ref = require("./reference");
 const xp = require("./experience");
 const statCalc = require("./statCalc");
@@ -69,6 +70,10 @@ const baseEvent = function(duration,type) {
   return new WorldEvent({_id:uniqid(),eventType:type,expiry:start+duration})
 };
 
+const baseActivityCalculation = function(duration) {
+  return new ActivityPreCalculation({duration:Math.max(Math.round(duration),3)})
+};
+
 const emptyItem = function(baseItem) {
   let item = new Item({_id:uniqid()});
   item.type = baseItem.type;
@@ -111,5 +116,6 @@ module.exports = {
   baseActivityResult,
   baseEvent,
   emptyBattleResults,
-  avatarName
+  avatarName,
+  baseActivityCalculation
 };

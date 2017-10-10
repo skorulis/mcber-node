@@ -17,13 +17,11 @@ let initialValues = function(itemRef,avatar) {
   skill += avatar.stats.skill(kCraftSkill);
 
   let time = 10 * Math.pow(resources.totalCost(),1.2) / (skill + 1);
-  time = Math.max(Math.round(time),2);
-  return {
-    skillLevel:skill,
-    duration: time,
-    usedSkills:[itemSkill.id,kCraftSkill],
-    resources:resources.adjustedList
-  }
+  let initial = gen.baseActivityCalculation(time);
+  initial.skillLevel = skill;
+  initial.usedSkills =[itemSkill.id,kCraftSkill];
+  initial.resources = resources.adjustedList;
+  return initial;
 };
 
 let initialGemValues = function(modRef,level,elementRef,avatar) {
@@ -31,13 +29,11 @@ let initialGemValues = function(modRef,level,elementRef,avatar) {
   let usedSkill = resources.skillAffiliation();
   let skill = avatar.stats.skill(kCraftSkill) + avatar.stats.skill(usedSkill.id);
   let time = 10 * Math.pow(resources.totalCost(),1.2) / (skill + 1);
-  time = Math.max(Math.round(time),2);
-  return {
-    skillLevel:skill,
-    duration: time,
-    usedSkills:[usedSkill.id,kCraftSkill],
-    resources:resources.adjustedList
-  }
+  let initial = gen.baseActivityCalculation(time);
+  initial.skillLevel = skill;
+  initial.usedSkills =[usedSkill.id,kCraftSkill];
+  initial.resources = resources.adjustedList;
+  return initial;
 };
 
 let initialSocketValues = function(item,gem,avatar) {
@@ -46,14 +42,12 @@ let initialSocketValues = function(item,gem,avatar) {
   let skill = avatar.stats.skill(kCraftSkill) + avatar.stats.skill(usedSkill.id);
   let difficulty = Math.round(Math.pow(item.level + gem.power + item.mods.length,1.5));
   let failure = Math.min(difficulty / (skill + 1),1);
-  let time = Math.max(Math.round( (30 * difficulty) / (skill + 1) ), 2);
-
-  return {
-    skillLevel:skill,
-    duration: time,
-    usedSkills:[kCraftSkill,usedSkill.id],
-    failureChance:failure
-  }
+  let time = (30 * difficulty) / (skill + 1);
+  let initial = gen.baseActivityCalculation(time);
+  initial.skillLevel = skill;
+  initial.usedSkills =[usedSkill.id,kCraftSkill];
+  initial.failureChance = failure;
+  return initial;
 };
 
 let getResult = function(itemRef,avatar,initial) {

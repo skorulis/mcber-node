@@ -63,13 +63,15 @@ it("Calculated gem initial values", function() {
   let modRef = ref.mods.atIndex(0);
   let element = ref.skills.atIndex(1);
   let initial = craft.initialGemValues(modRef,1,element,avatar);
-  initial.resources.should.deep.equal([{id:"4",quantity:5}]);
+  initial.resources[0].quantity.should.equal(5);
+  initial.resources[0].id.should.equal("4");
   initial.skillLevel.should.equal(26);
   initial.duration.should.equal(3);
   initial.usedSkills.should.deep.equal(["1","102"]);
 
   initial = craft.initialGemValues(modRef,2,element,avatar);
-  initial.resources.should.deep.equal([{id:"4",quantity:14}]);
+  initial.resources[0].quantity.should.equal(14);
+  initial.resources[0].id.should.equal("4");
   initial.duration.should.equal(9);
 });
 
@@ -141,7 +143,11 @@ it("Gets socket results", function() {
   let result = craft.getSocketResult(item,gem,initial);
   let xp1 = result.experience[0];
   xp1.xp.should.equal(15);
-  xp1.skillId.should.equal("102");
+  xp1.skillId.should.equal("5");
+
+  let xp2 = result.experience[1];
+  xp2.xp.should.equal(15);
+  xp2.skillId.should.equal("102");
 
   result.item.level.should.equal(1);
   result.item.mods.length.should.equal(1);
