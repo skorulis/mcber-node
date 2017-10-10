@@ -12,6 +12,7 @@ let userSchema = new mongoose.Schema({
   email: String,
   fbid: String,
   currency:Number, //May change this to a string later to handle larger values
+  maxAvatars:{type:Number,default:2},
   avatars:[avatarSchema],
   activities:[activitySchema],
   items:[itemSchema], //Unassigned items

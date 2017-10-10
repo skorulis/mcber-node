@@ -72,7 +72,7 @@ let getSocketResult = function(item,gem,initial) {
   if (rand.randomDouble() > initial.failureChance) {
     item.mods.push(gem)
   } else {
-    result.failure = true;
+    result.success = false;
   }
   result.item = update.updateItem(item);
   return result;

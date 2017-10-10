@@ -57,7 +57,7 @@ it("Calculates single results",function() {
 });
 
 
-it.only("Fails exploring", function() {
+it("Fails exploring", function() {
   let realm = gen.basicRealm("0",5);
   let avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0]);
   let initial = explore.initialValues(realm,avatar);
