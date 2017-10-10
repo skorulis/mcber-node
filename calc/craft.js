@@ -80,9 +80,9 @@ let getSocketResult = function(item,gem,initial) {
 
 let getActivity = function(itemRef,avatar) {
   let initial = initialValues(itemRef,avatar);
-  let activitiy = gen.baseActivity(avatar._id,"craft",initial);
-  activitiy.itemId = itemRef.id;
-  return activitiy
+  let activity = gen.baseActivity(avatar._id,"craft",initial);
+  activity.itemId = itemRef.id;
+  return activity
 };
 
 let getGemActivity = function(modRef,level,elementRef,avatar) {
