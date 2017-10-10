@@ -3,6 +3,7 @@ let config = require("../server/config/config");
 let modSchema = require("./ItemMod").schema;
 let itemSchema = require("./AvatarItem").schema;
 let battleResultSchema = require("./BattleResults").schema;
+let resourceSchema = require("./ResourceModel").schema;
 
 let schema = new mongoose.Schema({
   _id: String,
@@ -11,7 +12,7 @@ let schema = new mongoose.Schema({
   item:{type:itemSchema,default:null},
   gem:{type:modSchema,default:null},
   realmUnlock:{type:{elementId:String,level:Number,_id:false},default:null},
-  resources:[{id:String,quantity:Number,_id:false}],
+  resources:[resourceSchema],
   experience:[{skillId:String,xp:Number,_id:false}],
   battleResult:{type:battleResultSchema,default:null}
 });

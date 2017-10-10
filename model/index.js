@@ -8,5 +8,6 @@ module.exports = {
   ActivityResult:require("./ActivityResult").model,
   WorldEvent:require("./WorldEvent").model,
   BattleResults:require("./BattleResults").model,
-  ActivityPreCalculation:require("./ActivityPreCalculation").model
+  ActivityPreCalculation:require("./ActivityPreCalculation").model,
+  ResourceModel:require("./ResourceModel").model,
 };

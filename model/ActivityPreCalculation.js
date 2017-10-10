@@ -1,11 +1,12 @@
 let mongoose = require('mongoose');
+let resourceSchema = require("./ResourceModel").schema;
 
 let schema = new mongoose.Schema({
   duration:Number,
   difficulty:Number,
   usedSkills:[String],
   skillLevel:Number,
-  resources:[{id:String,quantity:Number,_id:false}],
+  resources:[resourceSchema],
   failureChance:Number,
   _id:false
 });
