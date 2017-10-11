@@ -120,3 +120,19 @@ it("Finds a new gem", function() {
   r1.gem.refId.should.be.a("string");
   r1.gem.power.should.be.a("number")
 });
+
+it("Finds a new avatar", function() {
+  let user = gen.newUser();
+  let realm = user.findRealm("1");
+  realm.level = realm.maximumLevel;
+  let avatar = user.avatars[0];
+
+  rand.setNextDouble(1,"findAvatar");
+  let results = explore.explore(realm,avatar,30);
+  results.length.should.equal(1);
+  let r1 = results[0];
+  update.completeActivity("0",user,avatar,r1);
+  user.avatars.length.should.equal(2);
+
+  r1.foundAvatar.should.be.a("object");
+});

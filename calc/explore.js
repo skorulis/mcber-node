@@ -51,7 +51,10 @@ const singleResult = function(realm,avatar,initial) {
       maxPower = maxPower * 2;
       result.gem = item.randomGem(maxPower,realm.elementId);
     }
-
+  }
+  if(rand.randomDouble("findAvatar") > 0.99) {
+    let level = rand.getRandomInt(realm.level*3,realm.level*10);
+    result.foundAvatar = gen.randomAvatar(level);
   }
 
   return result

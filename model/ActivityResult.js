@@ -1,9 +1,9 @@
 let mongoose = require('mongoose');
-let config = require("../server/config/config");
 let modSchema = require("./ItemMod").schema;
 let itemSchema = require("./AvatarItem").schema;
 let battleResultSchema = require("./BattleResults").schema;
 let resourceSchema = require("./ResourceModel").schema;
+let avatarSchema = require("./Avatar").schema;
 
 let schema = new mongoose.Schema({
   _id: String,
@@ -14,6 +14,7 @@ let schema = new mongoose.Schema({
   realmUnlock:{type:{elementId:String,level:Number,_id:false},default:null},
   resources:[resourceSchema],
   experience:[{skillId:String,xp:Number,_id:false}],
+  foundAvatar:avatarSchema,
   battleResult:{type:battleResultSchema,default:null}
 });
 
