@@ -1,4 +1,23 @@
 let util = require("../util/util.js");
+const validate = require('express-jsonschema').validate;
+
+const setOptionsSchema = {
+  type:'object',
+  required:"options",
+  properties:{
+    options:{
+      type:"array",
+      items:{
+        type:"object",
+        required:["optionName"],
+        properties:{
+          optionName:{type:"string"},
+          optionValue:{type:["string","integer"]},
+        }
+      }
+    }
+  }
+};
 
 const buyAvatarSlot = function (req,res,next) {
   let cost = Math.pow(10, req.user.maxAvatars-1);
@@ -14,9 +33,19 @@ const buyAvatarSlot = function (req,res,next) {
 
 };
 
+const setOptions = function (req, res, next) {
+  for (let opt of req.body.options) {
+    req.user.setOption(opt.optionName,opt.optionValue)
+  }
+
+  req.user.save().then((user) => {
+    res.send({"user":req.user})
+  });
+};
+
 
 module.exports = {
-  buyAvatarSlot
-
+  buyAvatarSlot,
+  setOptions:[validate({body:setOptionsSchema}),setOptions]
 
 };

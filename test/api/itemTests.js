@@ -1,15 +1,15 @@
-process.env.NODE_ENV = "test"
+process.env.NODE_ENV = "test";
 var chai = require('chai');
 const assert = chai.assert;
 var should = chai.should();
-var app = require("../../app")("mongodb://localhost:27017/mcberTest1");
-var supertest = require("supertest")(app);
-const helpers = require("../testHelpers")(supertest)
-const itemCalc = require("../../calc/item")
-const User = require("../../model").User
-const rand = require("../../calc/rand")
+let app = require("../../app")("mongodb://localhost:27017/mcberTest1");
+let supertest = require("supertest")(app);
+const helpers = require("../testHelpers")(supertest);
+const itemCalc = require("../../calc/item");
+const User = require("../../model").User;
+const rand = require("../../calc/rand");
 
-var token = null;
+let token = null;
 var avatar = null;
 var user = null;
 var item1 = null;

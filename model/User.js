@@ -22,6 +22,7 @@ let userSchema = new mongoose.Schema({
   consumables:[{refId:String,quantity:Number,_id:false}],
   events:[eventSchema],
   resources:[resourceSchema],
+  options:[{_id:false,optionName:String,optionValue:mongoose.Schema.Types.Mixed}],
   realms:[{
     elementId:String,
     maximumLevel:Number,
@@ -101,6 +102,16 @@ userSchema.methods.removeActivity = function(activityId) {
 userSchema.methods.resourceCount = function(resourceId) {
   let found = this.resources.find( (r) => r.id === resourceId);
   return found ? found.quantity : 0
+};
+
+userSchema.methods.setOption = function(optionName,value) {
+  let existingOption = this.options.filter((x) => x.optionName === optionName).first;
+  if (existingOption) {
+    existingOption.optionValue = value
+  } else {
+    this.options.push({optionName:optionName,optionValue:value})
+  }
+  this.markModified("options")
 };
 
 userSchema.methods.hasResources = function(resourceList) {

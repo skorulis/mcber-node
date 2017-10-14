@@ -1,13 +1,13 @@
-process.env.NODE_ENV = "test"
-var chai = require('chai');
+process.env.NODE_ENV = "test";
+let chai = require('chai');
 const assert = chai.assert;
-var should = chai.should();
-var app = require("../../app")("mongodb://localhost:27017/mcberTest1");
+let should = chai.should();
+let app = require("../../app")("mongodb://localhost:27017/mcberTest1");
 var supertest = require("supertest")(app);
-var auth = require("../../server/auth/authHelpers")
-const User = require("../../model").User
+var auth = require("../../server/auth/authHelpers");
+const User = require("../../model").User;
 
-var createdId = null;
+let createdId = null;
 
 it("Creates a user", function(done) {
   supertest.post("/api/signup")

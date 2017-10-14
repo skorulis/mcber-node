@@ -12,6 +12,7 @@ module.exports = (app,passport) => {
   app.post('/api/signup',passport.authenticate('local-signup'), controllers.userAccount.signup);
 
   app.post("/api/user/buyAvatarSlot",passport.authenticate("jwt-verify"),controllers.userActions.buyAvatarSlot);
+  app.post("/api/user/setOptions",passport.authenticate("jwt-verify"),controllers.userActions.setOptions);
 
   app.post('/api/action/explore',passport.authenticate("jwt-verify"), controllers.action.explore);
   app.post('/api/action/craft', passport.authenticate("jwt-verify"),  controllers.action.craft);
