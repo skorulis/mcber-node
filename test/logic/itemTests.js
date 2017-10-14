@@ -4,7 +4,7 @@ const assert = chai.assert;
 const gen = require("../../calc/generate");
 const ref = require("../../calc/reference");
 const rand = require("../../calc/rand");
-const itemCalc = require("../../calc/item");
+const itemCalc = require("../../calc/itemCalc");
 
 it("Generates a plain item",function() {
   rand.setNextInt(1);

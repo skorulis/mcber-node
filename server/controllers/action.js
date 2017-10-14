@@ -5,7 +5,7 @@ let battleCalc = require("../../calc/battle");
 let ref = require("../../calc/reference");
 let updateCalc = require("../../calc/update");
 let util = require("../util/util.js");
-let itemCalc = require("../../calc/item");
+let itemCalc = require("../../calc/itemCalc");
 const validate = require('express-jsonschema').validate;
 
 const exploreSchema = {
@@ -70,7 +70,7 @@ const battleSchema = exploreSchema;
 
 let completeActivity = function(activity,avatar,user) {
   if (activity.activityType === "explore") {
-    return exploreCalc.completeActivity(activity,avatar);
+    return exploreCalc.completeActivity(activity,avatar,user);
   } else if (activity.activityType === "craft") {
     return craftCalc.completeActivity(activity,avatar);
   } else if (activity.activityType === "craft gem") {

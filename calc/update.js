@@ -1,7 +1,6 @@
 //Saves all the data into objects after calculations have been done
 let xp = require("./experience");
 let avatarCalc = require("./avatar");
-let itemCalc = require("./item");
 
 const completeActivity = function(activityId,user,avatar,result) {
   if (activityId) {
@@ -9,15 +8,7 @@ const completeActivity = function(activityId,user,avatar,result) {
   }
 
   if (result.item) {
-    if (user.getOption("item auto squelch level",-1) >= result.item.level) {
-      let resContainer = itemCalc.breakdown(result.item);
-      resContainer.addArray(result.resources);
-      result.resources = resContainer.adjustedList;
-      result.item = null;
-
-    } else {
-      user.items.push(result.item)
-    }
+    user.items.push(result.item);
   }
 
   for (let res of result.resources) {

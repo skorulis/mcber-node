@@ -5,6 +5,7 @@ const explore = require("../../calc/explore");
 const ref = require("../../calc/reference");
 const rand = require("../../calc/rand");
 const update = require("../../calc/update");
+const squelch = require("../../calc/squelch");
 
 it("Calculates explore constants",function() {
   let realm = gen.basicRealm("0",1);
@@ -17,13 +18,6 @@ it("Calculates explore constants",function() {
   constants = explore.initialValues(realm,avatar);
   constants.skillLevel.should.equal(25);
   constants.duration.should.equal(3)
-});
-
-it("Calculates empty results", function() {
-  let realm = gen.basicRealm("0",1);
-  let avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0]);
-  let results = explore.explore(realm,avatar,20);
-  results.length.should.equal(0)
 });
 
 it("Chooses a resource", function() {
@@ -44,14 +38,13 @@ it("Calculates resource quantity", function() {
 it("Calculates single results",function() {
   let realm = gen.basicRealm("0",1);
   let avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0]);
-  let results = explore.explore(realm,avatar,30);
-  results.length.should.equal(1);
+  let constants = explore.initialValues(realm,avatar);
+  let results = explore.getExploreResult(realm,avatar,constants);
 
-  let r1 = results[0];
-  let xp = r1.experience[0];
+  let xp = results.experience[0];
   xp.xp.should.equal(40);
   xp.skillId.should.equal("0");
-  let res1 = r1.resources[0];
+  let res1 = results.resources[0];
   res1.quantity.should.equal(1);
   res1.id.should.equal("1")
 });
@@ -62,7 +55,7 @@ it("Fails exploring", function() {
   let avatar = gen.withLevels([0,0,0,0,0,0,0,0,0,0]);
   let initial = explore.initialValues(realm,avatar);
   rand.setNextDouble(0.5,"failureCheck");
-  let result = explore.singleResult(realm,avatar,initial);
+  let result = explore.getExploreResult(realm,avatar,initial);
   result.success.should.equal(false);
 });
 
@@ -71,16 +64,15 @@ it("Unlocks a new realm level",function() {
   let realm = user.findRealm("0");
   realm.level = realm.maximumLevel;
   let avatar = user.avatars[0];
+  let initial = explore.initialValues(realm,avatar);
   rand.setNextInt(100,"realmUnlock");
   rand.setNextInt(1,"findCurrency");
-  let results = explore.explore(realm,avatar,30);
-  results.length.should.equal(1);
-  let r1 = results[0];
-  r1.currency.should.equal(1);
-  r1.realmUnlock.level.should.equal(2);
-  r1.realmUnlock.elementId.should.equal(realm.elementId);
+  let results = explore.getExploreResult(realm,avatar,initial);
+  results.currency.should.equal(1);
+  results.realmUnlock.level.should.equal(2);
+  results.realmUnlock.elementId.should.equal(realm.elementId);
 
-  update.completeActivity("0",user,avatar,r1);
+  update.completeActivity("0",user,avatar,results);
   user.findRealm("0").maximumLevel.should.equal(2)
 });
 
@@ -89,22 +81,21 @@ it("Finds a new item", function() {
   let realm = user.findRealm("0");
   realm.level = realm.maximumLevel;
   let avatar = user.avatars[0];
+  let initial = explore.initialValues(realm,avatar);
   rand.setNextInt(1,"findCurrency");
   rand.setNextInt(100,"findGemOrItem");
   rand.setNextInt(55,"gemOrItem");
   rand.setNextInt(0,"realmUnlock");
-  let results = explore.explore(realm,avatar,30);
-  results.length.should.equal(1);
-  let r1 = results[0];
+  let results = explore.getExploreResult(realm,avatar,initial);
 
-  should.not.exist(r1.realmUnlock);
+  should.not.exist(results.realmUnlock);
 
-  r1.currency.should.equal(1);
-  r1.item.should.be.a("object");
-  r1.item.refId.should.be.a("string");
+  results.currency.should.equal(1);
+  results.item.should.be.a("object");
+  results.item.refId.should.be.a("string");
 
   user.items.length.should.equal(0);
-  update.completeActivity("0",user,avatar,r1);
+  update.completeActivity("0",user,avatar,results);
   user.items.length.should.equal(1);
   user.currency.should.equal(1);
 });
@@ -114,15 +105,14 @@ it("Finds a new gem", function() {
   let realm = user.findRealm("1");
   realm.level = realm.maximumLevel;
   let avatar = user.avatars[0];
+  let initial = explore.initialValues(realm,avatar);
   rand.setNextInt(100,"findGemOrItem");
   rand.setNextInt(0,"gemOrItem");
-  let results = explore.explore(realm,avatar,30);
-  results.length.should.equal(1);
-  let r1 = results[0];
+  let results = explore.getExploreResult(realm,avatar,initial);
 
-  r1.gem.should.be.a("object");
-  r1.gem.refId.should.be.a("string");
-  r1.gem.power.should.be.a("number")
+  results.gem.should.be.a("object");
+  results.gem.refId.should.be.a("string");
+  results.gem.power.should.be.a("number")
 });
 
 it("Finds a new avatar", function() {
@@ -130,22 +120,31 @@ it("Finds a new avatar", function() {
   let realm = user.findRealm("1");
   realm.level = realm.maximumLevel;
   let avatar = user.avatars[0];
+  let initial = explore.initialValues(realm,avatar);
 
   rand.setNextDouble(1,"findAvatar");
-  let results = explore.explore(realm,avatar,30);
-  results.length.should.equal(1);
-  let r1 = results[0];
-  update.completeActivity("0",user,avatar,r1);
+  let results = explore.getExploreResult(realm,avatar,initial);
+  update.completeActivity("0",user,avatar,results);
   user.avatars.length.should.equal(2);
 
-  r1.foundAvatar.should.be.a("object");
+  results.foundAvatar.should.be.a("object");
 });
 
 
 it("Auto squelched an item", function() {
   let user = gen.newUser();
+  user.setOption("item auto squelch level",2);
+  user.setOption("item auto squelch level",2);
   let realm = user.findRealm("1");
   realm.level = realm.maximumLevel;
   let avatar = user.avatars[0];
+  let initial = explore.initialValues(realm,avatar);
+
+  rand.setNextInt(100,"findGemOrItem");
+  rand.setNextInt(55,"gemOrItem");
+
+  let result = explore.getExploreResult(realm,avatar,initial);
+  squelch.squelchResult(user,result);
+  should.not.exist(result.item);
 
 });

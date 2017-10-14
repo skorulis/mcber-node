@@ -105,22 +105,23 @@ userSchema.methods.resourceCount = function(resourceId) {
 };
 
 userSchema.methods.setOption = function(optionName,value) {
-  let existingOption = this.options.filter((x) => x.optionName === optionName).first;
-  if (existingOption) {
-    existingOption.optionValue = value
-  } else {
-    this.options.push({optionName:optionName,optionValue:value})
+  this.markModified("options");
+  for (let opt of this.options) {
+    if (opt.optionName === optionName) {
+      opt.optionValue = value;
+      return
+    }
   }
-  this.markModified("options")
+  this.options.push({optionName:optionName,optionValue:value})
 };
 
 userSchema.methods.getOption = function(optionName,defaultValue) {
-  let existingOption = this.options.filter((x) => x.optionName === optionName).first;
-  if (existingOption) {
-    return existingOption.optionValue;
-  } else {
-    return defaultValue;
+  for (let opt of this.options) {
+    if (opt.optionName === optionName) {
+      return opt.optionValue;
+    }
   }
+  return defaultValue;
 };
 
 userSchema.methods.hasResources = function(resourceList) {

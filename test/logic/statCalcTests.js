@@ -3,7 +3,7 @@ const should = chai.should();
 const assert = chai.assert;
 const gen = require("../../calc/generate");
 const ref = require("../../calc/reference");
-const itemCalc = require("../../calc/item");
+const itemCalc = require("../../calc/itemCalc");
 const statCalc = require("../../calc/statCalc");
 
 it("Generates default stats",function() {

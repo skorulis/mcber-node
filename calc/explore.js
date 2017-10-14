@@ -1,9 +1,10 @@
 const rand = require("./rand");
 const ref = require("./reference");
 const xp = require("./experience");
-const item = require("./item");
+const item = require("./itemCalc");
 const gen = require("./generate");
 const common = require("./activityCommon");
+const squelch = require("./squelch");
 
 let kExploreSkill = "104";
 
@@ -29,7 +30,7 @@ const calculateResourceQuantity = function(realm,avatar,resource) {
   return Math.round(Math.pow(realm.level,1.5) / rarity)
 };
 
-const singleResult = function(realm,avatar,initial) {
+const getExploreResult = function(realm,avatar,initial) {
   let result = common.activityResult(initial);
   if (!result.success) {
     return result;
@@ -60,28 +61,16 @@ const singleResult = function(realm,avatar,initial) {
   return result
 };
 
-//Calculates the results of exploring for this length of time, no changes are made
-const explore = function(realm,avatar,time) {
-  let constants = initialValues(realm,avatar);
-  let ticks = Math.floor(time / constants.duration);
-  let results = [];
-  for(let i = 0; i < ticks; ++i) {
-    results.push(singleResult(realm,avatar,constants))
-  }
-
-  return results
-};
-
-const completeActivity = function(activity,avatar) {
-  //TODO: Decide if I should be handling multiple results
-  return singleResult(activity.realm,avatar,activity.calculated)
+const completeActivity = function(activity,avatar,user) {
+  let result = getExploreResult(activity.realm,avatar,activity.calculated);
+  squelch.squelchResult(user,result);
+  return result;
 };
 
 module.exports = {
   initialValues,
-  explore,
   chooseResource,
   calculateResourceQuantity,
   completeActivity,
-  singleResult
+  getExploreResult
 };

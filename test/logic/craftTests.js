@@ -4,7 +4,7 @@ const assert = chai.assert;
 const gen = require("../../calc/generate");
 const craft = require("../../calc/craft");
 const ref = require("../../calc/reference");
-const itemCalc = require("../../calc/item");
+const itemCalc = require("../../calc/itemCalc");
 const rand = require("../../calc/rand");
 const ResourceContainer = require("../../util/ResourceContainer");
 

@@ -4,7 +4,7 @@ const gen = require("./generate");
 const Counter = require("../util/Counter");
 const ItemMod = require("../model").ItemMod;
 const uniqid = require('uniqid');
-const update =require("./update");
+const update = require("./update");
 let ResourceContainer = require("../util/ResourceContainer");
 
 const itemGenInfo = function(power,elementId) {

@@ -5,7 +5,7 @@ var should = chai.should();
 let app = require("../../app")("mongodb://localhost:27017/mcberTest1");
 let supertest = require("supertest")(app);
 const helpers = require("../testHelpers")(supertest);
-const itemCalc = require("../../calc/item");
+const itemCalc = require("../../calc/itemCalc");
 const User = require("../../model").User;
 const rand = require("../../calc/rand");
 

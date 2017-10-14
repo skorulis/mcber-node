@@ -1,6 +1,6 @@
 const util = require("../util/util.js");
 const avatarUtil = require("../../calc/avatar");
-const itemCalc = require("../../calc/item");
+const itemCalc = require("../../calc/itemCalc");
 const ref = require("../../calc/reference");
 
 let assignItemSchema = {
