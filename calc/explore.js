@@ -36,16 +36,16 @@ const singleResult = function(realm,avatar,initial) {
   }
   let maxCurrency = Math.round(Math.pow(realm.level,1.1));
   result.experience = xp.exploreGain(realm, initial.duration);
-  result.currency = rand.getRandomInt(0,maxCurrency);
+  result.currency = rand.getRandomInt(0,maxCurrency,"findCurrency");
   let resource = chooseResource(realm,avatar);
   let quantity = calculateResourceQuantity(realm,avatar,resource);
   result.resources = [{id:resource.id,quantity:quantity}];
-  if (rand.getRandomInt(0,100) > 90) { //10% chance to unlock a realm)
+  if (rand.getRandomInt(0,100,"realmUnlock") > 90) { //10% chance to unlock a realm)
     result.realmUnlock = {elementId:realm.elementId,level:realm.level + 1}
   }
-  if (rand.makesChance(90)) { //10% chance of getting an item or mod
+  if (rand.makesChance(90,"findGemOrItem")) { //10% chance of getting an item or mod
     let maxPower = realm.level;
-    if (rand.makesChance(50)) {
+    if (rand.makesChance(50,"gemOrItem")) {
       result.item = item.randomItem(maxPower,realm.elementId)
     } else {
       maxPower = maxPower * 2;

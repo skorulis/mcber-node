@@ -22,16 +22,16 @@ describe("Performs all item methods",function() {
     .send({"email":"item@test.com",password:"dummy"})
     .set('Content-Type', 'application/x-www-form-urlencoded')
     .expect(function(res) {
-      token = res.body.auth.token
-      token.should.not.be.null
+      token = res.body.auth.token;
+      token.should.be.a("string");
       avatar = res.body.user.avatars[0]
     })
     .end(done)
-  })
+  });
 
   it("Finds the user",function(done) {
     User.findOne({email:"item@test.com"}, (err,u) => {
-      user = u
+      user = u;
       user.should.not.be.null
       var resource = {id:"1",quantity:10}
       user.addResource(resource)

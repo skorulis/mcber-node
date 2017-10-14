@@ -114,6 +114,15 @@ userSchema.methods.setOption = function(optionName,value) {
   this.markModified("options")
 };
 
+userSchema.methods.getOption = function(optionName,defaultValue) {
+  let existingOption = this.options.filter((x) => x.optionName === optionName).first;
+  if (existingOption) {
+    return existingOption.optionValue;
+  } else {
+    return defaultValue;
+  }
+};
+
 userSchema.methods.hasResources = function(resourceList) {
   if(!resourceList) {
     return true;

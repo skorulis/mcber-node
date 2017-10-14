@@ -48,6 +48,13 @@ class ResourceContainer {
     this.adjustedList = counter.asNamedArray("id","quantity");
   }
 
+  addArray(resources) {
+    let counter = new Counter();
+    counter.addAll(this.adjustedList,"id","quantity");
+    counter.addAll(resources,"id","quantity");
+    this.adjustedList = counter.asNamedArray("id","quantity");
+  }
+
 
 }
 

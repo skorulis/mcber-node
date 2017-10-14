@@ -71,8 +71,8 @@ it("Unlocks a new realm level",function() {
   let realm = user.findRealm("0");
   realm.level = realm.maximumLevel;
   let avatar = user.avatars[0];
-  rand.setNextInt(1);
-  rand.setNextInt(100);
+  rand.setNextInt(100,"realmUnlock");
+  rand.setNextInt(1,"findCurrency");
   let results = explore.explore(realm,avatar,30);
   results.length.should.equal(1);
   let r1 = results[0];
@@ -89,7 +89,10 @@ it("Finds a new item", function() {
   let realm = user.findRealm("0");
   realm.level = realm.maximumLevel;
   let avatar = user.avatars[0];
-  rand.setNextInt(1);rand.setNextInt(0);rand.setNextInt(100);rand.setNextInt(55);
+  rand.setNextInt(1,"findCurrency");
+  rand.setNextInt(100,"findGemOrItem");
+  rand.setNextInt(55,"gemOrItem");
+  rand.setNextInt(0,"realmUnlock");
   let results = explore.explore(realm,avatar,30);
   results.length.should.equal(1);
   let r1 = results[0];
@@ -111,7 +114,8 @@ it("Finds a new gem", function() {
   let realm = user.findRealm("1");
   realm.level = realm.maximumLevel;
   let avatar = user.avatars[0];
-  rand.setNextInt(0);rand.setNextInt(0);rand.setNextInt(100);rand.setNextInt(0);
+  rand.setNextInt(100,"findGemOrItem");
+  rand.setNextInt(0,"gemOrItem");
   let results = explore.explore(realm,avatar,30);
   results.length.should.equal(1);
   let r1 = results[0];
@@ -135,4 +139,13 @@ it("Finds a new avatar", function() {
   user.avatars.length.should.equal(2);
 
   r1.foundAvatar.should.be.a("object");
+});
+
+
+it("Auto squelched an item", function() {
+  let user = gen.newUser();
+  let realm = user.findRealm("1");
+  realm.level = realm.maximumLevel;
+  let avatar = user.avatars[0];
+
 });
