@@ -8,7 +8,7 @@ const cred = require("../config/credentials");
 const User = require("../../model").User;
 const gen = require("../../calc/generate");
 
-const jwtOpts = {secretOrKey:cred.secret,jwtFromRequest:ExtractJwt.fromAuthHeaderAsBearerToken()}
+const jwtOpts = {secretOrKey:cred.secret,jwtFromRequest:ExtractJwt.fromAuthHeaderAsBearerToken()};
 
 
 const createHash = function(password) {

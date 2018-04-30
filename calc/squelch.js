@@ -9,6 +9,12 @@ const squelchResult = function(user,result) {
 
     }
   }
+  if (result.gem) {
+    if (user.getOption("gem auto squelch level",-1) >= result.gem.power) {
+      result.addResources(itemCalc.breakdownGem(result.gem));
+      result.gem = null;
+    }
+  }
 };
 
 module.exports = {

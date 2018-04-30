@@ -29,6 +29,7 @@ const completeActivity = function(activityId,user,avatar,result) {
   if (result.foundAvatar && user.avatars.length < user.maxAvatars) {
     user.avatars.push(result.foundAvatar);
   }
+
   user.currency = user.currency + result.currency;
 
   //TODO: Add anything else that comes up

@@ -46,10 +46,10 @@ const getExploreResult = function(realm,avatar,initial) {
   }
   if (rand.makesChance(90,"findGemOrItem")) { //10% chance of getting an item or mod
     let maxPower = realm.level;
+    maxPower = maxPower * 2;
     if (rand.makesChance(50,"gemOrItem")) {
       result.item = item.randomItem(maxPower,realm.elementId)
     } else {
-      maxPower = maxPower * 2;
       result.gem = item.randomGem(maxPower,realm.elementId);
     }
   }

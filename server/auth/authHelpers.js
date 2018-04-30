@@ -5,7 +5,7 @@ const User = require("../../model").User;
 const expiry = 60*60*24;
 
 function findUser(req,res,next) {
-  User.findOne({_id:req.decodedToken.userid}).then(user => {
+  User.findOne({where:{id:req.decodedToken.userid}}).then(user => {
     if (!user) {
       console.log("Could not find user with id " + decoded)
     }

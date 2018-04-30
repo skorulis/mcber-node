@@ -3,7 +3,7 @@ let chai = require('chai');
 const assert = chai.assert;
 let should = chai.should();
 let app = require("../../app")("mongodb://localhost:27017/mcberTest1");
-var supertest = require("supertest")(app);
+let supertest = require("supertest")(app);
 var auth = require("../../server/auth/authHelpers");
 const User = require("../../model").User;
 
